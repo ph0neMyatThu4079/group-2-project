@@ -34,7 +34,11 @@ public class App {
 //        PopulationReport populationReport = new PopulationReport(populationDAO);
 
         // *** Country Report ***
+        // All countries in the world
         countryReport.printAllCountriesByPopulation();
+        // All countries in a continent
+        countryReport.printAllCountriesInContinentByPopulation("Europe");
+
 
 
 
