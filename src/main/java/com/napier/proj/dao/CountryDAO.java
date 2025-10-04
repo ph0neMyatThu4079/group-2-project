@@ -85,7 +85,7 @@ public class CountryDAO {
 
 
     // 3. All countries in a region
-    /*public List<Country> getAllCountriesInRegionByPopulation(String region) {
+    public List<Country> getAllCountriesInRegionByPopulation(String region) {
         List<Country> countries = new ArrayList<>();
         String sql =
                 "SELECT c.Code, c.Name, c.Continent, c.Region, c.Population, ci.Name AS Capital " +
@@ -116,7 +116,7 @@ public class CountryDAO {
         }
 
         return countries;
-    } */
+    }
 
 
     // 4. Top N countries in the world

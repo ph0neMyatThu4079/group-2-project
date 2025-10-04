@@ -38,6 +38,9 @@ public class App {
         countryReport.printAllCountriesByPopulation();
         // All countries in a continent
         countryReport.printAllCountriesInContinentByPopulation("Europe");
+        // All countries in a region
+        countryReport.printAllCountriesInRegionByPopulation("Southern and Central Asia");
+
 
 
 
