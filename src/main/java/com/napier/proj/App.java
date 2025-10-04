@@ -24,17 +24,37 @@ public class App {
 
         // method call for dao object
         CountryDAO countryDAO = new CountryDAO(conn);
-//        CityDAO cityDAO = new CityDAO(conn);
+        CityDAO cityDAO = new CityDAO(conn);
 //        LanguageDAO languageDAO = new LanguageDAO(conn);
 //        PopulationDAO populationDAO = new PopulationDAO(conn);
 
         CountryReport countryReport = new CountryReport(countryDAO);
-//        CityReport cityReport = new CityReport(cityDAO);
+        CityReport cityReport = new CityReport(cityDAO);
 //        LanguageReport languageReport = new LanguageReport(languageDAO);
 //        PopulationReport populationReport = new PopulationReport(populationDAO);
 
         // *** Country Report ***
+        // All countries in the world
         countryReport.printAllCountriesByPopulation();
+        // All countries in a continent
+        countryReport.printAllCountriesInContinentByPopulation("Europe");
+        // All countries in a region
+        countryReport.printAllCountriesInRegionByPopulation("Southern and Central Asia");
+        // Top N countries in the world
+        countryReport.getTopNPopulatedCountriesIntheworld(10);
+        // Top N countries in the continent
+        countryReport.getTopNPopulatedCountriesInContinent("North America",10);
+        // Top N countries in the region
+        countryReport.getTopNPopulatedCountriesInRegion("Middle East",10);
+
+
+        // *** City Report ***
+        cityReport.printAllCitiesInWorldByPopulation();
+        cityReport.printAllCitiesInContinentByPopulation("Asia");
+        cityReport.printAllCitiesInRegionByPopulation("Central Africa");
+        cityReport.printAllCitiesInCountryByPopulation("Argentina");
+        cityReport.printAllCitiesInDistrictByPopulation("Benguela");
+
 
 
 
