@@ -40,6 +40,7 @@ public class App {
         cityReport.printAllCitiesInWorldByPopulation();
         cityReport.printAllCitiesInContinentByPopulation("Asia");
         cityReport.printAllCitiesInRegionByPopulation("Central Africa");
+        cityReport.printAllCitiesInCountryByPopulation("Argentina");
 
 
 

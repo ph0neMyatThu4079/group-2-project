@@ -109,8 +109,37 @@ public class CityDAO {
     }
 
 
-    // 10. All the cities in a country organised by largest population to smallest.
-//    public List<Country> getTopNCountriesInRegion(String region, int n) { ... }
+    // 10. Get all cities in a country sorted by population (desc).
+    public List<City> getAllCitiesInCountryByPopulation(String country) {
+        List<City> cities = new ArrayList<>();
+
+        String sql = "SELECT ci.Name AS CityName, c.Name AS Country, ci.District, ci.Population " +
+                "FROM city ci " +
+                "JOIN country c ON ci.CountryCode = c.Code " +
+                "WHERE c.Name = ? " +
+                "ORDER BY ci.Population DESC;";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, country);  // set country parameter
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                City city = new City();
+                city.setName(rs.getString("CityName"));
+                city.setCountry(rs.getString("Country"));
+                city.setDistrict(rs.getString("District"));
+                city.setPopulation(rs.getLong("Population"));
+                cities.add(city);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in country");
+        }
+
+        return cities;
+    }
+
 
     // 11. All the cities in a district organised by largest population to smallest.
 //    public List<Country> getTopNCountriesInRegion(String region, int n) { ... }

@@ -20,7 +20,7 @@ public class CityReport {
 
         System.out.printf("%-25s %-25s %-25s %-15s%n",
                 "City", "Country", "District", "Population");
-        System.out.println("---------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------");
 
         for (City city : cities) {
             System.out.printf("%-25s %-25s %-25s %-15d%n",
@@ -37,7 +37,7 @@ public class CityReport {
 
         System.out.printf("%-25s %-25s %-25s %-15s%n",
                 "City", "Country", "District", "Population");
-        System.out.println("---------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------");
 
         for (City city : cities) {
             System.out.printf("%-25s %-25s %-25s %-15d%n",
@@ -54,7 +54,7 @@ public class CityReport {
 
         System.out.printf("%-25s %-25s %-25s %-15s%n",
                 "City", "Country", "District", "Population");
-        System.out.println("---------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------");
 
         for (City city : cities) {
             System.out.printf("%-25s %-25s %-25s %-15d%n",
@@ -64,6 +64,24 @@ public class CityReport {
                     city.getPopulation());
         }
     }
+    public void printAllCitiesInCountryByPopulation(String country) {
+        List<City> cities = this.cityDAO.getAllCitiesInCountryByPopulation(country);
+
+        System.out.println("\nAll the cities in a country organised by largest population to smallest.\n");
+
+        System.out.printf("%-25s %-25s %-25s %-15s%n",
+                "City", "Country", "District", "Population");
+        System.out.println("---------------------------------------------------------------------------------------------");
+
+        for (City city : cities) {
+            System.out.printf("%-25s %-25s %-25s %-15d%n",
+                    city.getName(),
+                    city.getCountry(),
+                    city.getDistrict(),
+                    city.getPopulation());
+        }
+    }
+
 
 
 }
