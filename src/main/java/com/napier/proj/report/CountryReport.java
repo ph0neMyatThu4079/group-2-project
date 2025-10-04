@@ -21,12 +21,12 @@ public class CountryReport {
         System.out.println("--------------------------------------------------------------------------------------------");
         for (Country country : countries) {
             System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n",
-                    country.code,
-                    country.name,
-                    country.continent,
-                    country.region,
-                    country.population,
-                    country.capital);
+                    country.getCode(),
+                    country.getName(),
+                    country.getContinent(),
+                    country.getRegion(),
+                    country.getPopulation(),
+                    country.getCapital());
         }
     }
 }

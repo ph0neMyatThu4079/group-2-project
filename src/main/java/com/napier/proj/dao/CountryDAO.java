@@ -30,12 +30,12 @@ public class CountryDAO {
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
                 Country country = new Country();
-                country.code = rs.getString("Code");
-                country.name = rs.getString("Name");
-                country.continent = rs.getString("Continent");
-                country.region = rs.getString("Region");
-                country.population = rs.getLong("Population");
-                country.capital = rs.getString("Capital");
+                country.setCode(rs.getString("Code"));
+                country.setName(rs.getString("Name"));
+                country.setContinent(rs.getString("Continent"));
+                country.setRegion(rs.getString("Region"));
+                country.setPopulation(rs.getLong("Population"));
+                country.setCapital(rs.getString("Capital"));
                 countries.add(country);
             }
 
