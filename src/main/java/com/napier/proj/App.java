@@ -41,6 +41,7 @@ public class App {
         cityReport.printAllCitiesInContinentByPopulation("Asia");
         cityReport.printAllCitiesInRegionByPopulation("Central Africa");
         cityReport.printAllCitiesInCountryByPopulation("Argentina");
+        cityReport.printAllCitiesInDistrictByPopulation("Benguela");
 
 
 
