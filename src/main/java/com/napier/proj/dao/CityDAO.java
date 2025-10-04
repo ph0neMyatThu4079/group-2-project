@@ -17,7 +17,7 @@ public class CityDAO {
     }
 
     // 7. Get all cities in the world sorted by population (desc).
-    public List<City> getAllCitiesByPopulation() {
+    public List<City> getAllinWorldCitiesByPopulation() {
         List<City> cities = new ArrayList<>();
 
         String sql = "SELECT ci.Name AS CityName, c.Name AS Country, ci.District, ci.Population " +
@@ -45,14 +45,69 @@ public class CityDAO {
         return cities;
     }
 
+    // 8. Get all cities in a continent sorted by population (desc).
+    public List<City> getAllCitiesInContinentByPopulation(String continent) {
+        List<City> cities = new ArrayList<>();
+
+        String sql = "SELECT ci.Name AS CityName, c.Name AS Country, ci.District, ci.Population " +
+                "FROM city ci " +
+                "JOIN country c ON ci.CountryCode = c.Code " +
+                "WHERE c.Continent = ? " +
+                "ORDER BY ci.Population DESC;";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, continent);  // set continent parameter
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                City city = new City();
+                city.setName(rs.getString("CityName"));
+                city.setCountry(rs.getString("Country"));
+                city.setDistrict(rs.getString("District"));
+                city.setPopulation(rs.getLong("Population"));
+                cities.add(city);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in continent");
+        }
+
+        return cities;
+    }
 
 
+    // 9. Get all cities in a region sorted by population (desc).
+    public List<City> getAllCitiesInRegionByPopulation(String region) {
+        List<City> cities = new ArrayList<>();
 
-    // 8. All the cities in a continent organised by largest population to smallest.
-//    public List<Country> getTopNCountriesInRegion(String region, int n) { ... }
+        String sql = "SELECT ci.Name AS CityName, c.Name AS Country, ci.District, ci.Population " +
+                "FROM city ci " +
+                "JOIN country c ON ci.CountryCode = c.Code " +
+                "WHERE c.Region = ? " +
+                "ORDER BY ci.Population DESC;";
 
-    // 9. All the cities in a region organised by largest population to smallest.
-//    public List<Country> getTopNCountriesInRegion(String region, int n) { ... }
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, region);  // set region parameter
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                City city = new City();
+                city.setName(rs.getString("CityName"));
+                city.setCountry(rs.getString("Country"));
+                city.setDistrict(rs.getString("District"));
+                city.setPopulation(rs.getLong("Population"));
+                cities.add(city);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in region");
+        }
+
+        return cities;
+    }
+
 
     // 10. All the cities in a country organised by largest population to smallest.
 //    public List<Country> getTopNCountriesInRegion(String region, int n) { ... }

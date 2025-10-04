@@ -34,10 +34,12 @@ public class App {
 //        PopulationReport populationReport = new PopulationReport(populationDAO);
 
         // *** Country Report ***
-        //countryReport.printAllCountriesByPopulation();
+        countryReport.printAllCountriesByPopulation();
 
         // *** City Report ***
-        cityReport.printAllCitiesByPopulation();
+        cityReport.printAllCitiesInWorldByPopulation();
+        cityReport.printAllCitiesInContinentByPopulation("Asia");
+        //cityReport.printAllCitiesInRegionByPopulation("Southern and Central Asia");
 
 
 
