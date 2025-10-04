@@ -24,12 +24,12 @@ public class App {
 
         // method call for dao object
         CountryDAO countryDAO = new CountryDAO(conn);
-//        CityDAO cityDAO = new CityDAO(conn);
+        CityDAO cityDAO = new CityDAO(conn);
 //        LanguageDAO languageDAO = new LanguageDAO(conn);
 //        PopulationDAO populationDAO = new PopulationDAO(conn);
 
         CountryReport countryReport = new CountryReport(countryDAO);
-//        CityReport cityReport = new CityReport(cityDAO);
+        CityReport cityReport = new CityReport(cityDAO);
 //        LanguageReport languageReport = new LanguageReport(languageDAO);
 //        PopulationReport populationReport = new PopulationReport(populationDAO);
 
@@ -38,6 +38,12 @@ public class App {
         countryReport.printAllCountriesByPopulation();
         // All countries in a continent
         countryReport.printAllCountriesInContinentByPopulation("Europe");
+
+
+        // *** City Report ***
+        cityReport.printAllCitiesInWorldByPopulation();
+        cityReport.printAllCitiesInContinentByPopulation("Asia");
+        //cityReport.printAllCitiesInRegionByPopulation("Southern and Central Asia");
 
 
 
