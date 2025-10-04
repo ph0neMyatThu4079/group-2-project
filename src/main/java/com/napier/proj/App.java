@@ -42,6 +42,8 @@ public class App {
         countryReport.printAllCountriesInRegionByPopulation("Southern and Central Asia");
         // Top N countries in the world
         countryReport.getTopNPopulatedCountriesIntheworld(10);
+        // Top N countries in the continent
+        countryReport.getTopNPopulatedCountriesInContinent("North America",10);
 
 
 

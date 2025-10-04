@@ -162,9 +162,45 @@ public class CountryDAO {
         return countries;
     }
 
-
     // 5. Top N countries in the continent
-//    public List<Country> getTopNCountriesInContinent(String continent, int n) { ... }
+    public List<Country> getTopNPopulatedCountriesInContinent(String continent, int n) {
+        List<Country> countries = new ArrayList<>();
+
+        System.out.println("\nThe top N populated countries in a continent where N is provided by the user.\n");
+
+            String sql =
+                    "SELECT c.Code, c.Name, c.Continent, c.Region, c.Population, ci.Name AS Capital " +
+                            "FROM country c " +
+                            "LEFT JOIN city ci ON c.Capital = ci.ID " +
+                            "WHERE c.Continent = ? " +
+                            "ORDER BY c.Population DESC " +
+                            "LIMIT ?;";
+
+        try(PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, continent);
+            pstmt.setInt(2, n);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Country country = new Country();
+                    country.setCode(rs.getString("Code"));
+                    country.setName(rs.getString("Name"));
+                    country.setContinent(rs.getString("Continent"));
+                    country.setRegion(rs.getString("Region"));
+                    country.setPopulation(rs.getLong("Population"));
+                    country.setCapital(rs.getString("Capital"));
+                    countries.add(country);
+                }
+            }
+        }
+         catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get top " + n + " populated countries in continent: " + continent);
+        }
+
+        return countries;
+    }
+
 
     // 6. Top N countries in a region
 //    public List<Country> getTopNCountriesInRegion(String region, int n) { ... }
