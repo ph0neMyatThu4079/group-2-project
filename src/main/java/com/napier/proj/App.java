@@ -39,7 +39,7 @@ public class App {
         // *** City Report ***
         cityReport.printAllCitiesInWorldByPopulation();
         cityReport.printAllCitiesInContinentByPopulation("Asia");
-        //cityReport.printAllCitiesInRegionByPopulation("Southern and Central Asia");
+        cityReport.printAllCitiesInRegionByPopulation("Central Africa");
 
 
 
