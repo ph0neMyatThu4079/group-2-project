@@ -24,17 +24,21 @@ public class App {
 
         // method call for dao object
         CountryDAO countryDAO = new CountryDAO(conn);
-//        CityDAO cityDAO = new CityDAO(conn);
+        CityDAO cityDAO = new CityDAO(conn);
 //        LanguageDAO languageDAO = new LanguageDAO(conn);
 //        PopulationDAO populationDAO = new PopulationDAO(conn);
 
         CountryReport countryReport = new CountryReport(countryDAO);
-//        CityReport cityReport = new CityReport(cityDAO);
+        CityReport cityReport = new CityReport(cityDAO);
 //        LanguageReport languageReport = new LanguageReport(languageDAO);
 //        PopulationReport populationReport = new PopulationReport(populationDAO);
 
         // *** Country Report ***
-        countryReport.printAllCountriesByPopulation();
+        //countryReport.printAllCountriesByPopulation();
+
+        // *** City Report ***
+        cityReport.printAllCitiesByPopulation();
+
 
 
 
