@@ -44,6 +44,8 @@ public class App {
         countryReport.getTopNPopulatedCountriesIntheworld(10);
         // Top N countries in the continent
         countryReport.getTopNPopulatedCountriesInContinent("North America",10);
+        // Top N countries in the region
+        countryReport.getTopNPopulatedCountriesInRegion("Middle East",10);
 
 
 

@@ -94,5 +94,21 @@ public class CountryReport {
                     country.getCapital());
         }
     }
+    // 5. Top N countries in the continent
+    public void getTopNPopulatedCountriesInRegion(String region, int n) {
+        List<Country> countries = this.countryDAO.getTopNPopulatedCountriesInRegion(region ,n);
+
+        System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n", "Code", "Name", "Continent", "Region", "Population",  "Capital");
+        System.out.println("--------------------------------------------------------------------------------------------");
+        for (Country country : countries) {
+            System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n",
+                    country.getCode(),
+                    country.getName(),
+                    country.getContinent(),
+                    country.getRegion(),
+                    country.getPopulation(),
+                    country.getCapital());
+        }
+    }
 
 }
