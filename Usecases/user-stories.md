@@ -1,0 +1,6 @@
+# Our Current User Stories
+1. As a data analyst, I want to generate reports on countries by population (globally, by continent, and by region) so that I can support demographic.
+2. As a data analyst, I want to generate reports on cities by population (globally, by continent, region, country, and district) so that I can analyse urban population distribution and trends.
+3. As a data analyst, I want to generate reports on capital cities by population (globally, by continent, and by region) so that I can compare and analyse capital city populations across different continents and regions.
+4. As a data analyst, I want to view total and comparative population data (including urban vs non-urban) for each continent, region, country, district, and city so that I can understand global and local demographic distributions.
+5. As a data analyst, I want to generate a report showing the number and percentage of people who speak major world languages (Chinese, English, Hindi, Spanish, Arabic) so that I can support linguistic and cultural population studies.

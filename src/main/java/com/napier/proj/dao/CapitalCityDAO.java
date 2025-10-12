@@ -1,31 +1,24 @@
 package com.napier.proj.dao;
 
+import com.napier.proj.model.CapitalCity;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
 public class CapitalCityDAO {
-    private String name;
-    private String country;
-    private long population;
 
-    public String getName() {
-        return name;
+    private Connection con;
+
+    public CapitalCityDAO(Connection con) {
+        this.con = con;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getCountry() {
-        return country;
-    }
+//    The top N populated capital cities in a region where N is provided by the user.
+//    public ArrayList<CapitalCity> getTopNPopulatedCitiesInRegion(String region, int n) {
+//        ArrayList<CapitalCity> capitalCityArrayList = new ArrayList<>();
+//
+//        String sql = "SELECT city.Name As Capacity"
+//    }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public long getPopulation() {
-        return population;
-    }
-
-    public void setPopulation(long population) {
-        this.population = population;
-    }
 }
