@@ -53,7 +53,7 @@ We follow **Scrum** with 2-week sprints, including:
 |--------|--------------|
 | `main` | Production-ready branch |
 | `develop` | Active development branch |
-| `release*` | Release preparation branches |
+| `release` | Release preparation branches |
 | `feature/*` | Feature-specific branches |
 
 ---
