@@ -40,7 +40,7 @@ The project is implemented in **Java**, built with **Maven**, containerized usin
 ---
 
 ## 🧠 Development Methodology
-We follow **Scrum** with 2-week sprints, including:
+We follow **Scrum** with sprints, including:
 - Sprint planning and daily stand-ups  
 - Product and Sprint Backlogs managed via **Zube.io**  
 - User stories and issues tracked on **GitHub**  
