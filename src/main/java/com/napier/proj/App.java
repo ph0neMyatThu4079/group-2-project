@@ -55,7 +55,12 @@ public class App {
         cityReport.printAllCitiesInCountryByPopulation("Argentina");
         cityReport.printAllCitiesInDistrictByPopulation("Benguela");
 
-
+        // *** Top N Populated City Reports ***
+        cityReport.printTopNPopulatedCitiesInWorld(10);
+        cityReport.printTopNPopulatedCitiesInContinent("Asia", 10);
+        cityReport.printTopNPopulatedCitiesInRegion("Eastern Europe", 10);
+        cityReport.printTopNPopulatedCitiesInCountry("Brazil", 10);
+        cityReport.printTopNPopulatedCitiesInDistrict("California", 10);
 
 
         DatabaseConfig.closeConnection();
