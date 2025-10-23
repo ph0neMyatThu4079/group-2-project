@@ -9,15 +9,34 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is Data Access Object (DAO) class for managing all database operations related to the CapitalCity entity.
+ * <p>
+ * This class provides methods to retrieve and display capital cities data
+ * from the database, sorted by population in various contexts (world, continent, region).
+ * </p>
+ *
+ * @author Phone Myat Thu
+ */
 public class CapitalCityDAO {
 
+    /** Database connection object used for executing SQL queries */
     private Connection con;
 
+    /**
+     * Constructs a CapitalCityDAO instance with the given database connection.
+     *
+     * @param con The active database connection.
+     */
     public CapitalCityDAO(Connection con) {
         this.con = con;
     }
 
-    //    All the capital cities in the world organised by largest population to smallest.
+    /**
+     * Retrieves all capital cities in the world ordered by population from largest to smallest.
+     *
+     * @return A list of capital cities sorted by population.
+     */
     public List<CapitalCity> getAllCapitalCities() {
         List<CapitalCity> capitalCities = new ArrayList<>();
 
@@ -47,7 +66,12 @@ public class CapitalCityDAO {
     }
 
 
-    //    All the capital cities in a continent organized by the largest population to smallest.
+    /**
+     * Retrieves all capital cities in a specific continent ordered by population from largest to smallest.
+     *
+     * @param continent The continent name (e.g., "Asia", "Europe").
+     * @return A list of capital cities within the specified continent.
+     */
     public List<CapitalCity> getAllCapitalCitiesInContinent(String continent) {
         List<CapitalCity> capitalCities = new ArrayList<>();
 
@@ -80,7 +104,12 @@ public class CapitalCityDAO {
     }
 
 
-    //    All the capital cities in a region organized by the largest population to smallest.
+    /**
+     * Retrieves all capital cities in a specific region ordered by population from largest to smallest.
+     *
+     * @param region The region name (e.g., "Southeast Asia", "Western Europe").
+     * @return A list of capital cities within the specified region.
+     */
     public List<CapitalCity> getAllCapitalCitiesInRegion(String region) {
         List<CapitalCity> capitalCities = new ArrayList<>();
 
@@ -112,7 +141,12 @@ public class CapitalCityDAO {
         return capitalCities;
     }
 
-    //    The top N populated capital cities in the world where N is provided by the user.
+    /**
+     * Retrieves the top N most populated capital cities in the world.
+     *
+     * @param n The number of capital cities to return.
+     * @return A list of the top N populated capital cities.
+     */
     public List<CapitalCity> getTopNPopulatedCapitalCities(int n) {
         List<CapitalCity> capitalCities = new ArrayList<>();
 
@@ -144,7 +178,13 @@ public class CapitalCityDAO {
         return capitalCities;
     }
 
-    //    The top N populated capital cities in a continent where N is provided by the user.
+    /**
+            * Retrieves the top N most populated capital cities in a specific continent.
+            *
+            * @param continent The continent name (e.g., "Africa", "Asia").
+            * @param n The number of capital cities to return.
+            * @return A list of the top N populated capital cities within the specified continent.
+     */
     public List<CapitalCity> getTopNPopulatedCapitalCitiesByContinent(String continent, int n) {
         List<CapitalCity> capitalCities = new ArrayList<>();
 
@@ -178,7 +218,13 @@ public class CapitalCityDAO {
         return capitalCities;
     }
 
-    //    The top N populated capital cities in a region where N is provided by the user.
+    /**
+     * Retrieves the top N most populated capital cities in a specific region.
+     *
+     * @param region The region name (e.g., "Eastern Europe", "Caribbean").
+     * @param n The number of capital cities to return.
+     * @return A list of the top N populated capital cities within the specified region.
+     */
     public List<CapitalCity> getTopNPopulatedCapitalCitiesByRegion(String region, int n) {
         List<CapitalCity> capitalCities = new ArrayList<>();
 
@@ -212,13 +258,5 @@ public class CapitalCityDAO {
         return capitalCities;
     }
 
-
-
-//    The top N populated capital cities in a region where N is provided by the user.
-//    public ArrayList<CapitalCity> getTopNPopulatedCitiesInRegion(String region, int n) {
-//        ArrayList<CapitalCity> capitalCityArrayList = new ArrayList<>();
-//
-//        String sql = "SELECT city.Name As Capacity"
-//    }
 
 }

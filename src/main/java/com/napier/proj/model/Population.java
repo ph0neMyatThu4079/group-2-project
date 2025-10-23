@@ -104,7 +104,8 @@ public class Population {
      */
     public void setCityPercentage() {
         if(this.totalPopulation > 0){
-            this.cityPercentage = ((double) this.cityPopulation /  this.totalPopulation) * 100;
+            double percentage = ((double) this.cityPopulation /  this.totalPopulation) * 100;
+            this.cityPercentage = Math.round(percentage);
         }
         else {
             this.cityPercentage = 0;
@@ -126,7 +127,8 @@ public class Population {
      */
     public void setNonCityPercentage() {
         if(this.totalPopulation > 0){
-            this.nonCityPercentage = ((double) this.nonCityPopulation /  this.totalPopulation) * 100;
+            double percentage = ((double) this.nonCityPopulation /  this.totalPopulation) * 100;
+            this.nonCityPercentage = Math.round(percentage);
         }
         else {
             this.nonCityPercentage = 0;

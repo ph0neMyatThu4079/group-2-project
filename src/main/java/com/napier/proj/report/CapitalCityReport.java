@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class CapitalCityReport {
 
+    /** Data Access Object for retrieving capital cities data. */
     private CapitalCityDAO capitalCityDAO;
 
     /**
