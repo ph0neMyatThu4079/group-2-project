@@ -9,6 +9,4 @@ public class PopulationDAO {
         this.con = con;
     }
 
-
-
 }

@@ -101,10 +101,14 @@ public class Population {
     /**
      * Sets the percentage of population living in cities.
      *
-     * @param cityPercentage the city population percentage to set
      */
-    public void setCityPercentage(double cityPercentage) {
-        this.cityPercentage = cityPercentage;
+    public void setCityPercentage() {
+        if(this.totalPopulation > 0){
+            this.cityPercentage = ((double) this.cityPopulation /  this.totalPopulation) * 100;
+        }
+        else {
+            this.cityPercentage = 0;
+        }
     }
 
     /**
@@ -119,9 +123,13 @@ public class Population {
     /**
      * Sets the percentage of population not living in cities.
      *
-     * @param nonCityPercentage the non-city population percentage to set
      */
-    public void setNonCityPercentage(double nonCityPercentage) {
-        this.nonCityPercentage = nonCityPercentage;
+    public void setNonCityPercentage() {
+        if(this.totalPopulation > 0){
+            this.nonCityPercentage = ((double) this.nonCityPopulation /  this.totalPopulation) * 100;
+        }
+        else {
+            this.nonCityPercentage = 0;
+        }
     }
 }
