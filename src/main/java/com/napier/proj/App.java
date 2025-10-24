@@ -58,6 +58,12 @@ public class App {
         PopulationReport populationReport = new PopulationReport(populationDAO);
 //        LanguageReport languageReport = new LanguageReport(languageDAO);
 
+        // *** Population Reports ***
+        populationReport.printEachContinentPopulationWithUrbanAndNonUrban();
+        populationReport.printEachRegionPopulationWithUrbanAndNonUrban();
+        populationReport.printEachCountryPopulationWithUrbanAndNonUrban();
+
+
         // *** Country Reports ***
         countryReport.printAllCountriesByPopulation();
         countryReport.printAllCountriesInContinentByPopulation("Europe");
@@ -80,11 +86,6 @@ public class App {
         capitalCityReport.printTopNPopulatedCapitalCities(10);
         capitalCityReport.printTopNPopulatedCapitalCitiesInContinent("Asia", 10);
         capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 10);
-
-        // *** Population Reports ***
-        populationReport.printEachContinentPopulationWithUrbanAndNonUrban();
-        populationReport.printEachRegionPopulationWithUrbanAndNonUrban();
-        populationReport.printEachCountryPopulationWithUrbanAndNonUrban();
 
         // Close database connection
         DatabaseConfig.closeConnection();
