@@ -5,6 +5,7 @@ import com.napier.proj.model.Population;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * </p>
  *
  * @author Phone Myat Thu
+ * @author Lin Myat Thu
  */
 public class PopulationDAO {
     /** Database connection object used for executing SQL queries */
@@ -162,5 +164,161 @@ public class PopulationDAO {
 
         return populations;
     }
+    /**
+     * Retrieves the total population of the world.
+     * @return A {@link Population} object representing world population.
+     */
+    public List<Population> getWorldPopulation() {
+        List<Population> populations = new ArrayList<>();
+        String sql = "SELECT SUM(Population) AS TotalPopulation FROM country;";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                Population population = new Population();
+                population.setName("World");
+                population.setTotalPopulation(rs.getLong("TotalPopulation"));
+                populations.add(population);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get world population: " + e.getMessage());
+        }
+
+        return populations;
+    }
+    /**
+     * Retrieves the total population of a specific continent.
+     * @param continentName The name of the continent.
+     * @return A list containing one {@link Population} object representing continent population.
+     */
+    public List<Population> getContinentPopulation(String continentName) {
+        List<Population> populations = new ArrayList<>();
+        String sql = "SELECT SUM(Population) AS TotalPopulation FROM country WHERE Continent = ?;";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, continentName);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Population population = new Population();
+                population.setName(continentName);
+                population.setTotalPopulation(rs.getLong("TotalPopulation"));
+                populations.add(population);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get continent population: " + e.getMessage());
+        }
+
+        return populations;
+    }
+    /**
+     * Retrieves the total population of a specific region.
+     * @param regionName The name of the region.
+     * @return A list containing one {@link Population} object representing region population.
+     */
+    public List<Population> getRegionPopulation(String regionName) {
+        List<Population> populations = new ArrayList<>();
+        String sql = "SELECT SUM(Population) AS TotalPopulation FROM country WHERE Region = ?;";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, regionName);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Population population = new Population();
+                population.setName(regionName);
+                population.setTotalPopulation(rs.getLong("TotalPopulation"));
+                populations.add(population);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get region population: " + e.getMessage());
+        }
+
+        return populations;
+    }
+    /**
+     * Retrieves the total population of a specific country.
+     * @param countryName The name of the country.
+     * @return A list containing one {@link Population} object representing country population.
+     */
+    public List<Population> getCountryPopulation(String countryName) {
+        List<Population> populations = new ArrayList<>();
+        String sql = "SELECT Population AS TotalPopulation FROM country WHERE Name = ?;";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, countryName);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Population population = new Population();
+                population.setName(countryName);
+                population.setTotalPopulation(rs.getLong("TotalPopulation"));
+                populations.add(population);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get country population: " + e.getMessage());
+        }
+
+        return populations;
+    }
+    /**
+     * Retrieves the total population of a specific district.
+     * @param districtName The name of the district.
+     * @return A list containing one {@link Population} object representing district population.
+     */
+    public List<Population> getDistrictPopulation(String districtName) {
+        List<Population> populations = new ArrayList<>();
+        String sql = "SELECT SUM(Population) AS TotalPopulation FROM city WHERE District = ?;";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, districtName);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Population population = new Population();
+                population.setName(districtName);
+                population.setTotalPopulation(rs.getLong("TotalPopulation"));
+                populations.add(population);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get district population: " + e.getMessage());
+        }
+
+        return populations;
+    }
+    /**
+     * Retrieves the total population of a specific city.
+     * @param cityName The name of the city.
+     * @return A list containing one {@link Population} object representing city population.
+     */
+    public List<Population> getCityPopulation(String cityName) {
+        List<Population> populations = new ArrayList<>();
+        String sql = "SELECT Population AS TotalPopulation FROM city WHERE Name = ?;";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, cityName);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Population population = new Population();
+                population.setName(cityName);
+                population.setTotalPopulation(rs.getLong("TotalPopulation"));
+                populations.add(population);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get city population: " + e.getMessage());
+        }
+
+        return populations;
+    }
+
+
 
 }

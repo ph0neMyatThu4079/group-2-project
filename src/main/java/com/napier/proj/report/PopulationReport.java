@@ -114,5 +114,105 @@ public class PopulationReport {
         }
     }
 
+    /**
+     * Print the total population of the world
+     */
+    public void printWorldPopulation() {
+        List<Population> populations = populationDAO.getWorldPopulation();
+
+        System.out.println("\nThe total population of the world.\n");
+        System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
+        System.out.println("----------------------------------");
+
+        for (Population population : populations) {
+            System.out.printf("%-20s %-20d\n",
+                    population.getName(),
+                    population.getTotalPopulation());
+        }
+    }
+    /**
+     * Print the total population of a continent.
+     */
+    public void printContinentPopulation(String continent) {
+        List<Population> populations = populationDAO.getContinentPopulation(continent);
+
+        System.out.println("\nThe total population of the continent: " + continent + "\n");
+        System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
+        System.out.println("----------------------------------");
+
+        for (Population population : populations) {
+            System.out.printf("%-20s %-20d\n",
+                    population.getName(),
+                    population.getTotalPopulation());
+        }
+    }
+
+    /**
+     * Print the total population of a region.
+     */
+    public void printRegionPopulation(String region) {
+        List<Population> populations = populationDAO.getRegionPopulation(region);
+
+        System.out.println("\nThe total population of the region: " + region + "\n");
+        System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
+        System.out.println("----------------------------------");
+
+        for (Population population : populations) {
+            System.out.printf("%-20s %-20d\n",
+                    population.getName(),
+                    population.getTotalPopulation());
+        }
+    }
+    /**
+     * Print the total population of a country.
+     */
+    public void printCountryPopulation(String country) {
+        List<Population> populations = populationDAO.getCountryPopulation(country);
+
+        System.out.println("\nThe total population of the country: " + country + "\n");
+        System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
+        System.out.println("----------------------------------");
+
+        for (Population population : populations) {
+            System.out.printf("%-20s %-20d\n",
+                    population.getName(),
+                    population.getTotalPopulation());
+        }
+    }
+    /**
+     * Print the total population of a district.
+     */
+    public void printDistrictPopulation(String district) {
+        List<Population> populations = populationDAO.getDistrictPopulation(district);
+
+        System.out.println("\nThe total population of the district: " + district + "\n");
+        System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
+        System.out.println("----------------------------------");
+
+        for (Population population : populations) {
+            System.out.printf("%-20s %-20d\n",
+                    population.getName(),
+                    population.getTotalPopulation());
+        }
+    }
+    /**
+     * Print the total population of a city.
+     */
+    public void printCityPopulation(String city) {
+        List<Population> populations = populationDAO.getCityPopulation(city);
+
+        System.out.println("\nThe total population of the city: " + city + "\n");
+        System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
+        System.out.println("----------------------------------");
+
+        for (Population population : populations) {
+            System.out.printf("%-20s %-20d\n",
+                    population.getName(),
+                    population.getTotalPopulation());
+        }
+    }
+
+
+
 
 }
