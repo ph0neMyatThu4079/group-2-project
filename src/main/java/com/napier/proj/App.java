@@ -59,9 +59,18 @@ public class App {
 //        LanguageReport languageReport = new LanguageReport(languageDAO);
 
         // *** Population Reports ***
-        populationReport.printEachContinentPopulationWithUrbanAndNonUrban();
-        populationReport.printEachRegionPopulationWithUrbanAndNonUrban();
-        populationReport.printEachCountryPopulationWithUrbanAndNonUrban();
+//        populationReport.printEachContinentPopulationWithUrbanAndNonUrban();
+//        populationReport.printEachRegionPopulationWithUrbanAndNonUrban();
+//        populationReport.printEachCountryPopulationWithUrbanAndNonUrban();
+        populationReport.printWorldPopulation();
+        populationReport.printContinentPopulation("Asia");
+        populationReport.printRegionPopulation("Central Africa");
+        populationReport.printCountryPopulation("Argentina");
+        populationReport.printDistrictPopulation("Benguela");
+        populationReport.printCityPopulation("Tokyo");
+
+
+
 
 
         // *** Country Reports ***
