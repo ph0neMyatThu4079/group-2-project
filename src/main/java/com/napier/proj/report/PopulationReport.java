@@ -94,7 +94,7 @@ public class PopulationReport {
         // Retrieve all population of people, people living in cities, and people not living in cities in each country.
         List<Population> populations = this.populationDAO.getEachCountryPopulationWithUrbanAndNonUrban();
 
-        System.out.println("\nThe population of people, people living in cities, and people not living in cities in each region.\n");
+        System.out.println("\nThe population of people, people living in cities, and people not living in cities in each country.\n");
 
         // Print table header
         System.out.printf("%-25s %-20s %-20s %-20s %-15s %-15s\n",
