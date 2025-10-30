@@ -1,14 +1,8 @@
 package com.napier.proj;
 
 import com.napier.proj.config.DatabaseConfig;
-import com.napier.proj.dao.CityDAO;
-import com.napier.proj.dao.CountryDAO;
-import com.napier.proj.dao.LanguageDAO;
-import com.napier.proj.dao.PopulationDAO;
-import com.napier.proj.report.CityReport;
-import com.napier.proj.report.CountryReport;
-import com.napier.proj.report.LanguageReport;
-import com.napier.proj.report.PopulationReport;
+import com.napier.proj.dao.*;
+import com.napier.proj.report.*;
 
 import java.sql.Connection;
 
@@ -19,21 +13,23 @@ public class App {
         DatabaseConfig.openConnection();
         Connection conn = DatabaseConfig.getConnection();
 
-//        System.out.println("Now, it's time to start project");
-
 
         // method call for dao object
         CountryDAO countryDAO = new CountryDAO(conn);
         CityDAO cityDAO = new CityDAO(conn);
+        CapitalCityDAO capitalCityDAO = new CapitalCityDAO(conn);
+        PopulationDAO populationDAO = new PopulationDAO(conn);
 //        LanguageDAO languageDAO = new LanguageDAO(conn);
-//        PopulationDAO populationDAO = new PopulationDAO(conn);
 
         CountryReport countryReport = new CountryReport(countryDAO);
         CityReport cityReport = new CityReport(cityDAO);
+        CapitalCityReport  capitalCityReport = new CapitalCityReport(capitalCityDAO);
+        PopulationReport populationReport = new PopulationReport(populationDAO);
 //        LanguageReport languageReport = new LanguageReport(languageDAO);
-//        PopulationReport populationReport = new PopulationReport(populationDAO);
 
-        // *** Country Report ***
+
+        /**
+        // *** Country Reports ***
         // All countries in the world
         countryReport.printAllCountriesByPopulation();
         // All countries in a continent
@@ -46,14 +42,40 @@ public class App {
         countryReport.getTopNPopulatedCountriesInContinent("North America",10);
         // Top N countries in the region
         countryReport.getTopNPopulatedCountriesInRegion("Middle East",10);
+         **/
 
 
-        // *** City Report ***
+        /**
+        // *** City Reports ***
         cityReport.printAllCitiesInWorldByPopulation();
         cityReport.printAllCitiesInContinentByPopulation("Asia");
         cityReport.printAllCitiesInRegionByPopulation("Central Africa");
         cityReport.printAllCitiesInCountryByPopulation("Argentina");
         cityReport.printAllCitiesInDistrictByPopulation("Benguela");
+         **/
+
+        /**
+        // *** Capital Cities Reports **
+        capitalCityReport.printAllCapitalCities();
+        capitalCityReport.printAllCapitalCitiesInContinent("Asia");
+        capitalCityReport.printAllCapitalCitiesInRegion("Caribbean");
+        capitalCityReport.printTopNPopulatedCapitalCities(10);
+        capitalCityReport.printTopNPopulatedCapitalCitiesInContinent("Asia", 10);
+        capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 10);
+         **/
+
+        // *** Population Reports ***
+//        populationReport.printEachContinentPopulationWithUrbanAndNonUrban();
+//        populationReport.printEachRegionPopulationWithUrbanAndNonUrban();
+//        populationReport.printEachCountryPopulationWithUrbanAndNonUrban();
+        populationReport.printWorldPopulation();
+        populationReport.printContinentPopulation("Asia");
+        populationReport.printRegionPopulation("Central Africa");
+        populationReport.printCountryPopulation("Argentina");
+        populationReport.printDistrictPopulation("Benguela");
+        populationReport.printCityPopulation("Tokyo");
+
+
 
         // *** Top N Populated City Reports ***
         cityReport.printTopNPopulatedCitiesInWorld(10);
