@@ -19,13 +19,13 @@ public class App {
         CityDAO cityDAO = new CityDAO(conn);
         CapitalCityDAO capitalCityDAO = new CapitalCityDAO(conn);
         PopulationDAO populationDAO = new PopulationDAO(conn);
-//        LanguageDAO languageDAO = new LanguageDAO(conn);
+        LanguageDAO languageDAO = new LanguageDAO(conn);
 
         CountryReport countryReport = new CountryReport(countryDAO);
         CityReport cityReport = new CityReport(cityDAO);
         CapitalCityReport  capitalCityReport = new CapitalCityReport(capitalCityDAO);
         PopulationReport populationReport = new PopulationReport(populationDAO);
-//        LanguageReport languageReport = new LanguageReport(languageDAO);
+        LanguageReport languageReport = new LanguageReport(languageDAO);
 
 
         /**
@@ -74,6 +74,9 @@ public class App {
         populationReport.printCountryPopulation("Argentina");
         populationReport.printDistrictPopulation("Benguela");
         populationReport.printCityPopulation("Tokyo");
+
+//        Language Reports
+        languageReport.printMajorLanguageReport();
 
 
 
