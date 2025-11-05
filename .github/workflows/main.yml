@@ -16,7 +16,7 @@ jobs:
           java-version: '21'
           distribution: temurin
       - name: Unit Tests
-        run: mvn -Dtest=com.napier.sem.AppTest test
+        run: mvn -Dtest=com.napier.proj.report.AppUnitTest test
 
   build:
     name: Group 2 Project
