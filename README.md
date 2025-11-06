@@ -63,3 +63,14 @@ We follow **Scrum** with sprints, including:
 ```bash
 git clone https://github.com/ph0neMyatThu4079/group-2-project.git
 cd <your-repo>
+```
+---
+### Badge
+
+Master Branch [![A workflow for GROUP 2](https://github.com/ph0neMyatThu4079/group-2-project/actions/workflows/main.yml/badge.svg)](https://github.com/ph0neMyatThu4079/group-2-project/actions/workflows/main.yml)
+
+Develop Branch [![A workflow for GROUP 2](https://github.com/ph0neMyatThu4079/group-2-project/actions/workflows/main.yml/badge.svg?branch=develop)](https://github.com/ph0neMyatThu4079/group-2-project/actions/workflows/main.yml)
+
+Release Branch [![A workflow for GROUP 2](https://github.com/ph0neMyatThu4079/group-2-project/actions/workflows/main.yml/badge.svg?branch=release)](https://github.com/ph0neMyatThu4079/group-2-project/actions/workflows/main.yml)
+
+Code Coverage [![codecov](https://codecov.io/gh/ph0neMyatThu4079/group-2-project/graph/badge.svg?token=00HPYJAJ18)](https://codecov.io/gh/ph0neMyatThu4079/group-2-project)
