@@ -34,7 +34,7 @@ public class DatabaseConfig {
      * where the database container or server is not immediately ready.
      * </p>
      */
-    public static void openConnection() {
+    public static void openConnection(String location, int delay) {
         int retries = 10; // maximum number of retries
 
         // Attempt to connect multiple times
@@ -44,10 +44,10 @@ public class DatabaseConfig {
                 // Only attempt connection if no active connection exists
                 if(conn == null || conn.isClosed()){
                     // Wait 5 seconds before retrying (gives time for DB to initialize)
-                    Thread.sleep(5000);
+                    Thread.sleep(delay);
 
                     // Establish a connection to the database using JDBC
-                    conn = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + dbname +
+                    conn = DriverManager.getConnection("jdbc:mysql://" + location + "/" + dbname +
                             "?useSSL=false&allowPublicKeyRetrieval=true", username, password);
                     System.out.println("Connected to database successfully");
                     break; // stop retrying once connected

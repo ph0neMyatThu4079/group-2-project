@@ -65,17 +65,60 @@ class AppUnitTest {
         c1.setPopulation(103000);
         c1.setCapital("America");
 
+        // Case 1 — Valid list with 1 country
         ArrayList<Country> mockCountries = new ArrayList<>();
         mockCountries.add(c1);
 
         Mockito.when(countryDAO.getAllCountriesByPopulation()).thenReturn(mockCountries);
+        assertDoesNotThrow(() -> countryReport.printAllCountriesByPopulation());
 
+        // Case 2 — Null list
+        Mockito.when(countryDAO.getAllCountriesByPopulation()).thenReturn(null);
+        assertDoesNotThrow(() -> countryReport.printAllCountriesByPopulation());
+
+        // Case 3 — Empty list
+        Mockito.when(countryDAO.getAllCountriesByPopulation()).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> countryReport.printAllCountriesByPopulation());
+
+        // Case 4 — List with all null elements
+        ArrayList<Country> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(countryDAO.getAllCountriesByPopulation()).thenReturn(listWithNull);
         assertDoesNotThrow(() -> countryReport.printAllCountriesByPopulation());
     }
 
     @Test
     void printAllCountriesInContinentByPopulation() {
+        Country c1 = new Country();
+        c1.setCode("ABW");
+        c1.setName("Aruba");
+        c1.setContinent("North America");
+        c1.setRegion("Caribbean");
+        c1.setPopulation(103000);
+        c1.setCapital("America");
 
+        // Case 1 — Valid list with 1 country
+        ArrayList<Country> mockCountries = new ArrayList<>();
+        mockCountries.add(c1);
+
+        Mockito.when(countryDAO.getAllCountriesInContinentByPopulation("North America")).thenReturn(mockCountries);
+        assertDoesNotThrow(() -> countryReport.printAllCountriesInContinentByPopulation("North America"));
+
+        // Case 2 — Null list
+        Mockito.when(countryDAO.getAllCountriesInContinentByPopulation("Asia")).thenReturn(null);
+        assertDoesNotThrow(() -> countryReport.printAllCountriesInContinentByPopulation("Asia"));
+
+        // Case 3 — Empty list
+        Mockito.when(countryDAO.getAllCountriesInContinentByPopulation("Europe")).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> countryReport.printAllCountriesInContinentByPopulation("Europe"));
+
+        // Case 4 — List with all null elements
+        ArrayList<Country> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(countryDAO.getAllCountriesInContinentByPopulation("Africa")).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> countryReport.printAllCountriesInContinentByPopulation("Africa"));
     }
 
     @Test
