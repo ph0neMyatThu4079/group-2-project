@@ -22,7 +22,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # now required for public repos too
           directory: ./target/site/jacoco
-          flags: Integration Tests # optional
+          flags: unittests # optional
           verbose: true # optional (default = false)
           slug: ph0neMyatThu4079/group-2-project
 
@@ -52,8 +52,20 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # now required for public repos too
           directory: ./target/site/jacoco
-          flags: Integration Tests # optional
+          flags: integration # optional
           verbose: true # optional (default = false)
+          slug: ph0neMyatThu4079/group-2-project
+
+  # New job to merge coverage reports
+  MergeCoverage:
+    needs: [UnitTests, IntegrationTests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge Codecov reports
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests,integration
           slug: ph0neMyatThu4079/group-2-project
 
   build:
