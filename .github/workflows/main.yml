@@ -17,6 +17,14 @@ jobs:
           distribution: temurin
       - name: Unit Tests
         run: mvn -Dtest=com.napier.proj.report.AppUnitTest test
+      - name: CodeCov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # now required for public repos too
+          directory: ./target/site/jacoco
+          flags: Integration Tests # optional
+          verbose: true # optional (default = false)
+          slug: ph0neMyatThu4079/group-2-project
 
   IntegrationTests:
     name: Integration Tests
