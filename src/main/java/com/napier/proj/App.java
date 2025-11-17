@@ -19,18 +19,20 @@ public class App {
         Connection conn = DatabaseConfig.getConnection();
 
 
+
+
         // method call for dao object
         CountryDAO countryDAO = new CountryDAO(conn);
         CityDAO cityDAO = new CityDAO(conn);
         CapitalCityDAO capitalCityDAO = new CapitalCityDAO(conn);
         PopulationDAO populationDAO = new PopulationDAO(conn);
-        LanguageDAO languageDAO = new LanguageDAO(conn);
+//        LanguageDAO languageDAO = new LanguageDAO(conn);
 
         CountryReport countryReport = new CountryReport(countryDAO);
         CityReport cityReport = new CityReport(cityDAO);
         CapitalCityReport  capitalCityReport = new CapitalCityReport(capitalCityDAO);
         PopulationReport populationReport = new PopulationReport(populationDAO);
-        LanguageReport languageReport = new LanguageReport(languageDAO);
+//        LanguageReport languageReport = new LanguageReport(languageDAO);
 
 
         /**
@@ -80,8 +82,15 @@ public class App {
         populationReport.printDistrictPopulation("Benguela");
         populationReport.printCityPopulation("Tokyo");
 
-//        Language Reports
-        languageReport.printMajorLanguageReport();
+
+
+        // *** Top N Populated City Reports ***
+        cityReport.printTopNPopulatedCitiesInWorld(10);
+        cityReport.printTopNPopulatedCitiesInContinent("Asia", 10);
+        cityReport.printTopNPopulatedCitiesInRegion("Eastern Europe", 10);
+        cityReport.printTopNPopulatedCitiesInCountry("Brazil", 10);
+        cityReport.printTopNPopulatedCitiesInDistrict("California", 10);
+
 
         DatabaseConfig.closeConnection();
 
