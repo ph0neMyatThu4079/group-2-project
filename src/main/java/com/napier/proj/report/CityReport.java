@@ -155,7 +155,11 @@ public class CityReport {
         }
     }
 
-    // 12. The top N populated cities in the world
+    /**
+     * Prints the top N most populated cities in the world.
+     *
+     * @param n The number of cities to display, based on highest population.
+     */
     public void printTopNPopulatedCitiesInWorld(int n) {
         List<City> cities = this.cityDAO.getTopNPopulatedCitiesInWorld(n);
 
@@ -174,7 +178,12 @@ public class CityReport {
         }
     }
 
-    // 13. The top N populated cities in a continent
+    /**
+     * Prints the top N most populated cities within a specific continent.
+     *
+     * @param continent The name of the continent to filter by.
+     * @param n The number of cities to display, based on highest population.
+     */
     public void printTopNPopulatedCitiesInContinent(String continent, int n) {
         List<City> cities = this.cityDAO.getTopNPopulatedCitiesInContinent(continent, n);
 
@@ -193,7 +202,12 @@ public class CityReport {
         }
     }
 
-    // 14. The top N populated cities in a region
+    /**
+     * Prints the top N most populated cities within a specific region.
+     *
+     * @param region The name of the region to filter by.
+     * @param n The number of cities to display, based on highest population.
+     */
     public void printTopNPopulatedCitiesInRegion(String region, int n) {
         List<City> cities = this.cityDAO.getTopNPopulatedCitiesInRegion(region, n);
 
@@ -212,7 +226,12 @@ public class CityReport {
         }
     }
 
-    // 15. The top N populated cities in a country
+    /**
+     * Prints the top N most populated cities within a specific country.
+     *
+     * @param country The name of the country to filter by.
+     * @param n The number of cities to display, based on highest population.
+     */
     public void printTopNPopulatedCitiesInCountry(String country, int n) {
         List<City> cities = this.cityDAO.getTopNPopulatedCitiesInCountry(country, n);
 
@@ -231,7 +250,12 @@ public class CityReport {
         }
     }
 
-    // 16. The top N populated cities in a district
+    /**
+     * Prints the top N most populated cities within a specific district.
+     *
+     * @param district The district name to filter by.
+     * @param n The number of cities to display, based on highest population.
+     */
     public void printTopNPopulatedCitiesInDistrict(String district, int n) {
         List<City> cities = this.cityDAO.getTopNPopulatedCitiesInDistrict(district, n);
 

@@ -221,7 +221,12 @@ public class CityDAO {
         return cities;
     }
 
-    // 12. The top N populated cities in the world
+    /**
+     * Retrieves the top N most populated cities in the world.
+     *
+     * @param n The number of cities to retrieve, based on highest population.
+     * @return A list of City objects representing the top N populated cities worldwide.
+     */
     public List<City> getTopNPopulatedCitiesInWorld(int n) {
         List<City> cities = new ArrayList<>();
 
@@ -255,7 +260,13 @@ public class CityDAO {
         return cities;
     }
 
-    // 13. The top N populated cities in a continent
+    /**
+     * Retrieves the top N most populated cities within a given continent.
+     *
+     * @param continent The name of the continent to filter by.
+     * @param n The number of cities to retrieve, based on highest population.
+     * @return A list of City objects representing the top N populated cities in the continent.
+     */
     public List<City> getTopNPopulatedCitiesInContinent(String continent, int n) {
         List<City> cities = new ArrayList<>();
 
@@ -291,7 +302,13 @@ public class CityDAO {
         return cities;
     }
 
-    // 14. The top N populated cities in a region
+    /**
+     * Retrieves the top N most populated cities within a specific region.
+     *
+     * @param region The region name to filter by.
+     * @param n The number of cities to retrieve, based on highest population.
+     * @return A list of City objects representing the top N populated cities in the region.
+     */
     public List<City> getTopNPopulatedCitiesInRegion(String region, int n) {
         List<City> cities = new ArrayList<>();
 
@@ -325,7 +342,13 @@ public class CityDAO {
         return cities;
     }
 
-    // 15. The top N populated cities in a country
+    /**
+     * Retrieves the top N most populated cities within a specific country.
+     *
+     * @param country The name of the country to filter by.
+     * @param n The number of cities to retrieve, based on highest population.
+     * @return A list of City objects representing the top N populated cities in the country.
+     */
     public List<City> getTopNPopulatedCitiesInCountry(String country, int n) {
         List<City> cities = new ArrayList<>();
 
@@ -361,7 +384,13 @@ public class CityDAO {
         return cities;
     }
 
-    // 16. The top N populated cities in a district
+    /**
+     * Retrieves the top N most populated cities within a specific district.
+     *
+     * @param district The district name to filter by.
+     * @param n The number of cities to retrieve, based on highest population.
+     * @return A list of City objects representing the top N populated cities in the district.
+     */
     public List<City> getTopNPopulatedCitiesInDistrict(String district, int n) {
         List<City> cities = new ArrayList<>();
 
