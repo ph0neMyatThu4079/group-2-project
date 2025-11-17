@@ -46,8 +46,8 @@ class AppIntegrationTest {
 
         // Verifies data integrity
         Country country = countries.getFirst();
-        assertEquals("China",  country.getName());
-        assertEquals("Asia",  country.getContinent());
+        assertEquals("China", country.getName());
+        assertEquals("Asia", country.getContinent());
     }
 
     @Test

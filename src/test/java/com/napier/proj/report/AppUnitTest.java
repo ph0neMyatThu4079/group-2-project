@@ -142,7 +142,6 @@ class AppUnitTest {
     // Unit Testings for City Reports
 
     // Unit Testings for Capital City Reports
-    // Unit Testings for Capital City Reports
     @Test
     void printAllCapitalCities() {
         CapitalCity cc = new CapitalCity();
