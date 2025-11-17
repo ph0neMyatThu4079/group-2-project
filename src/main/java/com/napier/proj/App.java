@@ -19,8 +19,6 @@ public class App {
         Connection conn = DatabaseConfig.getConnection();
 
 
-
-
         // method call for dao object
         CountryDAO countryDAO = new CountryDAO(conn);
         CityDAO cityDAO = new CityDAO(conn);
