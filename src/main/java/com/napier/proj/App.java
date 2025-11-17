@@ -10,8 +10,15 @@ public class App {
     public static void main(String[] args) {
 
 
-        DatabaseConfig.openConnection();
+        if(args.length < 1){
+            DatabaseConfig.openConnection("localhost:33060", 30000);
+        }
+        else{
+            DatabaseConfig.openConnection(args[0], Integer.parseInt(args[1]));
+        }
         Connection conn = DatabaseConfig.getConnection();
+
+
 
 
         // method call for dao object
