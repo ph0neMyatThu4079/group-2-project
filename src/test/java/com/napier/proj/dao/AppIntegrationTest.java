@@ -4,6 +4,7 @@ import com.napier.proj.App;
 import com.napier.proj.config.DatabaseConfig;
 import com.napier.proj.model.CapitalCity;
 import com.napier.proj.model.Country;
+import com.napier.proj.model.Population;
 import org.junit.jupiter.api.*;
 
 import java.sql.Connection;
@@ -17,6 +18,7 @@ class AppIntegrationTest {
     static Connection conn;
     static CountryDAO countryDAO;
     static CapitalCityDAO capitalCityDAO;
+    static PopulationDAO populationDAO;
 
     @BeforeAll
     static void setup()
@@ -29,6 +31,7 @@ class AppIntegrationTest {
 
         countryDAO = new CountryDAO(conn);
         capitalCityDAO = new CapitalCityDAO(conn);
+        populationDAO = new PopulationDAO(conn);
     }
 
     @AfterAll
@@ -165,5 +168,45 @@ class AppIntegrationTest {
         CapitalCity capitalCity = capitalCities.getFirst();
         assertEquals("Kinshasa", capitalCity.getName());
         assertEquals("Congo, The Democratic Republic of the", capitalCity.getCountry());
+    }
+
+    // Test Population
+    @Test
+    void getEachContinentPopulationWithUrbanAndNonUrban(){
+        List<Population> populations = populationDAO.getEachContinentPopulationWithUrbanAndNonUrban();
+
+        assertNotNull(populations);
+
+        assertFalse(populations.isEmpty());
+
+        Population population = populations.getFirst();
+        assertEquals("Asia", population.getName());
+        assertEquals(3705025700L, population.getTotalPopulation());
+    }
+
+    @Test
+    void getEachRegionPopulationWithUrbanAndNonUrban(){
+        List<Population> populations = populationDAO.getEachRegionPopulationWithUrbanAndNonUrban();
+
+        assertNotNull(populations);
+
+        assertFalse(populations.isEmpty());
+
+        Population population = populations.getFirst();
+        assertEquals("Antarctica", population.getName());
+        assertEquals(0, population.getTotalPopulation());
+    }
+
+    @Test
+    void getEachCountryPopulationWithUrbanAndNonUrban(){
+        List<Population> populations = populationDAO.getEachCountryPopulationWithUrbanAndNonUrban();
+
+        assertNotNull(populations);
+
+        assertFalse(populations.isEmpty());
+
+        Population population = populations.getFirst();
+        assertEquals("Afghanistan", population.getName());
+        assertEquals(22720000, population.getTotalPopulation());
     }
 }
