@@ -59,7 +59,7 @@ public class App {
         cityReport.printAllCitiesInDistrictByPopulation("Benguela");
          **/
 
-        /**
+
         // *** Capital Cities Reports **
         capitalCityReport.printAllCapitalCities();
         capitalCityReport.printAllCapitalCitiesInContinent("Asia");
@@ -67,7 +67,6 @@ public class App {
         capitalCityReport.printTopNPopulatedCapitalCities(10);
         capitalCityReport.printTopNPopulatedCapitalCitiesInContinent("Asia", 10);
         capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 10);
-         **/
 
         // *** Population Reports ***
 //        populationReport.printEachContinentPopulationWithUrbanAndNonUrban();

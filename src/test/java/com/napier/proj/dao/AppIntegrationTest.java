@@ -2,6 +2,7 @@ package com.napier.proj.dao;
 
 import com.napier.proj.App;
 import com.napier.proj.config.DatabaseConfig;
+import com.napier.proj.model.CapitalCity;
 import com.napier.proj.model.Country;
 import org.junit.jupiter.api.*;
 
@@ -15,6 +16,7 @@ class AppIntegrationTest {
 
     static Connection conn;
     static CountryDAO countryDAO;
+    static CapitalCityDAO capitalCityDAO;
 
     @BeforeAll
     static void setup()
@@ -26,6 +28,7 @@ class AppIntegrationTest {
         assertNotNull(conn);
 
         countryDAO = new CountryDAO(conn);
+        capitalCityDAO = new CapitalCityDAO(conn);
     }
 
     @AfterAll
@@ -80,5 +83,18 @@ class AppIntegrationTest {
 
     @Test
     void getTopNPopulatedCountriesInRegion() {
+    }
+
+    // Test Capital City
+    @Test
+    void getAllCapitalCities(){
+        List<CapitalCity> capitalCities = capitalCityDAO.getAllCapitalCities();
+
+        assertNotNull(capitalCities);
+
+        assertFalse(capitalCities.isEmpty());
+
+        CapitalCity capitalCity = capitalCities.getFirst();
+
     }
 }
