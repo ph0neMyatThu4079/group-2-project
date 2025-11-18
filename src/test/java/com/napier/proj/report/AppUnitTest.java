@@ -347,6 +347,41 @@ class AppUnitTest {
     }
 
     // Unit Testings for Population Reports
+    @Test
+    void printTopNPopulatedCapitalCitiesInRegin() {
+        CapitalCity cc1 = new CapitalCity();
+        cc1.setName("Kinshasa");
+        cc1.setCountry("Congo, The Democratic Republic of the");
+        cc1.setPopulation(5064000);
+
+        CapitalCity cc2 = new CapitalCity();
+        cc2.setName("Luanda");
+        cc2.setCountry("Angola");
+        cc2.setPopulation(2022000);
+
+        // Case 1 — Valid list with 1 country
+        ArrayList<CapitalCity> mockCapitalCity = new ArrayList<>();
+        mockCapitalCity.add(cc1);
+        mockCapitalCity.add(cc2);
+
+        Mockito.when(capitalCityDAO.getTopNPopulatedCapitalCitiesByRegion("Central Africa", 2)).thenReturn(mockCapitalCity);
+        assertDoesNotThrow(() -> capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 2));
+
+        // Case 2 — Null list
+        Mockito.when(capitalCityDAO.getTopNPopulatedCapitalCitiesByRegion("Central Africa", 2)).thenReturn(null);
+        assertDoesNotThrow(() -> capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 2));
+
+        // Case 3 — Empty list
+        Mockito.when(capitalCityDAO.getTopNPopulatedCapitalCitiesByRegion("Central Africa", 2)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 2));
+
+        // Case 4 — List with all null elements
+        ArrayList<CapitalCity> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(capitalCityDAO.getTopNPopulatedCapitalCitiesByRegion("Central Africa", 2)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 2));
+    }
 
     // Unit Testings for Language Reports
 

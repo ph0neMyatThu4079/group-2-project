@@ -95,6 +95,75 @@ class AppIntegrationTest {
         assertFalse(capitalCities.isEmpty());
 
         CapitalCity capitalCity = capitalCities.getFirst();
+        assertEquals("Seoul", capitalCity.getName());
+        assertEquals("South Korea", capitalCity.getCountry());
 
+    }
+
+    @Test
+    void getAllCapitalCitiesInContinent(){
+        List<CapitalCity> capitalCities = capitalCityDAO.getAllCapitalCitiesInContinent("Asia");
+
+        assertNotNull(capitalCities);
+
+        assertFalse(capitalCities.isEmpty());
+
+        CapitalCity capitalCity = capitalCities.getFirst();
+        assertEquals("Seoul", capitalCity.getName());
+        assertEquals("South Korea", capitalCity.getCountry());
+
+    }
+
+    @Test
+    void getAllCapitalCitiesInRegion(){
+        List<CapitalCity> capitalCities = capitalCityDAO.getAllCapitalCitiesInRegion("Caribbean");
+
+        assertNotNull(capitalCities);
+
+        assertFalse(capitalCities.isEmpty());
+
+        CapitalCity capitalCity = capitalCities.getFirst();
+        assertEquals("La Habana", capitalCity.getName());
+        assertEquals("Cuba", capitalCity.getCountry());
+
+    }
+
+    @Test
+    void getTopNPopulatedCapitalCities(){
+        List<CapitalCity> capitalCities = capitalCityDAO.getTopNPopulatedCapitalCities(10);
+
+        assertNotNull(capitalCities);
+
+        assertFalse(capitalCities.isEmpty());
+
+        CapitalCity capitalCity = capitalCities.getFirst();
+        assertEquals("Seoul", capitalCity.getName());
+        assertEquals("South Korea", capitalCity.getCountry());
+    }
+
+    @Test
+    void getTopNPopulatedCapitalCitiesByContinent(){
+        List<CapitalCity> capitalCities = capitalCityDAO.getTopNPopulatedCapitalCitiesByContinent("Asia", 10);
+
+        assertNotNull(capitalCities);
+
+        assertFalse(capitalCities.isEmpty());
+
+        CapitalCity capitalCity = capitalCities.getFirst();
+        assertEquals("Seoul", capitalCity.getName());
+        assertEquals("South Korea", capitalCity.getCountry());
+    }
+
+    @Test
+    void getTopNPopulatedCapitalCitiesByRegion(){
+        List<CapitalCity> capitalCities = capitalCityDAO.getTopNPopulatedCapitalCitiesByRegion("Central Africa", 10);
+
+        assertNotNull(capitalCities);
+
+        assertFalse(capitalCities.isEmpty());
+
+        CapitalCity capitalCity = capitalCities.getFirst();
+        assertEquals("Kinshasa", capitalCity.getName());
+        assertEquals("Congo, The Democratic Republic of the", capitalCity.getCountry());
     }
 }
