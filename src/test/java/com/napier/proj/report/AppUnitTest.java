@@ -8,6 +8,7 @@ import com.napier.proj.model.Country;
 
 import com.napier.proj.model.Language;
 import com.napier.proj.model.Population;
+import com.napier.proj.model.Population;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -512,6 +513,92 @@ class AppUnitTest {
         listWithNull.add(null);
         Mockito.when(populationDAO.getCityPopulation("Bangkok")).thenReturn(listWithNull);
         assertDoesNotThrow(() -> populationReport.printCityPopulation("Bangkok"));
+    }
+    @Test
+    void printEachContinentPopulationWithUrbanAndNonUrban() {
+        Population p = new Population();
+        p.setName("Asia");
+        p.setTotalPopulation(3705025700L);
+
+        // Case 1 — Valid list with 1 country
+        ArrayList<Population> mockPopulation = new ArrayList<>();
+        mockPopulation.add(p);
+
+        Mockito.when(populationDAO.getEachContinentPopulationWithUrbanAndNonUrban()).thenReturn(mockPopulation);
+        assertDoesNotThrow(() -> populationReport.printEachContinentPopulationWithUrbanAndNonUrban());
+
+        // Case 2 — Null list
+        Mockito.when(populationDAO.getEachContinentPopulationWithUrbanAndNonUrban()).thenReturn(null);
+        assertDoesNotThrow(() -> populationReport.printEachContinentPopulationWithUrbanAndNonUrban());
+
+        // Case 3 — Empty list
+        Mockito.when(populationDAO.getEachContinentPopulationWithUrbanAndNonUrban()).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> populationReport.printEachContinentPopulationWithUrbanAndNonUrban());
+
+        // Case 4 — List with all null elements
+        ArrayList<Population> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(populationDAO.getEachContinentPopulationWithUrbanAndNonUrban()).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> populationReport.printEachContinentPopulationWithUrbanAndNonUrban());
+    }
+
+    @Test
+    void printEachRegionPopulationWithUrbanAndNonUrban() {
+        Population p = new Population();
+        p.setName("Australia and New Zealand");
+        p.setTotalPopulation(22753100L);
+
+        // Case 1 — Valid list with 1 country
+        ArrayList<Population> mockPopulation = new ArrayList<>();
+        mockPopulation.add(p);
+
+        Mockito.when(populationDAO.getEachRegionPopulationWithUrbanAndNonUrban()).thenReturn(mockPopulation);
+        assertDoesNotThrow(() -> populationReport.printEachRegionPopulationWithUrbanAndNonUrban());
+
+        // Case 2 — Null list
+        Mockito.when(populationDAO.getEachRegionPopulationWithUrbanAndNonUrban()).thenReturn(null);
+        assertDoesNotThrow(() -> populationReport.printEachRegionPopulationWithUrbanAndNonUrban());
+
+        // Case 3 — Empty list
+        Mockito.when(populationDAO.getEachRegionPopulationWithUrbanAndNonUrban()).thenReturn(new  ArrayList<>());
+        assertDoesNotThrow(() -> populationReport.printEachRegionPopulationWithUrbanAndNonUrban());
+
+        // Case 4 — List with all null elements
+        ArrayList<Population> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(populationDAO.getEachRegionPopulationWithUrbanAndNonUrban()).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> populationReport.printEachRegionPopulationWithUrbanAndNonUrban());
+    }
+
+    @Test
+    void printEachCountryPopulationWithUrbanAndNonUrban() {
+        Population p = new Population();
+        p.setName("Afghanistan");
+        p.setTotalPopulation(22720000L);
+
+        // Case 1 — Valid list with 1 country
+        ArrayList<Population> mockPopulation = new ArrayList<>();
+        mockPopulation.add(p);
+
+        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(mockPopulation);
+        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
+
+        // Case 2 — Null list
+        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(null);
+        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
+
+        // Case 3 — Empty list
+        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
+
+        // Case 4 — List with all null elements
+        ArrayList<Population> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
     }
 
     // Unit Testings for Language Reports
