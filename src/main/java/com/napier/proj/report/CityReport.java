@@ -41,8 +41,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),
@@ -67,8 +76,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),
@@ -93,8 +111,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),
@@ -119,8 +146,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),
@@ -145,8 +181,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),

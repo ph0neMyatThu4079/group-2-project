@@ -3,6 +3,7 @@ package com.napier.proj.report;
 import com.napier.proj.App;
 import com.napier.proj.dao.*;
 import com.napier.proj.model.CapitalCity;
+import com.napier.proj.model.City;
 import com.napier.proj.model.Country;
 
 
@@ -15,12 +16,12 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AppUnitTest {
+public class AppUnitTest {
 
     static CountryDAO countryDAO;
     static CountryReport countryReport;
 
-    static CityDAO cityDAO;
+    public static CityDAO cityDAO;
     static CityReport cityReport;
 
     static CapitalCityDAO capitalCityDAO;
@@ -140,6 +141,175 @@ class AppUnitTest {
 
 
     // Unit Testings for City Reports
+    @Test
+    void printAllCitiesInWorldByPopulation() {
+        City ci1 = new City();
+        ci1.setName("Kabul");
+        ci1.setCountry("Afghanistan");
+        ci1.setDistrict("Kabol");
+        ci1.setPopulation(1780000);
+
+        ArrayList<City> cities = new ArrayList<>();
+        cities.add(ci1);
+
+        // Case 1 — valid list
+        Mockito.when(cityDAO.getAllinWorldCitiesByPopulation()).thenReturn(cities);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInWorldByPopulation());
+
+        // Case 2 — null list
+        Mockito.when(cityDAO.getAllinWorldCitiesByPopulation()).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInWorldByPopulation());
+
+        // Case 3 — empty list
+        Mockito.when(cityDAO.getAllinWorldCitiesByPopulation()).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInWorldByPopulation());
+
+        // Case 4 — list with all null element
+        ArrayList<City> nullList = new ArrayList<>();
+        nullList.add(null);
+
+        Mockito.when(cityDAO.getAllinWorldCitiesByPopulation()).thenReturn(nullList);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInWorldByPopulation());
+    }
+
+    @Test
+    void printAllCitiesInContinentByPopulation() {
+        String continent = "Europe";
+        City ci1 = new City();
+        ci1.setName("Berlin");
+        ci1.setCountry("Germany");
+        ci1.setDistrict("Berlin");
+        ci1.setPopulation(3500000);
+
+        ArrayList<City> list1 = new ArrayList<>();
+        list1.add(ci1);
+
+        Mockito.when(cityDAO.getAllCitiesInContinentByPopulation(continent)).thenReturn(list1);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInContinentByPopulation(continent));
+
+        // CASE 2 — null list
+        Mockito.when(cityDAO.getAllCitiesInContinentByPopulation(continent)).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInContinentByPopulation(continent));
+
+        // CASE 3 — empty list
+        Mockito.when(cityDAO.getAllCitiesInContinentByPopulation(continent)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInContinentByPopulation(continent));
+
+        // CASE 4 — list containing null
+        ArrayList<City> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+        Mockito.when(cityDAO.getAllCitiesInContinentByPopulation(continent)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInContinentByPopulation(continent));
+
+        // CASE 5 — invalid continent name
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInContinentByPopulation(""));
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInContinentByPopulation(null));
+    }
+
+    @Test
+    void printAllCitiesInRegionByPopulation() {
+        String region = "Southeast Asia";
+        City ci1 = new City();
+        ci1.setName("Bangkok");
+        ci1.setCountry("Thailand");
+        ci1.setDistrict("Bangkok");
+        ci1.setPopulation(8300000);
+
+        ArrayList<City> validList = new ArrayList<>();
+        validList.add(ci1);
+
+        Mockito.when(cityDAO.getAllCitiesInRegionByPopulation(region)).thenReturn(validList);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInRegionByPopulation(region));
+
+        // Case 2 — Null list
+        Mockito.when(cityDAO.getAllCitiesInRegionByPopulation(region)).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInRegionByPopulation(region));
+
+        // Case 3 — Empty list
+        Mockito.when(cityDAO.getAllCitiesInRegionByPopulation(region)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInRegionByPopulation(region));
+
+        // Case 4 — List containing null element
+        ArrayList<City> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+        Mockito.when(cityDAO.getAllCitiesInRegionByPopulation(region)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInRegionByPopulation(region));
+
+        // Case 5 — Invalid input
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInRegionByPopulation(""));
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInRegionByPopulation(null));
+    }
+
+
+    @Test
+    void printAllCitiesInCountryByPopulation() {
+        String country = "Myanmar";
+        City ci1 = new City();
+        ci1.setName("Yangon");
+        ci1.setCountry("Myanmar");
+        ci1.setDistrict("Yangon");
+        ci1.setPopulation(5000000);
+
+        ArrayList<City> mockCities = new ArrayList<>();
+        mockCities.add(ci1);
+
+        Mockito.when(cityDAO.getAllCitiesInCountryByPopulation(country)).thenReturn(mockCities);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInCountryByPopulation(country));
+
+        // Case 2 — Null list
+        Mockito.when(cityDAO.getAllCitiesInCountryByPopulation(country)).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInCountryByPopulation(country));
+
+        // Case 3 — Empty list
+        Mockito.when(cityDAO.getAllCitiesInCountryByPopulation(country)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInCountryByPopulation(country));
+
+        // Case 4 — List containing null element
+        ArrayList<City> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+        Mockito.when(cityDAO.getAllCitiesInCountryByPopulation(country)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInCountryByPopulation(country));
+
+        // Case 5 — Invalid input
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInCountryByPopulation(""));
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInCountryByPopulation(null));
+    }
+
+
+    @Test
+    void printAllCitiesInDistrictByPopulation() {
+        String district = "Yangon";
+        City ci1 = new City();
+        ci1.setName("Yangon");
+        ci1.setCountry("Myanmar");
+        ci1.setDistrict("Yangon");
+        ci1.setPopulation(5000000);
+
+        ArrayList<City> mockCities = new ArrayList<>();
+        mockCities.add(ci1);
+
+        Mockito.when(cityDAO.getAllCitiesInDistrictByPopulation(district)).thenReturn(mockCities);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInDistrictByPopulation(district));
+
+        // Case 2 — Null list
+        Mockito.when(cityDAO.getAllCitiesInDistrictByPopulation(district)).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInDistrictByPopulation(district));
+
+        // Case 3 — Empty list
+        Mockito.when(cityDAO.getAllCitiesInDistrictByPopulation(district)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInDistrictByPopulation(district));
+
+        // Case 4 — List containing null element
+        ArrayList<City> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+        Mockito.when(cityDAO.getAllCitiesInDistrictByPopulation(district)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInDistrictByPopulation(district));
+
+        // Case 5 — Invalid input
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInDistrictByPopulation(""));
+        assertDoesNotThrow(() -> cityReport.printAllCitiesInDistrictByPopulation(null));
+    }
+
 
     // Unit Testings for Capital City Reports
     @Test

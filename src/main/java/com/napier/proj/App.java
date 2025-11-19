@@ -50,14 +50,14 @@ public class App {
          **/
 
 
-        /**
+
         // *** City Reports ***
         cityReport.printAllCitiesInWorldByPopulation();
         cityReport.printAllCitiesInContinentByPopulation("Asia");
         cityReport.printAllCitiesInRegionByPopulation("Central Africa");
         cityReport.printAllCitiesInCountryByPopulation("Argentina");
         cityReport.printAllCitiesInDistrictByPopulation("Benguela");
-         **/
+
 
         /**
         // *** Capital Cities Reports **
@@ -73,21 +73,21 @@ public class App {
 //        populationReport.printEachContinentPopulationWithUrbanAndNonUrban();
 //        populationReport.printEachRegionPopulationWithUrbanAndNonUrban();
 //        populationReport.printEachCountryPopulationWithUrbanAndNonUrban();
-        populationReport.printWorldPopulation();
-        populationReport.printContinentPopulation("Asia");
-        populationReport.printRegionPopulation("Central Africa");
-        populationReport.printCountryPopulation("Argentina");
-        populationReport.printDistrictPopulation("Benguela");
-        populationReport.printCityPopulation("Tokyo");
-
-
-
-        // *** Top N Populated City Reports ***
-        cityReport.printTopNPopulatedCitiesInWorld(10);
-        cityReport.printTopNPopulatedCitiesInContinent("Asia", 10);
-        cityReport.printTopNPopulatedCitiesInRegion("Eastern Europe", 10);
-        cityReport.printTopNPopulatedCitiesInCountry("Brazil", 10);
-        cityReport.printTopNPopulatedCitiesInDistrict("California", 10);
+//        populationReport.printWorldPopulation();
+//        populationReport.printContinentPopulation("Asia");
+//        populationReport.printRegionPopulation("Central Africa");
+//        populationReport.printCountryPopulation("Argentina");
+//        populationReport.printDistrictPopulation("Benguela");
+//        populationReport.printCityPopulation("Tokyo");
+//
+//
+//
+//        // *** Top N Populated City Reports ***
+//        cityReport.printTopNPopulatedCitiesInWorld(10);
+//        cityReport.printTopNPopulatedCitiesInContinent("Asia", 10);
+//        cityReport.printTopNPopulatedCitiesInRegion("Eastern Europe", 10);
+//        cityReport.printTopNPopulatedCitiesInCountry("Brazil", 10);
+//        cityReport.printTopNPopulatedCitiesInDistrict("California", 10);
 
 
         DatabaseConfig.closeConnection();
