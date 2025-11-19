@@ -559,4 +559,5 @@ class AppUnitTest {
         assertDoesNotThrow(() -> languageReport.printMajorLanguageReport());
     }
 
+
 }
