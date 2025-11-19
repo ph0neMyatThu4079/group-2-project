@@ -212,6 +212,7 @@ class AppIntegrationTest {
             assertTrue(languages.get(i - 1).getSpeakers() >= languages.get(i).getSpeakers(),
                     "Languages should be ordered by descending number of speakers");
         }
+    }
 
     // Test Capital City
     @Test
