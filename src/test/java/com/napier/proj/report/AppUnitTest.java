@@ -124,20 +124,138 @@ class AppUnitTest {
 
     @Test
     void printAllCountriesInRegionByPopulation() {
+            Country c1 = new Country();
+            c1.setCode("ABW");
+            c1.setName("Aruba");
+            c1.setContinent("North America");
+            c1.setRegion("Caribbean");
+            c1.setPopulation(103000);
+            c1.setCapital("America");
+
+            // Case 1 — Valid list with 1 country
+            ArrayList<Country> mockCountries = new ArrayList<>();
+            mockCountries.add(c1);
+
+            Mockito.when(countryDAO.getAllCountriesInRegionByPopulation("Caribbean")).thenReturn(mockCountries);
+            assertDoesNotThrow(() -> countryReport.printAllCountriesInRegionByPopulation("Caribbean"));
+
+            // Case 2 — Null list
+            Mockito.when(countryDAO.getAllCountriesInRegionByPopulation("Southern and Central Asia")).thenReturn(null);
+            assertDoesNotThrow(() -> countryReport.printAllCountriesInRegionByPopulation("Southern and Central Asia"));
+
+            // Case 3 — Empty list
+            Mockito.when(countryDAO.getAllCountriesInRegionByPopulation("Central Africa")).thenReturn(new ArrayList<>());
+            assertDoesNotThrow(() -> countryReport.printAllCountriesInRegionByPopulation("Central Africa"));
+
+            // Case 4 — List with all null elements
+            ArrayList<Country> listWithNull = new ArrayList<>();
+            listWithNull.add(null);
+
+            Mockito.when(countryDAO.getAllCountriesInRegionByPopulation("Southern Europe")).thenReturn(listWithNull);
+            assertDoesNotThrow(() -> countryReport.printAllCountriesInRegionByPopulation("Southern Europe"));
     }
 
     @Test
     void getTopNPopulatedCountriesIntheworld() {
-    }
+        Country c1 = new Country();
+        c1.setCode("ABW");
+        c1.setName("Aruba");
+        c1.setContinent("North America");
+        c1.setRegion("Caribbean");
+        c1.setPopulation(103000);
+        c1.setCapital("America");
+
+        // Case 1 — Valid list with 1 country
+        ArrayList<Country> mockCountries = new ArrayList<>();
+        mockCountries.add(c1);
+
+        Mockito.when(countryDAO.getTopNPopulatedCountriesIntheworld(2)).thenReturn(mockCountries);
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesIntheworld(2));
+
+        // Case 2 — Null list
+        Mockito.when(countryDAO.getTopNPopulatedCountriesIntheworld(2)).thenReturn(null);
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesIntheworld(2));
+
+        // Case 3 — Empty list
+        Mockito.when(countryDAO.getTopNPopulatedCountriesIntheworld(2)).thenReturn(new  ArrayList<>());
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesIntheworld(2));
+
+        // Case 4 — List with all null elements
+        ArrayList<Country> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(countryDAO.getTopNPopulatedCountriesIntheworld(2)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesIntheworld(2));
+
+}
 
     @Test
     void getTopNPopulatedCountriesInContinent() {
+        Country c1 = new Country();
+        c1.setCode("ABW");
+        c1.setName("Aruba");
+        c1.setContinent("North America");
+        c1.setRegion("Caribbean");
+        c1.setPopulation(103000);
+        c1.setCapital("America");
+
+        // Case 1 — Valid list with 1 country
+        ArrayList<Country> mockCountries = new ArrayList<>();
+        mockCountries.add(c1);
+
+        Mockito.when(countryDAO.getTopNPopulatedCountriesInContinent("North America",2)).thenReturn(mockCountries);
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesInContinent("North America", 2));
+
+        // Case 2 — Null list
+        Mockito.when(countryDAO.getTopNPopulatedCountriesInContinent("North America", 2)).thenReturn(null);
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesInContinent("North America", 2));
+
+        // Case 3 — Empty list
+        Mockito.when(countryDAO.getTopNPopulatedCountriesInContinent("North America", 2)).thenReturn(new  ArrayList<>());
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesInContinent("North America", 2));
+
+        // Case 4 — List with all null elements
+        ArrayList<Country> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(countryDAO.getTopNPopulatedCountriesInContinent("North America", 2)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesInContinent("North America", 2));
+
     }
 
     @Test
     void getTopNPopulatedCountriesInRegion() {
-    }
+        Country c1 = new Country();
+        c1.setCode("ABW");
+        c1.setName("Aruba");
+        c1.setContinent("North America");
+        c1.setRegion("Caribbean");
+        c1.setPopulation(103000);
+        c1.setCapital("America");
 
+        // Case 1 — Valid list with 1 country
+        ArrayList<Country> mockCountries = new ArrayList<>();
+        mockCountries.add(c1);
+
+        Mockito.when(countryDAO.getTopNPopulatedCountriesInRegion("Caribbean",2)).thenReturn(mockCountries);
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesInRegion("Caribbean", 2));
+
+        // Case 2 — Null list
+        Mockito.when(countryDAO.getTopNPopulatedCountriesInRegion("Caribbean", 2)).thenReturn(null);
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesInRegion("Caribbean", 2));
+
+        // Case 3 — Empty list
+        Mockito.when(countryDAO.getTopNPopulatedCountriesInRegion("Caribbean", 2)).thenReturn(new  ArrayList<>());
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesInRegion("Caribbean", 2));
+
+        // Case 4 — List with all null elements
+        ArrayList<Country> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(countryDAO.getTopNPopulatedCountriesInRegion("Caribbean", 2)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> countryReport.getTopNPopulatedCountriesInRegion("Caribbean", 2));
+
+    }
 
     // Unit Testings for City Reports
 
