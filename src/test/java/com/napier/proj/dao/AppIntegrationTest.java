@@ -3,6 +3,8 @@ package com.napier.proj.dao;
 import com.napier.proj.App;
 import com.napier.proj.config.DatabaseConfig;
 import com.napier.proj.model.Country;
+import com.napier.proj.model.Language;
+import com.napier.proj.model.Population;
 import org.junit.jupiter.api.*;
 
 import java.sql.Connection;
@@ -15,6 +17,8 @@ class AppIntegrationTest {
 
     static Connection conn;
     static CountryDAO countryDAO;
+    static PopulationDAO populationDAO;
+    static LanguageDAO languageDAO;
 
     @BeforeAll
     static void setup()
@@ -26,6 +30,8 @@ class AppIntegrationTest {
         assertNotNull(conn);
 
         countryDAO = new CountryDAO(conn);
+        populationDAO = new PopulationDAO(conn);
+        languageDAO = new LanguageDAO(conn);
     }
 
     @AfterAll
@@ -80,5 +86,120 @@ class AppIntegrationTest {
 
     @Test
     void getTopNPopulatedCountriesInRegion() {
+    }
+
+
+    //Testings for Population DAO
+    @Test
+    void getWorldPopulation(){
+        List<Population> populations = populationDAO.getWorldPopulation();
+
+        assertNotNull(populations);
+        assertFalse(populations.isEmpty());
+
+        Population population = populations.getFirst();
+
+        // Validate object mapping
+        assertEquals("World", population.getName());
+        assertTrue(population.getTotalPopulation() > 0);
+        assertEquals(6078749450L, population.getTotalPopulation());
+    }
+    @Test
+    void getContinentPopulation(){
+        List<Population> populations = populationDAO.getContinentPopulation("Asia");
+
+        assertNotNull(populations);
+        assertFalse(populations.isEmpty());
+
+        Population population = populations.getFirst();
+
+        assertEquals("Asia", population.getName());
+        assertTrue(population.getTotalPopulation() > 0);
+        assertEquals(3705025700L, population.getTotalPopulation());
+    }
+    @Test
+    void  getRegionPopulation(){
+        List<Population> populations = populationDAO.getRegionPopulation("Central Africa");
+
+        assertNotNull(populations);
+        assertFalse(populations.isEmpty());
+
+        Population population = populations.getFirst();
+
+        assertEquals("Central Africa", population.getName());
+        assertTrue(population.getTotalPopulation() > 0);
+        assertEquals(95652000L, population.getTotalPopulation());
+    }
+    @Test
+    void getCountryPopulation(){
+        List<Population> populations = populationDAO.getCountryPopulation("Argentina");
+
+        assertNotNull(populations);
+        assertFalse(populations.isEmpty());
+
+        Population population = populations.getFirst();
+
+        assertEquals("Argentina", population.getName());
+        assertEquals(37032000, population.getTotalPopulation()); // From world.sql dataset
+
+    }
+    @Test
+    void getDistrictPopulation(){
+        List<Population> populations = populationDAO.getDistrictPopulation("Benguela");
+
+        assertNotNull(populations);
+        assertFalse(populations.isEmpty());
+
+        Population population = populations.getFirst();
+
+        assertEquals("Benguela", population.getName());
+        assertTrue(population.getTotalPopulation() > 0);
+        assertEquals(258300L, population.getTotalPopulation());
+
+
+    }
+    @Test
+    void getCityPopulation(){
+        List<Population> populations = populationDAO.getCityPopulation("Tokyo");
+
+        assertNotNull(populations);
+        assertFalse(populations.isEmpty());
+
+        Population population = populations.getFirst();
+
+        assertEquals("Tokyo", population.getName());
+        assertTrue(population.getTotalPopulation() > 0);
+        assertEquals(7980230, population.getTotalPopulation()); // From world.sql dataset
+    }
+
+    //Testing for LanguageDAO
+    @Test
+    void getMajorLanguageReport(){
+        List<Language> languages = languageDAO.getMajorLanguageReport();
+        // List must not be null
+        assertNotNull(languages);
+
+        // List must not be empty
+        assertFalse(languages.isEmpty());
+
+        // Ensure exactly 5 major languages are returned
+        assertEquals(5, languages.size());
+
+        // Check that expected languages exist
+        boolean hasChinese = languages.stream().anyMatch(l -> l.getLanguage().equals("Chinese"));
+        boolean hasEnglish = languages.stream().anyMatch(l -> l.getLanguage().equals("English"));
+        boolean hasHindi = languages.stream().anyMatch(l -> l.getLanguage().equals("Hindi"));
+        boolean hasSpanish = languages.stream().anyMatch(l -> l.getLanguage().equals("Spanish"));
+        boolean hasArabic = languages.stream().anyMatch(l -> l.getLanguage().equals("Arabic"));
+
+        assertTrue(hasChinese && hasEnglish && hasHindi && hasSpanish && hasArabic);
+
+
+        // Check order by speakers (descending)
+        for (int i = 1; i < languages.size(); i++) {
+            assertTrue(languages.get(i - 1).getSpeakers() >= languages.get(i).getSpeakers(),
+                    "Languages should be ordered by descending number of speakers");
+        }
+
     }
 }

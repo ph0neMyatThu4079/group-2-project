@@ -124,8 +124,13 @@ public class PopulationReport {
         System.out.println("\nThe total population of the world.\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -140,8 +145,13 @@ public class PopulationReport {
         System.out.println("\nThe total population of the continent: " + continent + "\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -153,12 +163,16 @@ public class PopulationReport {
      */
     public void printRegionPopulation(String region) {
         List<Population> populations = populationDAO.getRegionPopulation(region);
-
         System.out.println("\nThe total population of the region: " + region + "\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -174,7 +188,13 @@ public class PopulationReport {
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
 
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
+
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -189,8 +209,13 @@ public class PopulationReport {
         System.out.println("\nThe total population of the district: " + district + "\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -205,8 +230,13 @@ public class PopulationReport {
         System.out.println("\nThe total population of the city: " + city + "\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
