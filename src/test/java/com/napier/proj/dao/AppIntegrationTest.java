@@ -4,10 +4,7 @@ import com.napier.proj.App;
 import com.napier.proj.config.DatabaseConfig;
 import com.napier.proj.model.CapitalCity;
 import com.napier.proj.model.Country;
-<<<<<<< HEAD
 import com.napier.proj.model.Language;
-=======
->>>>>>> feature/capitalcity-reports
 import com.napier.proj.model.Population;
 import org.junit.jupiter.api.*;
 
@@ -21,13 +18,12 @@ class AppIntegrationTest {
 
     static Connection conn;
     static CountryDAO countryDAO;
-<<<<<<< HEAD
+
     static PopulationDAO populationDAO;
     static LanguageDAO languageDAO;
-=======
+
     static CapitalCityDAO capitalCityDAO;
-    static PopulationDAO populationDAO;
->>>>>>> feature/capitalcity-reports
+   
 
     @BeforeAll
     static void setup()
@@ -39,13 +35,10 @@ class AppIntegrationTest {
         assertNotNull(conn);
 
         countryDAO = new CountryDAO(conn);
-<<<<<<< HEAD
         populationDAO = new PopulationDAO(conn);
         languageDAO = new LanguageDAO(conn);
-=======
         capitalCityDAO = new CapitalCityDAO(conn);
-        populationDAO = new PopulationDAO(conn);
->>>>>>> feature/capitalcity-reports
+
     }
 
     @AfterAll
@@ -102,7 +95,6 @@ class AppIntegrationTest {
     void getTopNPopulatedCountriesInRegion() {
     }
 
-<<<<<<< HEAD
 
     //Testings for Population DAO
     @Test
@@ -119,6 +111,7 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(6078749450L, population.getTotalPopulation());
     }
+    
     @Test
     void getContinentPopulation(){
         List<Population> populations = populationDAO.getContinentPopulation("Asia");
@@ -132,6 +125,7 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(3705025700L, population.getTotalPopulation());
     }
+    
     @Test
     void  getRegionPopulation(){
         List<Population> populations = populationDAO.getRegionPopulation("Central Africa");
@@ -145,6 +139,7 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(95652000L, population.getTotalPopulation());
     }
+    
     @Test
     void getCountryPopulation(){
         List<Population> populations = populationDAO.getCountryPopulation("Argentina");
@@ -158,6 +153,7 @@ class AppIntegrationTest {
         assertEquals(37032000, population.getTotalPopulation()); // From world.sql dataset
 
     }
+    
     @Test
     void getDistrictPopulation(){
         List<Population> populations = populationDAO.getDistrictPopulation("Benguela");
@@ -173,6 +169,7 @@ class AppIntegrationTest {
 
 
     }
+    
     @Test
     void getCityPopulation(){
         List<Population> populations = populationDAO.getCityPopulation("Tokyo");
@@ -216,7 +213,6 @@ class AppIntegrationTest {
                     "Languages should be ordered by descending number of speakers");
         }
 
-=======
     // Test Capital City
     @Test
     void getAllCapitalCities(){
@@ -337,6 +333,6 @@ class AppIntegrationTest {
         Population population = populations.getFirst();
         assertEquals("Afghanistan", population.getName());
         assertEquals(22720000, population.getTotalPopulation());
->>>>>>> feature/capitalcity-reports
+
     }
 }
