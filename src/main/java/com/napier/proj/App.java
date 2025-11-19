@@ -51,12 +51,12 @@ public class App {
 
 
 
-        // *** City Reports ***
-        cityReport.printAllCitiesInWorldByPopulation();
-        cityReport.printAllCitiesInContinentByPopulation("Asia");
-        cityReport.printAllCitiesInRegionByPopulation("Central Africa");
-        cityReport.printAllCitiesInCountryByPopulation("Argentina");
-        cityReport.printAllCitiesInDistrictByPopulation("Benguela");
+//        // *** City Reports ***
+//        cityReport.printAllCitiesInWorldByPopulation();
+//        cityReport.printAllCitiesInContinentByPopulation("Asia");
+//        cityReport.printAllCitiesInRegionByPopulation("Central Africa");
+//        cityReport.printAllCitiesInCountryByPopulation("Argentina");
+//        cityReport.printAllCitiesInDistrictByPopulation("Benguela");
 
 
         /**
@@ -82,12 +82,12 @@ public class App {
 //
 //
 //
-//        // *** Top N Populated City Reports ***
-//        cityReport.printTopNPopulatedCitiesInWorld(10);
-//        cityReport.printTopNPopulatedCitiesInContinent("Asia", 10);
-//        cityReport.printTopNPopulatedCitiesInRegion("Eastern Europe", 10);
-//        cityReport.printTopNPopulatedCitiesInCountry("Brazil", 10);
-//        cityReport.printTopNPopulatedCitiesInDistrict("California", 10);
+        // *** Top N Populated City Reports ***
+        cityReport.printTopNPopulatedCitiesInWorld(10);
+        cityReport.printTopNPopulatedCitiesInContinent("Asia", 10);
+        cityReport.printTopNPopulatedCitiesInRegion("Eastern Europe", 10);
+        cityReport.printTopNPopulatedCitiesInCountry("Brazil", 10);
+        cityReport.printTopNPopulatedCitiesInDistrict("California", 10);
 
 
         DatabaseConfig.closeConnection();

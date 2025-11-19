@@ -176,4 +176,89 @@ class AppIntegrationTest {
         assertEquals("Benguela", city.getDistrict());
         assertEquals(130000L, city.getPopulation()); // Compare as long
     }
-}
+
+    // Integration Testings for Top N City DAO
+        @Test
+        void getTopNPopulatedCitiesInWorld() {
+            int n = 5;
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInWorld(n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("Mumbai (Bombay)", city.getName());
+            assertEquals("India", city.getCountry());
+            assertEquals("Maharashtra", city.getDistrict());
+            assertEquals(10500000L, city.getPopulation());
+        }
+
+        @Test
+        void getTopNPopulatedCitiesInContinent() {
+            int n = 5;
+            String continent = "Asia";
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInContinent(continent, n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("Mumbai (Bombay)", city.getName());
+            assertEquals("India", city.getCountry());
+            assertEquals("Maharashtra", city.getDistrict());
+            assertEquals(10500000L, city.getPopulation());
+        }
+
+        @Test
+        void getTopNPopulatedCitiesInRegion() {
+            int n = 5;
+            String region = "Eastern Europe";
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInRegion(region, n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("Moscow", city.getName());
+            assertEquals("Russian Federation", city.getCountry());
+            assertEquals("Moscow (City)", city.getDistrict());
+            assertEquals(8389200L, city.getPopulation());
+        }
+
+        @Test
+        void getTopNPopulatedCitiesInCountry() {
+            int n = 5;
+            String country = "Brazil";
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInCountry(country, n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("São Paulo", city.getName());
+            assertEquals("Brazil", city.getCountry());
+            assertEquals("São Paulo", city.getDistrict());
+            assertEquals(9968485L, city.getPopulation());
+        }
+
+        @Test
+        void getTopNPopulatedCitiesInDistrict() {
+            int n = 5;
+            String district = "California";
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInDistrict(district, n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("Los Angeles", city.getName());
+            assertEquals("United States", city.getCountry());
+            assertEquals("California", city.getDistrict());
+            assertEquals(3694820L, city.getPopulation());
+        }
+    }

@@ -516,6 +516,162 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 2));
     }
 
+    // Unit Testings for Top N City Reports
+    @Test
+    void printTopNPopulatedCitiesInWorld() {
+        City ci1 = new City();
+        ci1.setName("Tokyo");
+        ci1.setCountry("Japan");
+        ci1.setDistrict("Tokyo");
+        ci1.setPopulation(37000000);
+
+        ArrayList<City> list = new ArrayList<>();
+        list.add(ci1);
+
+        // Case 1 — valid list
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInWorld(5)).thenReturn(list);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInWorld(5));
+
+        // Case 2 — null list
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInWorld(5)).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInWorld(5));
+
+        // Case 3 — empty list
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInWorld(5)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInWorld(5));
+
+        // Case 4 — list containing null
+        ArrayList<City> nullList = new ArrayList<>();
+        nullList.add(null);
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInWorld(5)).thenReturn(nullList);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInWorld(5));
+    }
+
+    @Test
+    void printTopNPopulatedCitiesInContinent() {
+        String continent = "Asia";
+
+        City ci1 = new City();
+        ci1.setName("Shanghai");
+        ci1.setCountry("China");
+        ci1.setDistrict("Shanghai");
+        ci1.setPopulation(26000000);
+
+        ArrayList<City> list = new ArrayList<>();
+        list.add(ci1);
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInContinent(continent, 5)).thenReturn(list);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(continent, 5));
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInContinent(continent, 5)).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(continent, 5));
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInContinent(continent, 5)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(continent, 5));
+
+        ArrayList<City> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInContinent(continent, 5)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(continent, 5));
+
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent("", 5));
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(null, 5));
+    }
+
+    @Test
+    void printTopNPopulatedCitiesInRegion() {
+        String region = "Western Europe";
+
+        City ci1 = new City();
+        ci1.setName("Paris");
+        ci1.setCountry("France");
+        ci1.setDistrict("Île-de-France");
+        ci1.setPopulation(11000000);
+
+        ArrayList<City> list = new ArrayList<>();
+        list.add(ci1);
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInRegion(region, 5)).thenReturn(list);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(region, 5));
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInRegion(region, 5)).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(region, 5));
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInRegion(region, 5)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(region, 5));
+
+        ArrayList<City> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInRegion(region, 5)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(region, 5));
+
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion("", 5));
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(null, 5));
+    }
+
+    @Test
+    void printTopNPopulatedCitiesInCountry() {
+        String country = "USA";
+
+        City ci1 = new City();
+        ci1.setName("New York");
+        ci1.setCountry("USA");
+        ci1.setDistrict("New York");
+        ci1.setPopulation(19000000);
+
+        ArrayList<City> list = new ArrayList<>();
+        list.add(ci1);
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInCountry(country, 5)).thenReturn(list);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(country, 5));
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInCountry(country, 5)).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(country, 5));
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInCountry(country, 5)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(country, 5));
+
+        ArrayList<City> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInCountry(country, 5)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(country, 5));
+
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry("", 5));
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(null, 5));
+    }
+
+    @Test
+    void printTopNPopulatedCitiesInDistrict() {
+        String district = "California";
+
+        City ci1 = new City();
+        ci1.setName("Los Angeles");
+        ci1.setCountry("USA");
+        ci1.setDistrict("California");
+        ci1.setPopulation(13000000);
+
+        ArrayList<City> list = new ArrayList<>();
+        list.add(ci1);
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInDistrict(district, 5)).thenReturn(list);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(district, 5));
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInDistrict(district, 5)).thenReturn(null);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(district, 5));
+
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInDistrict(district, 5)).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(district, 5));
+
+        ArrayList<City> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+        Mockito.when(cityDAO.getTopNPopulatedCitiesInDistrict(district, 5)).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(district, 5));
+
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict("", 5));
+        assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(null, 5));
+    }
+
+
     // Unit Testings for Population Reports
 
     // Unit Testings for Language Reports
