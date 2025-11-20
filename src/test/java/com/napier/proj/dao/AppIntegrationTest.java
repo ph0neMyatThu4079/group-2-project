@@ -27,6 +27,17 @@ class AppIntegrationTest {
     static CapitalCityDAO capitalCityDAO;
 
 
+    @Test
+    void testConnection() {
+        assertNotNull(conn, "Connection should not be null");
+
+        try {
+            assertTrue(conn.isValid(5), "Connection should be valid");
+        } catch (Exception e) {
+            fail("Connection is not valid: " + e.getMessage());
+        }
+    }
+
     @BeforeAll
     static void setup()
     {
@@ -34,13 +45,10 @@ class AppIntegrationTest {
         DatabaseConfig.openConnection("localhost:33060", 30000);
         conn = DatabaseConfig.getConnection();
 
-        assertNotNull(conn);
-
         countryDAO = new CountryDAO(conn);
         populationDAO = new PopulationDAO(conn);
         languageDAO = new LanguageDAO(conn);
         capitalCityDAO = new CapitalCityDAO(conn);
-
         cityDAO = new CityDAO(conn);
     }
 
@@ -183,7 +191,6 @@ class AppIntegrationTest {
                 previousPop = c.getPopulation();
             }
         }
-
 
 
     //Testings for Population DAO
