@@ -3,6 +3,7 @@ package com.napier.proj.dao;
 import com.napier.proj.App;
 import com.napier.proj.config.DatabaseConfig;
 import com.napier.proj.model.CapitalCity;
+import com.napier.proj.model.City;
 import com.napier.proj.model.Country;
 import com.napier.proj.model.Language;
 import com.napier.proj.model.Population;
@@ -18,12 +19,13 @@ class AppIntegrationTest {
 
     static Connection conn;
     static CountryDAO countryDAO;
+    static CityDAO cityDAO;
 
     static PopulationDAO populationDAO;
     static LanguageDAO languageDAO;
 
     static CapitalCityDAO capitalCityDAO;
-   
+
 
     @BeforeAll
     static void setup()
@@ -39,6 +41,7 @@ class AppIntegrationTest {
         languageDAO = new LanguageDAO(conn);
         capitalCityDAO = new CapitalCityDAO(conn);
 
+        cityDAO = new CityDAO(conn);
     }
 
     @AfterAll
@@ -111,7 +114,7 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(6078749450L, population.getTotalPopulation());
     }
-    
+
     @Test
     void getContinentPopulation(){
         List<Population> populations = populationDAO.getContinentPopulation("Asia");
@@ -125,7 +128,7 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(3705025700L, population.getTotalPopulation());
     }
-    
+
     @Test
     void  getRegionPopulation(){
         List<Population> populations = populationDAO.getRegionPopulation("Central Africa");
@@ -139,7 +142,7 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(95652000L, population.getTotalPopulation());
     }
-    
+
     @Test
     void getCountryPopulation(){
         List<Population> populations = populationDAO.getCountryPopulation("Argentina");
@@ -153,7 +156,7 @@ class AppIntegrationTest {
         assertEquals(37032000, population.getTotalPopulation()); // From world.sql dataset
 
     }
-    
+
     @Test
     void getDistrictPopulation(){
         List<Population> populations = populationDAO.getDistrictPopulation("Benguela");
@@ -169,7 +172,7 @@ class AppIntegrationTest {
 
 
     }
-    
+
     @Test
     void getCityPopulation(){
         List<Population> populations = populationDAO.getCityPopulation("Tokyo");
@@ -336,4 +339,179 @@ class AppIntegrationTest {
         assertEquals(22720000, population.getTotalPopulation());
 
     }
-}
+    // integration testing for city dao
+    @Test
+    void getAllinWorldCitiesByPopulation() {
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Check if a country list is not null
+        assertNotNull(cities);
+
+        // Check if a list is not empty
+        assertFalse(cities.isEmpty());
+
+        // Verifies data integrity
+        City city = cities.get(0); // use get(0) instead of getFirst() for List
+        assertEquals("Mumbai (Bombay)", city.getName());
+        assertEquals("India", city.getCountry());
+        assertEquals("Maharashtra", city.getDistrict());
+        assertEquals(10500000L, city.getPopulation()); // Compare as long
+    }
+
+    @Test
+    void getAllCitiesInContinentByPopulation() {
+        List<City> cities = cityDAO.getAllCitiesInContinentByPopulation("Asia");
+
+        // Check if a country list is not null
+        assertNotNull(cities);
+
+        // Check if a list is not empty
+        assertFalse(cities.isEmpty());
+
+        // Verifies data integrity
+        City city = cities.get(0); // use get(0) instead of getFirst() for List
+        assertEquals("Mumbai (Bombay)", city.getName());
+        assertEquals("India", city.getCountry());
+        assertEquals("Maharashtra", city.getDistrict());
+        assertEquals(10500000L, city.getPopulation()); // Compare as long
+    }
+
+    @Test
+    void getAllCitiesInRegionByPopulation() {
+        List<City> cities = cityDAO.getAllCitiesInRegionByPopulation("Central Africa");
+
+        // Check if a country list is not null
+        assertNotNull(cities);
+
+        // Check if a list is not empty
+        assertFalse(cities.isEmpty());
+
+        // Verifies data integrity
+        City city = cities.get(1); // use get(0) instead of getFirst() for List
+        assertEquals("Luanda", city.getName());
+        assertEquals("Angola", city.getCountry());
+        assertEquals("Luanda", city.getDistrict());
+        assertEquals(2022000L, city.getPopulation()); // Compare as long
+    }
+
+    @Test
+    void getAllCitiesInCountryByPopulation() {
+        List<City> cities = cityDAO.getAllCitiesInCountryByPopulation("Argentina");
+
+        // Check if a country list is not null
+        assertNotNull(cities);
+
+        // Check if a list is not empty
+        assertFalse(cities.isEmpty());
+
+        // Verifies data integrity
+        City city = cities.get(0); // use get(0) instead of getFirst() for List
+        assertEquals("Buenos Aires", city.getName());
+        assertEquals("Argentina", city.getCountry());
+        assertEquals("Distrito Federal", city.getDistrict());
+        assertEquals(2982146L, city.getPopulation()); // Compare as long
+    }
+
+    @Test
+    void getAllCitiesInDistrictByPopulation() {
+        List<City> cities = cityDAO.getAllCitiesInDistrictByPopulation("Benguela");
+
+        // Check if a country list is not null
+        assertNotNull(cities);
+
+        // Check if a list is not empty
+        assertFalse(cities.isEmpty());
+
+        // Verifies data integrity
+        City city = cities.get(0); // use get(0) instead of getFirst() for List
+        assertEquals("Lobito", city.getName());
+        assertEquals("Angola", city.getCountry());
+        assertEquals("Benguela", city.getDistrict());
+        assertEquals(130000L, city.getPopulation()); // Compare as long
+    }
+
+    // Integration Testings for Top N City DAO
+        @Test
+        void getTopNPopulatedCitiesInWorld() {
+            int n = 5;
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInWorld(n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("Mumbai (Bombay)", city.getName());
+            assertEquals("India", city.getCountry());
+            assertEquals("Maharashtra", city.getDistrict());
+            assertEquals(10500000L, city.getPopulation());
+        }
+
+        @Test
+        void getTopNPopulatedCitiesInContinent() {
+            int n = 5;
+            String continent = "Asia";
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInContinent(continent, n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("Mumbai (Bombay)", city.getName());
+            assertEquals("India", city.getCountry());
+            assertEquals("Maharashtra", city.getDistrict());
+            assertEquals(10500000L, city.getPopulation());
+        }
+
+        @Test
+        void getTopNPopulatedCitiesInRegion() {
+            int n = 5;
+            String region = "Eastern Europe";
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInRegion(region, n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("Moscow", city.getName());
+            assertEquals("Russian Federation", city.getCountry());
+            assertEquals("Moscow (City)", city.getDistrict());
+            assertEquals(8389200L, city.getPopulation());
+        }
+
+        @Test
+        void getTopNPopulatedCitiesInCountry() {
+            int n = 5;
+            String country = "Brazil";
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInCountry(country, n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("São Paulo", city.getName());
+            assertEquals("Brazil", city.getCountry());
+            assertEquals("São Paulo", city.getDistrict());
+            assertEquals(9968485L, city.getPopulation());
+        }
+
+        @Test
+        void getTopNPopulatedCitiesInDistrict() {
+            int n = 5;
+            String district = "California";
+            List<City> cities = cityDAO.getTopNPopulatedCitiesInDistrict(district, n);
+
+            assertNotNull(cities);
+            assertFalse(cities.isEmpty());
+            assertTrue(cities.size() <= n);
+
+            City city = cities.get(0);
+            assertEquals("Los Angeles", city.getName());
+            assertEquals("United States", city.getCountry());
+            assertEquals("California", city.getDistrict());
+            assertEquals(3694820L, city.getPopulation());
+        }
+    }
