@@ -135,13 +135,29 @@ public class CountryReport {
 
         System.out.println("\nAll the countries in a region organized by largest population to smallest.\n");
 
+        if (countries == null) {
+            System.out.println("No country list returned.");
+            return;
+        }
+
+        if (countries.isEmpty()) {
+            System.out.println("No countries found.");
+            return;
+        }
         // Print table header
         System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n", "Code", "Name", "Continent", "Region", "Population",  "Capital");
 
         System.out.println("--------------------------------------------------------------------------------------------");
 
+        boolean printed = false;
         // Print each country's details
         for (Country country : countries) {
+
+            if (country == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n",
                     country.getCode(),
                     country.getName(),
@@ -149,6 +165,9 @@ public class CountryReport {
                     country.getRegion(),
                     country.getPopulation(),
                     country.getCapital());
+        }
+        if(!printed){
+            System.out.println("No valid country records.");
         }
     }
 
@@ -163,13 +182,29 @@ public class CountryReport {
 
         System.out.println("\nThe top N populated countries in the world where N is provided by the user.");
 
+        if (countries == null) {
+            System.out.println("No country list returned.");
+            return;
+        }
+
+        if (countries.isEmpty()) {
+            System.out.println("No countries found.");
+            return;
+        }
         // Print table header
         System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n", "Code", "Name", "Continent", "Region", "Population",  "Capital");
 
         System.out.println("--------------------------------------------------------------------------------------------");
 
+        boolean printed = false;
         // Print each country's details
         for (Country country : countries) {
+
+            if (country == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n",
                     country.getCode(),
                     country.getName(),
@@ -178,8 +213,10 @@ public class CountryReport {
                     country.getPopulation(),
                     country.getCapital());
         }
+        if(!printed){
+            System.out.println("No valid country records.");
+        }
     }
-
     /**
      * Prints the top N most populated countries within a given continent.
      *
@@ -192,13 +229,29 @@ public class CountryReport {
 
         System.out.println("\nThe top N populated countries in a continent where N is provided by the user.");
 
+        if (countries == null) {
+            System.out.println("No country list returned.");
+            return;
+        }
+
+        if (countries.isEmpty()) {
+            System.out.println("No countries found.");
+            return;
+        }
         // Print table header
         System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n", "Code", "Name", "Continent", "Region", "Population",  "Capital");
 
         System.out.println("--------------------------------------------------------------------------------------------");
 
+        boolean printed = false;
         // Print each country's details
         for (Country country : countries) {
+
+            if (country == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n",
                     country.getCode(),
                     country.getName(),
@@ -206,6 +259,9 @@ public class CountryReport {
                     country.getRegion(),
                     country.getPopulation(),
                     country.getCapital());
+        }
+        if(!printed){
+            System.out.println("No valid country records.");
         }
     }
 
@@ -221,13 +277,29 @@ public class CountryReport {
 
         System.out.println("\nThe top N populated countries in a region where N is provided by the user.");
 
+        if (countries == null) {
+            System.out.println("No country list returned.");
+            return;
+        }
+
+        if (countries.isEmpty()) {
+            System.out.println("No countries found.");
+            return;
+        }
         // Print table header
         System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n", "Code", "Name", "Continent", "Region", "Population",  "Capital");
 
         System.out.println("--------------------------------------------------------------------------------------------");
 
+        boolean printed = false;
         // Print each country's details
         for (Country country : countries) {
+
+            if (country == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-7s %-25s %-15s %-25s %-20s %-20s%n",
                     country.getCode(),
                     country.getName(),
@@ -235,6 +307,9 @@ public class CountryReport {
                     country.getRegion(),
                     country.getPopulation(),
                     country.getCapital());
+        }
+        if(!printed){
+            System.out.println("No valid country records.");
         }
     }
 
