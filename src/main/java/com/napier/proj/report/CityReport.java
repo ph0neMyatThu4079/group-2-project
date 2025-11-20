@@ -41,8 +41,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),
@@ -67,8 +76,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),
@@ -93,8 +111,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),
@@ -119,8 +146,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),
@@ -145,8 +181,17 @@ public class CityReport {
                 "City", "Country", "District", "Population");
         System.out.println("---------------------------------------------------------------------------------------------");
 
+        // ADD THIS CHECK — REQUIRED
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
         // Print each city's details
         for (City city : cities) {
+
+            if (city == null) continue; // avoid null element crash
+
             System.out.printf("%-25s %-25s %-25s %-15d%n",
                     city.getName(),
                     city.getCountry(),
@@ -155,7 +200,156 @@ public class CityReport {
         }
     }
 
+    /**
+     * Prints the top N most populated cities in the world.
+     *
+     * @param n The number of cities to display, based on highest population.
+     */
+    public void printTopNPopulatedCitiesInWorld(int n) {
+        List<City> cities = this.cityDAO.getTopNPopulatedCitiesInWorld(n);
+
+        System.out.println("\nThe top " + n + " populated cities in the world where N is provided by the user.\n");
+
+        System.out.printf("%-25s %-25s %-25s %-15s%n",
+                "City", "Country", "District", "Population");
+        System.out.println("---------------------------------------------------------------------------------------------");
+
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
+        for (City city : cities) {
+            if (city == null) continue;
+            System.out.printf("%-25s %-25s %-25s %-15d%n",
+                    city.getName(),
+                    city.getCountry(),
+                    city.getDistrict(),
+                    city.getPopulation());
+        }
+    }
+
+    /**
+     * Prints the top N most populated cities within a specific continent.
+     *
+     * @param continent The name of the continent to filter by.
+     * @param n The number of cities to display, based on highest population.
+     */
+    public void printTopNPopulatedCitiesInContinent(String continent, int n) {
+        List<City> cities = this.cityDAO.getTopNPopulatedCitiesInContinent(continent, n);
+
+        System.out.println("\nThe top " + n + " populated cities in continent: " + continent + ".\n");
+
+        System.out.printf("%-25s %-25s %-25s %-15s%n",
+                "City", "Country", "District", "Population");
+        System.out.println("---------------------------------------------------------------------------------------------");
+
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
+        for (City city : cities) {
+            if (city == null) continue;
+            System.out.printf("%-25s %-25s %-25s %-15d%n",
+                    city.getName(),
+                    city.getCountry(),
+                    city.getDistrict(),
+                    city.getPopulation());
+        }
+    }
+
+    /**
+     * Prints the top N most populated cities within a specific region.
+     *
+     * @param region The name of the region to filter by.
+     * @param n The number of cities to display, based on highest population.
+     */
+    public void printTopNPopulatedCitiesInRegion(String region, int n) {
+        List<City> cities = this.cityDAO.getTopNPopulatedCitiesInRegion(region, n);
+
+        System.out.println("\nThe top " + n + " populated cities in region: " + region + ".\n");
+
+        System.out.printf("%-25s %-25s %-25s %-15s%n",
+                "City", "Country", "District", "Population");
+        System.out.println("---------------------------------------------------------------------------------------------");
+
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
+        for (City city : cities) {
+            if (city == null) continue;
+            System.out.printf("%-25s %-25s %-25s %-15d%n",
+                    city.getName(),
+                    city.getCountry(),
+                    city.getDistrict(),
+                    city.getPopulation());
+        }
+    }
+
+    /**
+     * Prints the top N most populated cities within a specific country.
+     *
+     * @param country The name of the country to filter by.
+     * @param n The number of cities to display, based on highest population.
+     */
+    public void printTopNPopulatedCitiesInCountry(String country, int n) {
+        List<City> cities = this.cityDAO.getTopNPopulatedCitiesInCountry(country, n);
+
+        System.out.println("\nThe top " + n + " populated cities in country: " + country + ".\n");
+
+        System.out.printf("%-25s %-25s %-25s %-15s%n",
+                "City", "Country", "District", "Population");
+        System.out.println("---------------------------------------------------------------------------------------------");
+
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
+        for (City city : cities) {
+            if (city == null) continue;
+            System.out.printf("%-25s %-25s %-25s %-15d%n",
+                    city.getName(),
+                    city.getCountry(),
+                    city.getDistrict(),
+                    city.getPopulation());
+        }
+    }
+
+    /**
+     * Prints the top N most populated cities within a specific district.
+     *
+     * @param district The district name to filter by.
+     * @param n The number of cities to display, based on highest population.
+     */
+    public void printTopNPopulatedCitiesInDistrict(String district, int n) {
+        List<City> cities = this.cityDAO.getTopNPopulatedCitiesInDistrict(district, n);
+
+        System.out.println("\nThe top " + n + " populated cities in district: " + district + ".\n");
+
+        System.out.printf("%-25s %-25s %-25s %-15s%n",
+                "City", "Country", "District", "Population");
+        System.out.println("---------------------------------------------------------------------------------------------");
+
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No data available.");
+            return;
+        }
+
+        for (City city : cities) {
+            if (city == null) continue;
+            System.out.printf("%-25s %-25s %-25s %-15d%n",
+                    city.getName(),
+                    city.getCountry(),
+                    city.getDistrict(),
+                    city.getPopulation());
+        }
+    }
 }
+
 
 
 

@@ -38,18 +38,39 @@ public class CapitalCityReport {
 
         System.out.println("\nAll the capital cities in the world organised by largest population to smallest.\n");
 
+        if(capitalCities == null) {
+            System.out.println("No capital city list returned.");
+            return;
+        }
+
+        if(capitalCities.isEmpty()) {
+            System.out.println("No capital city found");
+            return;
+        }
+
         // Print table header
         System.out.printf("%-25s %-25s %-20s\n",
                 "CapitalCity", "Country", "Population");
         System.out.println("----------------------------------------------------------");
 
         // Print each capital cities's details
+        boolean printed = false;
         for (CapitalCity capitalCity : capitalCities) {
+
+            if(capitalCity == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-25s %-25s %-20s\n",
                     capitalCity.getName(),
                     capitalCity.getCountry(),
                     capitalCity.getPopulation()
             );
+        }
+
+        if(!printed) {
+            System.out.println("No valid capital city record");
         }
     }
 
@@ -64,18 +85,40 @@ public class CapitalCityReport {
 
         System.out.println("\nAll the capital cities in a continent organised by largest population to smallest.\n");
 
+        if(capitalCities == null) {
+            System.out.println("No capital city list returned.");
+            return;
+        }
+
+        if(capitalCities.isEmpty()) {
+            System.out.println("No capital city found");
+            return;
+        }
+
+
         // Print table header
         System.out.printf("%-25s %-25s %-20s\n",
                 "CapitalCity", "Country", "Population");
         System.out.println("----------------------------------------------------------");
 
+        boolean printed = false;
         // Print each capital cities's details
         for (CapitalCity capitalCity : capitalCities) {
+
+            if(capitalCity == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-25s %-25s %-20s\n",
                     capitalCity.getName(),
                     capitalCity.getCountry(),
                     capitalCity.getPopulation()
             );
+        }
+
+        if(!printed) {
+            System.out.println("No valid capital city record");
         }
     }
 
@@ -90,18 +133,39 @@ public class CapitalCityReport {
 
         System.out.println("\nAll the capital cities in a region organised by largest population to smallest.\n");
 
+        if(capitalCities == null) {
+            System.out.println("No capital city list returned.");
+            return;
+        }
+
+        if(capitalCities.isEmpty()) {
+            System.out.println("No capital city found");
+            return;
+        }
+
         // Print table header
         System.out.printf("%-25s %-25s %-20s\n",
                 "CapitalCity", "Country", "Population");
         System.out.println("----------------------------------------------------------");
 
+        boolean printed = false;
         // Print each capital cities's details
         for (CapitalCity capitalCity : capitalCities) {
+
+            if(capitalCity == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-25s %-25s %-20s\n",
                     capitalCity.getName(),
                     capitalCity.getCountry(),
                     capitalCity.getPopulation()
             );
+        }
+
+        if(!printed) {
+            System.out.println("No valid capital city record");
         }
     }
 
@@ -116,18 +180,39 @@ public class CapitalCityReport {
 
         System.out.println("\nThe top N populated capital cities in the world where N is provided by the user.\n");
 
+        if(capitalCities == null) {
+            System.out.println("No capital city list returned.");
+            return;
+        }
+
+        if(capitalCities.isEmpty()) {
+            System.out.println("No capital city found");
+            return;
+        }
+
         // Print table header
         System.out.printf("%-25s %-25s %-20s\n",
                 "CapitalCity", "Country", "Population");
         System.out.println("----------------------------------------------------------");
 
+        boolean printed = false;
         // Print each capital cities's details
         for (CapitalCity capitalCity : capitalCities) {
+
+            if(capitalCity == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-25s %-25s %-20s\n",
                     capitalCity.getName(),
                     capitalCity.getCountry(),
                     capitalCity.getPopulation()
             );
+        }
+
+        if(!printed) {
+            System.out.println("No valid capital city record");
         }
     }
 
@@ -143,18 +228,39 @@ public class CapitalCityReport {
 
         System.out.println("\nThe top N populated capital cities in a continent where N is provided by the user.\n");
 
+        if(capitalCities == null) {
+            System.out.println("No capital city list returned.");
+            return;
+        }
+
+        if(capitalCities.isEmpty()) {
+            System.out.println("No capital city found");
+            return;
+        }
+
         // Print table header
         System.out.printf("%-25s %-25s %-20s\n",
                 "CapitalCity", "Country", "Population");
         System.out.println("----------------------------------------------------------");
 
+        boolean printed = false;
         // Print each capital cities's details
         for (CapitalCity capitalCity : capitalCities) {
+
+            if(capitalCity == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-25s %-25s %-20s\n",
                     capitalCity.getName(),
                     capitalCity.getCountry(),
                     capitalCity.getPopulation()
             );
+        }
+
+        if(!printed) {
+            System.out.println("No valid capital city record");
         }
     }
 
@@ -170,18 +276,39 @@ public class CapitalCityReport {
 
         System.out.println("\nThe top N populated capital cities in a region where N is provided by the user.\n");
 
+        if(capitalCities == null) {
+            System.out.println("No capital city list returned.");
+            return;
+        }
+
+        if(capitalCities.isEmpty()) {
+            System.out.println("No capital city found");
+            return;
+        }
+
         // Print table header
         System.out.printf("%-25s %-25s %-20s\n",
                 "CapitalCity", "Country", "Population");
         System.out.println("----------------------------------------------------------");
 
+        boolean printed = false;
         // Print each capital cities's details
         for (CapitalCity capitalCity : capitalCities) {
+
+            if(capitalCity == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-25s %-25s %-20s\n",
                     capitalCity.getName(),
                     capitalCity.getCountry(),
                     capitalCity.getPopulation()
             );
+        }
+
+        if(!printed) {
+            System.out.println("No valid capital city record");
         }
     }
 }

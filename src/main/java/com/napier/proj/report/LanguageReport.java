@@ -39,9 +39,14 @@ public class LanguageReport {
         System.out.printf("%-15s %-20s %-20s%n",
                 "Language", "Total Speakers", "% of World Population");
         System.out.println("-----------------------------------------------------------");
+        if (languages == null || languages.isEmpty()) {
+            System.out.println("No language data available.");
+            return;
+        }
 
         // Print each language's details
         for (Language language : languages) {
+            if (language == null) continue;
             System.out.printf("%-15s %-20d %.2f%%%n",
                     language.getLanguage(),
                     language.getSpeakers(),

@@ -41,13 +41,30 @@ public class PopulationReport {
 
         System.out.println("\nThe population of people, people living in cities, and people not living in cities in each continent.\n");
 
+        if(populations == null) {
+            System.out.println("No capital city list returned.");
+            return;
+        }
+
+        if(populations.isEmpty()) {
+            System.out.println("No capital city found");
+            return;
+        }
+
         // Print table header
         System.out.printf("%-25s %-20s %-20s %-20s %-15s %-15s\n",
                 "Continent", "TotalPopulation", "CityPopulation", "NonCityPopulation", "CityPercentage", "NonCityPercentage");
         System.out.println("----------------------------------------------------------");
 
+        boolean printed = false;
         // Print each population's details
         for (Population population : populations) {
+
+            if(population == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-25s %-20s %-20s %-20s %-15s %-15s\n",
                     population.getName(),
                     population.getTotalPopulation(),
@@ -56,6 +73,10 @@ public class PopulationReport {
                     population.getCityPercentage() + "%",
                     population.getNonCityPercentage() + "%"
             );
+        }
+
+        if(!printed) {
+            System.out.println("No valid population record");
         }
     }
 
@@ -69,13 +90,30 @@ public class PopulationReport {
 
         System.out.println("\nThe population of people, people living in cities, and people not living in cities in each region.\n");
 
+        if(populations == null) {
+            System.out.println("No capital city list returned.");
+            return;
+        }
+
+        if(populations.isEmpty()) {
+            System.out.println("No capital city found");
+            return;
+        }
+
         // Print table header
         System.out.printf("%-25s %-20s %-20s %-20s %-15s %-15s\n",
                 "Region", "TotalPopulation", "CityPopulation", "NonCityPopulation", "CityPercentage", "NonCityPercentage");
         System.out.println("----------------------------------------------------------");
 
+        boolean printed = false;
         // Print each population's details
         for (Population population : populations) {
+
+            if(population == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-25s %-20s %-20s %-20s %-15s %-15s\n",
                     population.getName(),
                     population.getTotalPopulation(),
@@ -84,6 +122,10 @@ public class PopulationReport {
                     population.getCityPercentage() + "%",
                     population.getNonCityPercentage() + "%"
             );
+        }
+
+        if(!printed) {
+            System.out.println("No valid population record");
         }
     }
 
@@ -97,13 +139,30 @@ public class PopulationReport {
 
         System.out.println("\nThe population of people, people living in cities, and people not living in cities in each country.\n");
 
+        if(populations == null) {
+            System.out.println("No capital city list returned.");
+            return;
+        }
+
+        if(populations.isEmpty()) {
+            System.out.println("No capital city found");
+            return;
+        }
+
         // Print table header
         System.out.printf("%-25s %-20s %-20s %-20s %-15s %-15s\n",
                 "Country", "TotalPopulation", "CityPopulation", "NonCityPopulation", "CityPercentage", "NonCityPercentage");
         System.out.println("----------------------------------------------------------");
 
+        boolean printed = false;
         // Print each population's details
         for (Population population : populations) {
+
+            if(population == null) {
+                continue;
+            }
+            printed = true;
+
             System.out.printf("%-25s %-20s %-20s %-20s %-15s %-15s\n",
                     population.getName(),
                     population.getTotalPopulation(),
@@ -112,6 +171,10 @@ public class PopulationReport {
                     population.getCityPercentage() + "%",
                     population.getNonCityPercentage() + "%"
             );
+        }
+
+        if(!printed) {
+            System.out.println("No valid population record");
         }
     }
 
@@ -124,8 +187,13 @@ public class PopulationReport {
         System.out.println("\nThe total population of the world.\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -140,8 +208,13 @@ public class PopulationReport {
         System.out.println("\nThe total population of the continent: " + continent + "\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -153,12 +226,16 @@ public class PopulationReport {
      */
     public void printRegionPopulation(String region) {
         List<Population> populations = populationDAO.getRegionPopulation(region);
-
         System.out.println("\nThe total population of the region: " + region + "\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -174,7 +251,13 @@ public class PopulationReport {
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
 
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
+
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -189,8 +272,13 @@ public class PopulationReport {
         System.out.println("\nThe total population of the district: " + district + "\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
@@ -205,8 +293,13 @@ public class PopulationReport {
         System.out.println("\nThe total population of the city: " + city + "\n");
         System.out.printf("%-20s %-20s\n", "Name", "TotalPopulation");
         System.out.println("----------------------------------");
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No population data available.");
+            return;
+        }
 
         for (Population population : populations) {
+            if (population == null) continue;
             System.out.printf("%-20s %-20d\n",
                     population.getName(),
                     population.getTotalPopulation());
