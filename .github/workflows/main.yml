@@ -17,14 +17,14 @@ jobs:
           distribution: temurin
       - name: Unit Tests
         run: mvn -Dtest=com.napier.proj.report.AppUnitTest test
-      - name: CodeCov
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # now required for public repos too
-          directory: ./target/site/jacoco
-          flags: unittests # optional
-          verbose: true # optional (default = false)
-          slug: ph0neMyatThu4079/group-2-project
+#      - name: CodeCov
+#        uses: codecov/codecov-action@v4.0.1
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }} # now required for public repos too
+#          directory: ./target/site/jacoco
+#          flags: unittests # optional
+#          verbose: true # optional (default = false)
+#          slug: ph0neMyatThu4079/group-2-project
 
   IntegrationTests:
     name: Integration Tests
@@ -47,26 +47,26 @@ jobs:
           docker stop world
           docker rm world
           docker image rm database
-      - name: CodeCov
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # now required for public repos too
-          directory: ./target/site/jacoco
-          flags: integration # optional
-          verbose: true # optional (default = false)
-          slug: ph0neMyatThu4079/group-2-project
+#      - name: CodeCov
+#        uses: codecov/codecov-action@v4.0.1
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }} # now required for public repos too
+#          directory: ./target/site/jacoco
+#          flags: integration # optional
+#          verbose: true # optional (default = false)
+#          slug: ph0neMyatThu4079/group-2-project
 
   # New job to merge coverage reports
-  MergeCoverage:
-    needs: [UnitTests, IntegrationTests]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Merge Codecov reports
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unittests,integration
-          slug: ph0neMyatThu4079/group-2-project
+#  MergeCoverage:
+#    needs: [UnitTests, IntegrationTests]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Merge Codecov reports
+#        uses: codecov/codecov-action@v4
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
+#          flags: unittests,integration
+#          slug: ph0neMyatThu4079/group-2-project
 
   build:
     name: Group 2 Project
