@@ -86,7 +86,7 @@ jobs:
       - name: Package and Run docker compose
         run: |
           mvn package -DskipTests
-          docker-compose up --abort-on-container-exit --exit-code-from app
+          docker compose up --abort-on-container-exit --exit-code-from app
 
 #      - name: Build with Maven
 #        run: mvn package
