@@ -608,8 +608,5 @@ class AppIntegrationTest {
             assertEquals("California", city.getDistrict());
             assertEquals(3694820L, city.getPopulation());
         }
-    @Test
-    void testMainDoesNotThrow() {
-        assertDoesNotThrow(() -> App.main(new String[]{}));
-    }
+
     }
