@@ -17,6 +17,7 @@ import java.util.List;
  * </p>
  *
  * @author Min Wanna Hlan
+ * @author Ingyin Thwe
  */
 public class CityDAO {
     /** Database connection object used for executing SQL queries */

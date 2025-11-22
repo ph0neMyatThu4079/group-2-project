@@ -11,6 +11,7 @@ import java.util.List;
  * {@link CityDAO} and outputs readable tables in the console.
  *
  * @author Min Wanna Hlan
+ * @author Ingyin Thwe
  */
 public class CityReport {
 

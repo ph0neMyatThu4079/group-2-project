@@ -6,6 +6,17 @@ import com.napier.proj.report.*;
 
 import java.sql.Connection;
 
+/**
+ *  The App class establishes a database connection, initializes all DAO
+ *  (Data Access Object) and report classes, and triggers the execution of
+ *  every required report for countries, cities, capital cities, populations,
+ *  and languages.
+ * @author Lin Myat Thu
+ * @author Phone Myat Thu
+ * @author Min Wanna Hlan
+ * @author So Pyay Tun
+ * @author Ingyin Thwe
+ */
 public class App {
     public static void main(String[] args) {
 
@@ -24,16 +35,15 @@ public class App {
         CityDAO cityDAO = new CityDAO(conn);
         CapitalCityDAO capitalCityDAO = new CapitalCityDAO(conn);
         PopulationDAO populationDAO = new PopulationDAO(conn);
-//        LanguageDAO languageDAO = new LanguageDAO(conn);
+        LanguageDAO languageDAO = new LanguageDAO(conn);
 
         CountryReport countryReport = new CountryReport(countryDAO);
         CityReport cityReport = new CityReport(cityDAO);
         CapitalCityReport  capitalCityReport = new CapitalCityReport(capitalCityDAO);
         PopulationReport populationReport = new PopulationReport(populationDAO);
-//        LanguageReport languageReport = new LanguageReport(languageDAO);
+        LanguageReport languageReport = new LanguageReport(languageDAO);
 
 
-        /**
         // *** Country Reports ***
         // All countries in the world
         countryReport.printAllCountriesByPopulation();
@@ -47,19 +57,24 @@ public class App {
         countryReport.getTopNPopulatedCountriesInContinent("North America",10);
         // Top N countries in the region
         countryReport.getTopNPopulatedCountriesInRegion("Middle East",10);
-         **/
 
 
-        /**
+
         // *** City Reports ***
         cityReport.printAllCitiesInWorldByPopulation();
         cityReport.printAllCitiesInContinentByPopulation("Asia");
         cityReport.printAllCitiesInRegionByPopulation("Central Africa");
         cityReport.printAllCitiesInCountryByPopulation("Argentina");
         cityReport.printAllCitiesInDistrictByPopulation("Benguela");
-         **/
+        // *** Top N Populated City Reports ***
+        cityReport.printTopNPopulatedCitiesInWorld(10);
+        cityReport.printTopNPopulatedCitiesInContinent("Asia", 10);
+        cityReport.printTopNPopulatedCitiesInRegion("Eastern Europe", 10);
+        cityReport.printTopNPopulatedCitiesInCountry("Brazil", 10);
+        cityReport.printTopNPopulatedCitiesInDistrict("California", 10);
 
-        /**
+
+
         // *** Capital Cities Reports **
         capitalCityReport.printAllCapitalCities();
         capitalCityReport.printAllCapitalCitiesInContinent("Asia");
@@ -67,7 +82,6 @@ public class App {
         capitalCityReport.printTopNPopulatedCapitalCities(10);
         capitalCityReport.printTopNPopulatedCapitalCitiesInContinent("Asia", 10);
         capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 10);
-         **/
 
         // *** Population Reports ***
         populationReport.printEachContinentPopulationWithUrbanAndNonUrban();
@@ -80,14 +94,10 @@ public class App {
         populationReport.printDistrictPopulation("Benguela");
         populationReport.printCityPopulation("Tokyo");
 
+        // *** Language Reports ***
+        languageReport.printMajorLanguageReport();
 
 
-        // *** Top N Populated City Reports ***
-        cityReport.printTopNPopulatedCitiesInWorld(10);
-        cityReport.printTopNPopulatedCitiesInContinent("Asia", 10);
-        cityReport.printTopNPopulatedCitiesInRegion("Eastern Europe", 10);
-        cityReport.printTopNPopulatedCitiesInCountry("Brazil", 10);
-        cityReport.printTopNPopulatedCitiesInDistrict("California", 10);
 
 
         DatabaseConfig.closeConnection();
