@@ -1,7 +1,6 @@
-package com.napier.proj;
+package com.napier.proj.dao;
 
 import com.napier.proj.config.DatabaseConfig;
-import com.napier.proj.dao.*;
 import com.napier.proj.report.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
