@@ -15,6 +15,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * AppIntegrationTest performs integration testing on the DAO classes and their
+ * corresponding report methods. It establishes a real database connection
+ * and verifies that each DAO correctly retrieves data from the database
+ * and maps it to the appropriate model objects (Country, City, CapitalCity,
+ * Population, Language).
+ *
+ * @author Lin Myat Thu
+ * @author Phone Myat Thu
+ * @author Min Wanna Hlan
+ * @author So Pyay Tun
+ * @author Ingyin Thwe
+ */
 class AppIntegrationTest {
 
     static Connection conn;

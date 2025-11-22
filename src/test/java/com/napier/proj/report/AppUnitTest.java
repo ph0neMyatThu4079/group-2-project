@@ -19,6 +19,19 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the reporting module of the application.
+ * This class tests various report classes (CountryReport, CityReport, CapitalCityReport,
+ * PopulationReport, LanguageReport) using mocked DAO objects to simulate database responses.
+ * The focus is on verifying that the report methods handle valid data, empty lists, null lists,
+ * and lists containing null elements without throwing exceptions.
+ *
+ * @author Lin Myat Thu
+ * @author Phone Myat Thu
+ * @author Min Wanna Hlan
+ * @author So Pyay Tun
+ * @author Ingyin Thwe
+ */
 public class AppUnitTest {
 
     static CountryDAO countryDAO;
