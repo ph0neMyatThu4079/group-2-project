@@ -10,10 +10,14 @@ import com.napier.proj.model.Population;
 import org.junit.jupiter.api.*;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * AppIntegrationTest performs integration testing on the DAO classes and their
@@ -464,6 +468,26 @@ class AppIntegrationTest {
         assertEquals("Maharashtra", city.getDistrict());
         assertEquals(10500000L, city.getPopulation()); // Compare as long
     }
+    @Test
+    void getAllinWorldCitiesByPopulation_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
+
 
     @Test
     void getAllCitiesInContinentByPopulation() {
