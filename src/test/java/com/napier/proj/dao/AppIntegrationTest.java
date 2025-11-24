@@ -90,6 +90,24 @@ class AppIntegrationTest {
         assertEquals("China", country.getName());
         assertEquals("Asia", country.getContinent());
     }
+    @Test
+    void getAllCountriesByPopulation_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
     @Test
     void getAllCountriesInContinentByPopulation() {
@@ -105,6 +123,24 @@ class AppIntegrationTest {
         Country country = countries.getFirst();
         assertEquals("Russian Federation",  country.getName());
         assertEquals("Europe",  country.getContinent());
+    }
+    @Test
+    void getAllCountriesInContinentByPopulation_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
     @Test
@@ -153,6 +189,24 @@ class AppIntegrationTest {
         }
 
     }
+    @Test
+    void getTopNPopulatedCountriesIntheworld_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
     @Test
     void getTopNPopulatedCountriesInContinent() {
@@ -181,6 +235,24 @@ class AppIntegrationTest {
         }
 
     }
+    @Test
+    void getTopNPopulatedCountriesInContinent_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
     @Test
     void getTopNPopulatedCountriesInRegion() {
@@ -208,6 +280,24 @@ class AppIntegrationTest {
                 previousPop = c.getPopulation();
             }
         }
+    @Test
+    void getTopNPopulatedCountriesInRegion_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
 
     //Testings for Population DAO
@@ -477,8 +567,7 @@ class AppIntegrationTest {
         CityDAO cityDAO = new CityDAO(mockCon);
 
         // Force the prepareStatement() call to fail
-        when(mockCon.prepareStatement(anyString()))
-                .thenThrow(new SQLException("Simulated DB error"));
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
 
         // Call the method
         List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
@@ -506,6 +595,24 @@ class AppIntegrationTest {
         assertEquals("Maharashtra", city.getDistrict());
         assertEquals(10500000L, city.getPopulation()); // Compare as long
     }
+    @Test
+    void getAllCitiesInContinentByPopulation_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
     @Test
     void getAllCitiesInRegionByPopulation() {
@@ -523,6 +630,24 @@ class AppIntegrationTest {
         assertEquals("Angola", city.getCountry());
         assertEquals("Luanda", city.getDistrict());
         assertEquals(2022000L, city.getPopulation()); // Compare as long
+    }
+    @Test
+    void getAllCitiesInRegionByPopulation_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
     @Test
@@ -542,6 +667,24 @@ class AppIntegrationTest {
         assertEquals("Distrito Federal", city.getDistrict());
         assertEquals(2982146L, city.getPopulation()); // Compare as long
     }
+    @Test
+    void getAllCitiesInCountryByPopulation_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
     @Test
     void getAllCitiesInDistrictByPopulation() {
@@ -560,6 +703,24 @@ class AppIntegrationTest {
         assertEquals("Benguela", city.getDistrict());
         assertEquals(130000L, city.getPopulation()); // Compare as long
     }
+    @Test
+    void getAllCitiesInDistrictByPopulation_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
     // Integration Testings for Top N City DAO
         @Test
@@ -577,6 +738,24 @@ class AppIntegrationTest {
             assertEquals("Maharashtra", city.getDistrict());
             assertEquals(10500000L, city.getPopulation());
         }
+    @Test
+    void getTopNPopulatedCitiesInWorld_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
         @Test
         void getTopNPopulatedCitiesInContinent() {
@@ -594,6 +773,24 @@ class AppIntegrationTest {
             assertEquals("Maharashtra", city.getDistrict());
             assertEquals(10500000L, city.getPopulation());
         }
+    @Test
+    void getTopNPopulatedCitiesInContinent_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
         @Test
         void getTopNPopulatedCitiesInRegion() {
@@ -611,6 +808,24 @@ class AppIntegrationTest {
             assertEquals("Moscow (City)", city.getDistrict());
             assertEquals(8389200L, city.getPopulation());
         }
+    @Test
+    void getTopNPopulatedCitiesInRegion_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
         @Test
         void getTopNPopulatedCitiesInCountry() {
@@ -628,6 +843,24 @@ class AppIntegrationTest {
             assertEquals("São Paulo", city.getDistrict());
             assertEquals(9968485L, city.getPopulation());
         }
+    @Test
+    void getTopNPopulatedCitiesInCountry_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
         @Test
         void getTopNPopulatedCitiesInDistrict() {
@@ -645,5 +878,23 @@ class AppIntegrationTest {
             assertEquals("California", city.getDistrict());
             assertEquals(3694820L, city.getPopulation());
         }
+    @Test
+    void getTopNPopulatedCitiesInDistrict_Exception() throws Exception {
+        // Mock the DB connection
+        Connection mockCon = mock(Connection.class);
+
+        // Inject the mocked connection into the DAO
+        CityDAO cityDAO = new CityDAO(mockCon);
+
+        // Force the prepareStatement() call to fail
+        when(mockCon.prepareStatement(anyString())).thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
+
+        // Assertions
+        assertNotNull(cities);        // Method must still return a list
+        assertTrue(cities.isEmpty()); // It should be empty due to the exception
+    }
 
     }
