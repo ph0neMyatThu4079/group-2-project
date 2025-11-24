@@ -63,6 +63,10 @@ class AppIntegrationTest {
         DatabaseConfig.closeConnection();
     }
 
+    /**
+     * Tests that a valid database connection is successfully established
+     * and that the connection is verified to be valid by the driver.
+     */
     @Test
     void testConnection() {
         assertNotNull(conn, "Connection should not be null");
@@ -73,6 +77,11 @@ class AppIntegrationTest {
         }
     }
 
+    /**
+     * Verifies that getAllCountriesByPopulation() returns
+     * a non-null, non-empty list of correctly mapped Country objects
+     * sorted by population in descending order.
+     */
     @Test
     void getAllCountriesByPopulation() {
 
@@ -89,6 +98,13 @@ class AppIntegrationTest {
         assertEquals("China", country.getName());
         assertEquals("Asia", country.getContinent());
     }
+
+    /**
+     * Ensures getAllCountriesByPopulation() handles SQL exceptions properly
+     * by returning an empty, non-null list when the query fails.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getAllCountriesByPopulation_Exception() throws Exception {
         // Mock the DB connection
@@ -108,6 +124,10 @@ class AppIntegrationTest {
         assertTrue(countries.isEmpty()); // It should be empty due to the exception
     }
 
+    /**
+     * Tests that countries in a given continent are retrieved correctly,
+     * sorted by population, and mapped to valid Country objects.
+     */
     @Test
     void getAllCountriesInContinentByPopulation() {
         List<Country> countries = countryDAO.getAllCountriesInContinentByPopulation("Europe");
@@ -123,6 +143,13 @@ class AppIntegrationTest {
         assertEquals("Russian Federation",  country.getName());
         assertEquals("Europe",  country.getContinent());
     }
+
+    /**
+     * Ensures continent filtering query fails gracefully by returning
+     * an empty list when an SQL exception occurs.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getAllCountriesInContinentByPopulation_Exception() throws Exception {
         // Mock the DB connection
@@ -142,6 +169,11 @@ class AppIntegrationTest {
         assertTrue(countries.isEmpty()); // It should be empty due to the exception
     }
 
+    /**
+     * Tests retrieving all countries in a specific region ordered by population.
+     * Verifies that the returned list is not null, not empty, and the first
+     * country in the list has valid data.
+     */
     @Test
     void getAllCountriesInRegionByPopulation() {
         List<Country> countries = countryDAO.getAllCountriesInRegionByPopulation("Southern Europe");
@@ -157,6 +189,13 @@ class AppIntegrationTest {
         assertEquals("Italy",  country.getName());
         assertEquals("Southern Europe",  country.getRegion());
     }
+
+    /**
+     * Ensures the region-based population filtering query fails gracefully by
+     * returning an empty list when an SQL exception occurs.
+     *
+     * @throws Exception simulated SQL error during statement preparation
+     */
     @Test
     void getAllCountriesInRegionByPopulation_Exception() throws Exception {
         // Mock the DB connection
@@ -176,6 +215,10 @@ class AppIntegrationTest {
         assertTrue(countries.isEmpty()); // It should be empty due to the exception
     }
 
+    /**
+     * Tests retrieving the top N most populated countries in the world.
+     * Verifies correct list size, sorting order, and expected top result.
+     */
     @Test
     void getTopNPopulatedCountriesIntheworld() {
         List<Country> countries = countryDAO.getTopNPopulatedCountriesIntheworld(2);
@@ -206,6 +249,13 @@ class AppIntegrationTest {
         }
 
     }
+
+    /**
+     * Ensures the world top-N population query returns an empty list when an
+     * SQL exception occurs instead of crashing.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getTopNPopulatedCountriesIntheworld_Exception() throws Exception {
         // Mock the DB connection
@@ -225,6 +275,10 @@ class AppIntegrationTest {
         assertTrue(countries.isEmpty()); // It should be empty due to the exception
     }
 
+    /**
+     * Tests retrieving the top N most populated countries in a given continent.
+     * Validates list size constraints, correct continent filtering, and sorting order.
+     */
     @Test
     void getTopNPopulatedCountriesInContinent() {
         List<Country> countries = countryDAO.getTopNPopulatedCountriesInContinent("Europe",2);
@@ -252,6 +306,13 @@ class AppIntegrationTest {
         }
 
     }
+
+    /**
+     * Ensures the continent-based top-N population query returns an empty list
+     * gracefully when an SQL exception occurs.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getTopNPopulatedCountriesInContinent_Exception() throws Exception {
         // Mock the DB connection
@@ -271,6 +332,10 @@ class AppIntegrationTest {
         assertTrue(countries.isEmpty()); // It should be empty due to the exception
     }
 
+    /**
+     * Tests retrieving the top N most populated countries in a specific region.
+     * Confirms list size, data correctness, and population descending order.
+     */
     @Test
     void getTopNPopulatedCountriesInRegion() {
         List<Country> countries = countryDAO.getTopNPopulatedCountriesInRegion("Southern Europe",2);
@@ -296,7 +361,14 @@ class AppIntegrationTest {
                 assertTrue(c.getPopulation() <= previousPop, "Countries must be sorted by descending population");
                 previousPop = c.getPopulation();
             }
-        }
+    }
+
+    /**
+     * Ensures the region-based top-N population query returns an empty list
+     * when a database error occurs.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getTopNPopulatedCountriesInRegion_Exception() throws Exception {
         // Mock the DB connection
@@ -317,7 +389,11 @@ class AppIntegrationTest {
     }
 
 
-    //Testings for Population DAO
+    /**
+     * Tests retrieving world population data.
+     * Ensures the result is not null, contains data, and validates expected values
+     * including correct name mapping and population count from dataset.
+     */
     @Test
     void getWorldPopulation(){
         List<Population> populations = populationDAO.getWorldPopulation();
@@ -332,6 +408,13 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(6078749450L, population.getTotalPopulation());
     }
+
+    /**
+     * Ensures the world population query handles SQL exceptions gracefully by
+     * returning an empty list instead of throwing an error.
+     *
+     * @throws SQLException simulated SQL exception
+     */
     @Test
     void getWorldPopulation_SQLExceptionHandled() throws SQLException {
         // Mock connection
@@ -352,7 +435,10 @@ class AppIntegrationTest {
         assertTrue(result.isEmpty());    // No data added since exception occurred
     }
 
-
+    /**
+     * Tests retrieving continent-level population statistics.
+     * Validates presence of data and correctness of mapped population values.
+     */
     @Test
     void getContinentPopulation(){
         List<Population> populations = populationDAO.getContinentPopulation("Asia");
@@ -367,6 +453,13 @@ class AppIntegrationTest {
         assertEquals(3705025700L, population.getTotalPopulation());
     }
 
+
+    /**
+     * Ensures the continent population query returns an empty list when a database
+     * failure occurs, instead of causing the method to crash.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getContinentPopulation_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -382,6 +475,10 @@ class AppIntegrationTest {
     }
 
 
+    /**
+     * Tests retrieving population statistics for a specific region.
+     * Confirms a valid response and verifies population totals match expected dataset values.
+     */
     @Test
     void  getRegionPopulation(){
         List<Population> populations = populationDAO.getRegionPopulation("Central Africa");
@@ -396,6 +493,12 @@ class AppIntegrationTest {
         assertEquals(95652000L, population.getTotalPopulation());
     }
 
+    /**
+     * Verifies proper handling of SQL failure when querying regional population.
+     * Method must return a non-null but empty list when an exception occurs.
+     *
+     * @throws Exception simulated SQL exception
+     */
     @Test
     void getRegionPopulation_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -411,6 +514,10 @@ class AppIntegrationTest {
     }
 
 
+    /**
+     * Tests retrieving population details for a specific country.
+     * Ensures result list is non-empty and mapped data matches expected database values.
+     */
     @Test
     void getCountryPopulation(){
         List<Population> populations = populationDAO.getCountryPopulation("Argentina");
@@ -425,6 +532,12 @@ class AppIntegrationTest {
 
     }
 
+    /**
+     * Ensures getCountryPopulation gracefully handles SQL exceptions by returning
+     * an empty list rather than throwing an exception.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getCountryPopulation_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -440,6 +553,10 @@ class AppIntegrationTest {
     }
 
 
+    /**
+     * Tests retrieving population data for a specific district.
+     * Ensures returned list is valid and first entry contains correct mapping and values.
+     */
     @Test
     void getDistrictPopulation(){
         List<Population> populations = populationDAO.getDistrictPopulation("Benguela");
@@ -454,6 +571,12 @@ class AppIntegrationTest {
         assertEquals(258300L, population.getTotalPopulation());
     }
 
+    /**
+     * Confirms that the district population query returns an empty list when SQL failures occur,
+     * maintaining application stability.
+     *
+     * @throws Exception simulated SQL exception
+     */
     @Test
     void getDistrictPopulation_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -469,6 +592,10 @@ class AppIntegrationTest {
     }
 
 
+    /**
+     * Tests retrieving population data for a given city.
+     * Ensures correct mapping of name and realistic population values from the dataset.
+     */
     @Test
     void getCityPopulation(){
         List<Population> populations = populationDAO.getCityPopulation("Tokyo");
@@ -483,6 +610,12 @@ class AppIntegrationTest {
         assertEquals(7980230, population.getTotalPopulation()); // From world.sql dataset
     }
 
+    /**
+     * Verifies that the city population query does not crash on SQL errors,
+     * instead returning a safe, empty result list.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getCityPopulation_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -498,7 +631,11 @@ class AppIntegrationTest {
     }
 
 
-    //Testing for LanguageDAO
+    /**
+     * Tests retrieval of the major language usage report.
+     * Ensures the list is populated, contains exactly five major languages,
+     * and is sorted correctly by descending number of speakers.
+     */
     @Test
     void getMajorLanguageReport(){
         List<Language> languages = languageDAO.getMajorLanguageReport();
@@ -528,6 +665,12 @@ class AppIntegrationTest {
         }
     }
 
+    /**
+     * Verifies that SQL errors during major language report queries are handled safely
+     * by returning an empty but non-null list.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getMajorLanguageReport_Exception() throws Exception {
         // Mock connection
@@ -549,7 +692,10 @@ class AppIntegrationTest {
     }
 
 
-    // Test Capital City
+    /**
+     * Tests retrieval of all capital cities.
+     * Ensures the result contains entries and checks correct mapping of name and country.
+     */
     @Test
     void getAllCapitalCities(){
         List<CapitalCity> capitalCities = capitalCityDAO.getAllCapitalCities();
@@ -564,6 +710,12 @@ class AppIntegrationTest {
 
     }
 
+    /**
+     * Ensures the all-capital-cities query returns an empty list in case of SQL error,
+     * without throwing an exception.
+     *
+     * @throws Exception simulated DB error
+     */
     @Test
     void getAllCapitalCities_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -578,7 +730,10 @@ class AppIntegrationTest {
         assertTrue(result.isEmpty());
     }
 
-
+    /**
+     * Tests retrieving all capital cities in a specific continent.
+     * Confirms the list is not empty and validates the mapped fields.
+     */
     @Test
     void getAllCapitalCitiesInContinent(){
         List<CapitalCity> capitalCities = capitalCityDAO.getAllCapitalCitiesInContinent("Asia");
@@ -592,6 +747,12 @@ class AppIntegrationTest {
         assertEquals("South Korea", capitalCity.getCountry());
     }
 
+    /**
+     * Ensures continent-based capital cities query handles SQL exceptions gracefully
+     * by returning an empty result list.
+     *
+     * @throws Exception simulated DB error
+     */
     @Test
     void getAllCapitalCitiesInContinent_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -606,7 +767,10 @@ class AppIntegrationTest {
         assertTrue(result.isEmpty());
     }
 
-
+    /**
+     * Tests retrieving all capital cities in a specific region.
+     * Validates result mapping and that data exists for expected region.
+     */
     @Test
     void getAllCapitalCitiesInRegion(){
         List<CapitalCity> capitalCities = capitalCityDAO.getAllCapitalCitiesInRegion("Caribbean");
@@ -620,6 +784,12 @@ class AppIntegrationTest {
         assertEquals("Cuba", capitalCity.getCountry());
     }
 
+    /**
+     * Verifies that a SQL failure during a region-specific capital city query
+     * results in a non-null but empty list.
+     *
+     * @throws Exception simulated database error
+     */
     @Test
     void getAllCapitalCitiesInRegion_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -634,7 +804,10 @@ class AppIntegrationTest {
         assertTrue(result.isEmpty());
     }
 
-
+    /**
+     * Tests retrieval of the top N most populated capital cities.
+     * Ensures valid ordering and correct first object mapping from dataset.
+     */
     @Test
     void getTopNPopulatedCapitalCities(){
         List<CapitalCity> capitalCities = capitalCityDAO.getTopNPopulatedCapitalCities(10);
@@ -648,6 +821,12 @@ class AppIntegrationTest {
         assertEquals("South Korea", capitalCity.getCountry());
     }
 
+    /**
+     * Ensures proper exception handling for top-N capital city queries,
+     * returning an empty list on SQL failure.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getTopNPopulatedCapitalCities_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -663,6 +842,10 @@ class AppIntegrationTest {
     }
 
 
+    /**
+     * Tests retrieving the top N most populated capital cities by continent.
+     * Verifies results are populated and ordered correctly by population.
+     */
     @Test
     void getTopNPopulatedCapitalCitiesByContinent(){
         List<CapitalCity> capitalCities = capitalCityDAO.getTopNPopulatedCapitalCitiesByContinent("Asia", 10);
@@ -676,6 +859,12 @@ class AppIntegrationTest {
         assertEquals("South Korea", capitalCity.getCountry());
     }
 
+    /**
+     * Ensures continent-specific top-N capital city population query returns
+     * a safe empty list when a SQL exception occurs.
+     *
+     * @throws Exception simulated DB error
+     */
     @Test
     void getTopNPopulatedCapitalCitiesByContinent_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -690,7 +879,10 @@ class AppIntegrationTest {
         assertTrue(result.isEmpty());
     }
 
-
+    /**
+     * Tests retrieving the top N most populated capital cities by region.
+     * Confirms valid list and correct data mapping against dataset.
+     */
     @Test
     void getTopNPopulatedCapitalCitiesByRegion(){
         List<CapitalCity> capitalCities = capitalCityDAO.getTopNPopulatedCapitalCitiesByRegion("Central Africa", 10);
@@ -704,6 +896,12 @@ class AppIntegrationTest {
         assertEquals("Congo, The Democratic Republic of the", capitalCity.getCountry());
     }
 
+    /**
+     * Ensures that regional top-N capital city population queries do not crash
+     * and return an empty list when SQL errors occur.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getTopNPopulatedCapitalCitiesByRegion_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -719,7 +917,10 @@ class AppIntegrationTest {
     }
 
 
-    // Test Population
+    /**
+     * Tests population statistics for each continent including urban and non-urban counts.
+     * Ensures result list contains correctly mapped data.
+     */
     @Test
     void getEachContinentPopulationWithUrbanAndNonUrban(){
         List<Population> populations = populationDAO.getEachContinentPopulationWithUrbanAndNonUrban();
@@ -733,6 +934,12 @@ class AppIntegrationTest {
         assertEquals(3705025700L, population.getTotalPopulation());
     }
 
+    /**
+     * Verifies graceful handling of SQL errors in continent population breakdown queries
+     * by returning an empty list.
+     *
+     * @throws Exception simulated DB failure
+     */
     @Test
     void getEachContinentPopulationWithUrbanAndNonUrban_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -747,7 +954,10 @@ class AppIntegrationTest {
         assertTrue(result.isEmpty());  // Expected due to exception
     }
 
-
+    /**
+     * Tests regional population statistics including breakdown of urban vs non-urban.
+     * Ensures valid values are returned matching expected dataset.
+     */
     @Test
     void getEachRegionPopulationWithUrbanAndNonUrban(){
         List<Population> populations = populationDAO.getEachRegionPopulationWithUrbanAndNonUrban();
@@ -761,6 +971,12 @@ class AppIntegrationTest {
         assertEquals(0, population.getTotalPopulation());
     }
 
+    /**
+     * Ensures region population breakdown queries return an empty result when a SQL
+     * exception occurs, preserving application stability.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getEachRegionPopulationWithUrbanAndNonUrban_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -775,7 +991,10 @@ class AppIntegrationTest {
         assertTrue(result.isEmpty());  // Expected due to exception
     }
 
-
+    /**
+     * Tests country-level population statistics with urban and non-urban population.
+     * Confirms correct mapping and non-empty results.
+     */
     @Test
     void getEachCountryPopulationWithUrbanAndNonUrban(){
         List<Population> populations = populationDAO.getEachCountryPopulationWithUrbanAndNonUrban();
@@ -789,6 +1008,12 @@ class AppIntegrationTest {
         assertEquals(22720000, population.getTotalPopulation());
     }
 
+    /**
+     * Confirms that a SQL failure during country population breakdown queries
+     * results in an empty list, not an exception.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getEachCountryPopulationWithUrbanAndNonUrban_Exception() throws Exception {
         Connection mockCon = mock(Connection.class);
@@ -803,7 +1028,10 @@ class AppIntegrationTest {
         assertTrue(result.isEmpty());  // Expected due to exception
     }
 
-    // integration testing for city dao
+    /**
+     * Verifies that the method retrieves all cities in the world ordered by population.
+     * Ensures result list is non-empty and the highest populated city data is correct.
+     */
     @Test
     void getAllinWorldCitiesByPopulation() {
         List<City> cities = cityDAO.getAllinWorldCitiesByPopulation();
@@ -821,6 +1049,13 @@ class AppIntegrationTest {
         assertEquals("Maharashtra", city.getDistrict());
         assertEquals(10500000L, city.getPopulation()); // Compare as long
     }
+
+    /**
+     * Ensures that SQL exceptions during world-city retrieval result in an empty list
+     * rather than failing the method execution.
+     *
+     * @throws Exception simulated SQL failure
+     */
     @Test
     void getAllinWorldCitiesByPopulation_Exception() throws Exception {
         // Mock the DB connection
@@ -840,7 +1075,10 @@ class AppIntegrationTest {
         assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
-
+    /**
+     * Validates retrieval and ordering of cities by population within a continent.
+     * Confirms the highest populated city fields are accurate.
+     */
     @Test
     void getAllCitiesInContinentByPopulation() {
         List<City> cities = cityDAO.getAllCitiesInContinentByPopulation("Asia");
@@ -858,6 +1096,13 @@ class AppIntegrationTest {
         assertEquals("Maharashtra", city.getDistrict());
         assertEquals(10500000L, city.getPopulation()); // Compare as long
     }
+
+    /**
+     * Confirms safe handling of database errors when retrieving continent-based city lists.
+     * Returns an empty list instead of throwing an exception.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getAllCitiesInContinentByPopulation_Exception() throws Exception {
         // Mock the DB connection
@@ -877,6 +1122,10 @@ class AppIntegrationTest {
         assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
+    /**
+     * Tests retrieval of city populations in a specific region ordered by population.
+     * Ensures the result is valid and data integrity is maintained for a key element.
+     */
     @Test
     void getAllCitiesInRegionByPopulation() {
         List<City> cities = cityDAO.getAllCitiesInRegionByPopulation("Central Africa");
@@ -894,6 +1143,13 @@ class AppIntegrationTest {
         assertEquals("Luanda", city.getDistrict());
         assertEquals(2022000L, city.getPopulation()); // Compare as long
     }
+
+    /**
+     * Ensures resilience during SQL failure when querying cities by region, returning
+     * an empty list while keeping system stability.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getAllCitiesInRegionByPopulation_Exception() throws Exception {
         // Mock the DB connection
@@ -913,6 +1169,10 @@ class AppIntegrationTest {
         assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
+    /**
+     * Validates fetching all cities within a specific country ordered by population.
+     * Confirms proper data mapping of the most populated city.
+     */
     @Test
     void getAllCitiesInCountryByPopulation() {
         List<City> cities = cityDAO.getAllCitiesInCountryByPopulation("Argentina");
@@ -930,6 +1190,13 @@ class AppIntegrationTest {
         assertEquals("Distrito Federal", city.getDistrict());
         assertEquals(2982146L, city.getPopulation()); // Compare as long
     }
+
+    /**
+     * Ensures the country-level city population query remains fail-safe by returning
+     * an empty list during SQL exception scenarios.
+     *
+     * @throws Exception simulated SQL failure
+     */
     @Test
     void getAllCitiesInCountryByPopulation_Exception() throws Exception {
         // Mock the DB connection
@@ -949,6 +1216,10 @@ class AppIntegrationTest {
         assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
+    /**
+     * Tests retrieval of cities within a district ordered by population.
+     * Verifies correct population ranking and city attribute mapping.
+     */
     @Test
     void getAllCitiesInDistrictByPopulation() {
         List<City> cities = cityDAO.getAllCitiesInDistrictByPopulation("Benguela");
@@ -966,6 +1237,13 @@ class AppIntegrationTest {
         assertEquals("Benguela", city.getDistrict());
         assertEquals(130000L, city.getPopulation()); // Compare as long
     }
+
+    /**
+     * Confirms SQL errors in district-based city queries do not propagate but yield
+     * an empty list as expected.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getAllCitiesInDistrictByPopulation_Exception() throws Exception {
         // Mock the DB connection
@@ -985,22 +1263,32 @@ class AppIntegrationTest {
         assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
-    // Integration Testings for Top N City DAO
-        @Test
-        void getTopNPopulatedCitiesInWorld() {
-            int n = 5;
-            List<City> cities = cityDAO.getTopNPopulatedCitiesInWorld(n);
+    /**
+     * Tests retrieving the top N populated cities globally.
+     * Ensures correct size constraints and proper descending-ordered city data.
+     */
+    @Test
+    void getTopNPopulatedCitiesInWorld() {
+        int n = 5;
+        List<City> cities = cityDAO.getTopNPopulatedCitiesInWorld(n);
 
-            assertNotNull(cities);
-            assertFalse(cities.isEmpty());
-            assertTrue(cities.size() <= n);
+        assertNotNull(cities);
+        assertFalse(cities.isEmpty());
+        assertTrue(cities.size() <= n);
 
-            City city = cities.get(0);
-            assertEquals("Mumbai (Bombay)", city.getName());
-            assertEquals("India", city.getCountry());
-            assertEquals("Maharashtra", city.getDistrict());
-            assertEquals(10500000L, city.getPopulation());
-        }
+        City city = cities.get(0);
+        assertEquals("Mumbai (Bombay)", city.getName());
+        assertEquals("India", city.getCountry());
+        assertEquals("Maharashtra", city.getDistrict());
+        assertEquals(10500000L, city.getPopulation());
+    }
+
+    /**
+     * Ensures robustness of top-N world city query under SQL failure by returning
+     * an empty list instead of crashing execution.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getTopNPopulatedCitiesInWorld_Exception() throws Exception {
         // Mock the DB connection
@@ -1020,22 +1308,33 @@ class AppIntegrationTest {
         assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
-        @Test
-        void getTopNPopulatedCitiesInContinent() {
-            int n = 5;
-            String continent = "Asia";
-            List<City> cities = cityDAO.getTopNPopulatedCitiesInContinent(continent, n);
+    /**
+     * Verifies retrieval of the top N populated cities within a continent.
+     * Validates ranking logic and correct city attribute values for the top result.
+     */
+    @Test
+    void getTopNPopulatedCitiesInContinent() {
+        int n = 5;
+        String continent = "Asia";
+        List<City> cities = cityDAO.getTopNPopulatedCitiesInContinent(continent, n);
 
-            assertNotNull(cities);
-            assertFalse(cities.isEmpty());
-            assertTrue(cities.size() <= n);
+        assertNotNull(cities);
+        assertFalse(cities.isEmpty());
+        assertTrue(cities.size() <= n);
 
-            City city = cities.get(0);
-            assertEquals("Mumbai (Bombay)", city.getName());
-            assertEquals("India", city.getCountry());
-            assertEquals("Maharashtra", city.getDistrict());
-            assertEquals(10500000L, city.getPopulation());
-        }
+        City city = cities.get(0);
+        assertEquals("Mumbai (Bombay)", city.getName());
+        assertEquals("India", city.getCountry());
+        assertEquals("Maharashtra", city.getDistrict());
+        assertEquals(10500000L, city.getPopulation());
+    }
+
+    /**
+     * Ensures continent-based top-N population queries fail gracefully by returning
+     * an empty list when the database throws an exception.
+     *
+     * @throws Exception simulated SQL failure
+     */
     @Test
     void getTopNPopulatedCitiesInContinent_Exception() throws Exception {
         // Mock the DB connection
@@ -1055,22 +1354,33 @@ class AppIntegrationTest {
         assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
-        @Test
-        void getTopNPopulatedCitiesInRegion() {
-            int n = 5;
-            String region = "Eastern Europe";
-            List<City> cities = cityDAO.getTopNPopulatedCitiesInRegion(region, n);
+    /**
+     * Tests retrieval of the top N populated cities inside a specific region.
+     * Confirms valid ordering and top-city details integrity.
+     */
+    @Test
+    void getTopNPopulatedCitiesInRegion() {
+        int n = 5;
+        String region = "Eastern Europe";
+        List<City> cities = cityDAO.getTopNPopulatedCitiesInRegion(region, n);
 
-            assertNotNull(cities);
-            assertFalse(cities.isEmpty());
-            assertTrue(cities.size() <= n);
+        assertNotNull(cities);
+        assertFalse(cities.isEmpty());
+        assertTrue(cities.size() <= n);
 
-            City city = cities.get(0);
-            assertEquals("Moscow", city.getName());
-            assertEquals("Russian Federation", city.getCountry());
-            assertEquals("Moscow (City)", city.getDistrict());
-            assertEquals(8389200L, city.getPopulation());
-        }
+        City city = cities.get(0);
+        assertEquals("Moscow", city.getName());
+        assertEquals("Russian Federation", city.getCountry());
+        assertEquals("Moscow (City)", city.getDistrict());
+        assertEquals(8389200L, city.getPopulation());
+    }
+
+    /**
+     * Validates graceful error handling of region-based top-N city queries by
+     * returning an empty list during SQL exceptions.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getTopNPopulatedCitiesInRegion_Exception() throws Exception {
         // Mock the DB connection
@@ -1090,22 +1400,33 @@ class AppIntegrationTest {
         assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
-        @Test
-        void getTopNPopulatedCitiesInCountry() {
-            int n = 5;
-            String country = "Brazil";
-            List<City> cities = cityDAO.getTopNPopulatedCitiesInCountry(country, n);
+    /**
+     * Tests retrieving the top N populated cities of a specific country.
+     * Ensures accuracy in returned top-ranked city data.
+     */
+    @Test
+    void getTopNPopulatedCitiesInCountry() {
+        int n = 5;
+        String country = "Brazil";
+        List<City> cities = cityDAO.getTopNPopulatedCitiesInCountry(country, n);
 
-            assertNotNull(cities);
-            assertFalse(cities.isEmpty());
-            assertTrue(cities.size() <= n);
+        assertNotNull(cities);
+        assertFalse(cities.isEmpty());
+        assertTrue(cities.size() <= n);
 
-            City city = cities.get(0);
-            assertEquals("São Paulo", city.getName());
-            assertEquals("Brazil", city.getCountry());
-            assertEquals("São Paulo", city.getDistrict());
-            assertEquals(9968485L, city.getPopulation());
-        }
+        City city = cities.get(0);
+        assertEquals("São Paulo", city.getName());
+        assertEquals("Brazil", city.getCountry());
+        assertEquals("São Paulo", city.getDistrict());
+        assertEquals(9968485L, city.getPopulation());
+    }
+
+    /**
+     * Confirms that country-based top-N city queries remain fail-safe with
+     * empty list returns on database errors.
+     *
+     * @throws Exception simulated SQL error
+     */
     @Test
     void getTopNPopulatedCitiesInCountry_Exception() throws Exception {
         // Mock the DB connection
@@ -1125,22 +1446,33 @@ class AppIntegrationTest {
         assertTrue(cities.isEmpty()); // It should be empty due to the exception
     }
 
-        @Test
-        void getTopNPopulatedCitiesInDistrict() {
-            int n = 5;
-            String district = "California";
-            List<City> cities = cityDAO.getTopNPopulatedCitiesInDistrict(district, n);
+    /**
+     * Tests retrieval of the top N populated cities in a single district.
+     * Ensures correct city-ordering and top result content validity.
+     */
+    @Test
+    void getTopNPopulatedCitiesInDistrict() {
+        int n = 5;
+        String district = "California";
+        List<City> cities = cityDAO.getTopNPopulatedCitiesInDistrict(district, n);
 
-            assertNotNull(cities);
-            assertFalse(cities.isEmpty());
-            assertTrue(cities.size() <= n);
+        assertNotNull(cities);
+        assertFalse(cities.isEmpty());
+        assertTrue(cities.size() <= n);
 
-            City city = cities.get(0);
-            assertEquals("Los Angeles", city.getName());
-            assertEquals("United States", city.getCountry());
-            assertEquals("California", city.getDistrict());
-            assertEquals(3694820L, city.getPopulation());
-        }
+        City city = cities.get(0);
+        assertEquals("Los Angeles", city.getName());
+        assertEquals("United States", city.getCountry());
+        assertEquals("California", city.getDistrict());
+        assertEquals(3694820L, city.getPopulation());
+    }
+
+    /**
+     * Ensures SQL failures in district top-N retrieval scenarios result in empty output
+     * while maintaining method contract compliance.
+     *
+     * @throws Exception simulated SQL failure
+     */
     @Test
     void getTopNPopulatedCitiesInDistrict_Exception() throws Exception {
         // Mock the DB connection
