@@ -8,10 +8,10 @@ import com.napier.proj.model.Country;
 import com.napier.proj.model.Language;
 import com.napier.proj.model.Population;
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -315,6 +315,26 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(6078749450L, population.getTotalPopulation());
     }
+    @Test
+    void getWorldPopulation_SQLExceptionHandled() throws SQLException {
+        // Mock connection
+        Connection mockConnection = Mockito.mock(Connection.class);
+
+        // Make prepareStatement throw SQLException
+        Mockito.when(mockConnection.prepareStatement(Mockito.anyString()))
+                .thenThrow(new SQLException("Mock SQL Error"));
+
+        // Inject mock connection into DAO
+        PopulationDAO faultyDAO = new PopulationDAO(mockConnection);
+
+        // Run method
+        List<Population> result = faultyDAO.getWorldPopulation();
+
+        // Assertions
+        assertNotNull(result);           // Method should still return a list
+        assertTrue(result.isEmpty());    // No data added since exception occurred
+    }
+
 
     @Test
     void getContinentPopulation(){
@@ -331,6 +351,21 @@ class AppIntegrationTest {
     }
 
     @Test
+    void getContinentPopulation_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        PopulationDAO dao = new PopulationDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<Population> result = dao.getContinentPopulation("Asia");
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+
+    @Test
     void  getRegionPopulation(){
         List<Population> populations = populationDAO.getRegionPopulation("Central Africa");
 
@@ -343,6 +378,21 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(95652000L, population.getTotalPopulation());
     }
+
+    @Test
+    void getRegionPopulation_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        PopulationDAO dao = new PopulationDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<Population> result = dao.getRegionPopulation("Western Europe");
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
 
     @Test
     void getCountryPopulation(){
@@ -359,6 +409,21 @@ class AppIntegrationTest {
     }
 
     @Test
+    void getCountryPopulation_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        PopulationDAO dao = new PopulationDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<Population> result = dao.getCountryPopulation("France");
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+
+    @Test
     void getDistrictPopulation(){
         List<Population> populations = populationDAO.getDistrictPopulation("Benguela");
 
@@ -370,9 +435,22 @@ class AppIntegrationTest {
         assertEquals("Benguela", population.getName());
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(258300L, population.getTotalPopulation());
-
-
     }
+
+    @Test
+    void getDistrictPopulation_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        PopulationDAO dao = new PopulationDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<Population> result = dao.getDistrictPopulation("California");
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
 
     @Test
     void getCityPopulation(){
@@ -387,6 +465,21 @@ class AppIntegrationTest {
         assertTrue(population.getTotalPopulation() > 0);
         assertEquals(7980230, population.getTotalPopulation()); // From world.sql dataset
     }
+
+    @Test
+    void getCityPopulation_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        PopulationDAO dao = new PopulationDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<Population> result = dao.getCityPopulation("Yangon");
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
 
     //Testing for LanguageDAO
     @Test
@@ -418,6 +511,27 @@ class AppIntegrationTest {
         }
     }
 
+    @Test
+    void getMajorLanguageReport_Exception() throws Exception {
+        // Mock connection
+        Connection mockCon = mock(Connection.class);
+
+        // Create DAO with mocked connection
+        LanguageDAO dao = new LanguageDAO(mockCon);
+
+        // Force prepareStatement to throw exception
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        // Call the method
+        List<Language> result = dao.getMajorLanguageReport();
+
+        // Assertions
+        assertNotNull(result);          // Should not return null
+        assertTrue(result.isEmpty());   // Must be empty due to exception
+    }
+
+
     // Test Capital City
     @Test
     void getAllCapitalCities(){
@@ -434,6 +548,21 @@ class AppIntegrationTest {
     }
 
     @Test
+    void getAllCapitalCities_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        CapitalCityDAO dao = new CapitalCityDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<CapitalCity> result = dao.getAllCapitalCities();
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+
+    @Test
     void getAllCapitalCitiesInContinent(){
         List<CapitalCity> capitalCities = capitalCityDAO.getAllCapitalCitiesInContinent("Asia");
 
@@ -444,8 +573,22 @@ class AppIntegrationTest {
         CapitalCity capitalCity = capitalCities.getFirst();
         assertEquals("Seoul", capitalCity.getName());
         assertEquals("South Korea", capitalCity.getCountry());
-
     }
+
+    @Test
+    void getAllCapitalCitiesInContinent_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        CapitalCityDAO dao = new CapitalCityDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<CapitalCity> result = dao.getAllCapitalCitiesInContinent("Asia");
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
 
     @Test
     void getAllCapitalCitiesInRegion(){
@@ -458,8 +601,22 @@ class AppIntegrationTest {
         CapitalCity capitalCity = capitalCities.getFirst();
         assertEquals("La Habana", capitalCity.getName());
         assertEquals("Cuba", capitalCity.getCountry());
-
     }
+
+    @Test
+    void getAllCapitalCitiesInRegion_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        CapitalCityDAO dao = new CapitalCityDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<CapitalCity> result = dao.getAllCapitalCitiesInRegion("Western Europe");
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
 
     @Test
     void getTopNPopulatedCapitalCities(){
@@ -475,6 +632,21 @@ class AppIntegrationTest {
     }
 
     @Test
+    void getTopNPopulatedCapitalCities_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        CapitalCityDAO dao = new CapitalCityDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<CapitalCity> result = dao.getTopNPopulatedCapitalCities(10);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+
+    @Test
     void getTopNPopulatedCapitalCitiesByContinent(){
         List<CapitalCity> capitalCities = capitalCityDAO.getTopNPopulatedCapitalCitiesByContinent("Asia", 10);
 
@@ -488,6 +660,21 @@ class AppIntegrationTest {
     }
 
     @Test
+    void getTopNPopulatedCapitalCitiesByContinent_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        CapitalCityDAO dao = new CapitalCityDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<CapitalCity> result = dao.getTopNPopulatedCapitalCitiesByContinent("Europe", 5);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+
+    @Test
     void getTopNPopulatedCapitalCitiesByRegion(){
         List<CapitalCity> capitalCities = capitalCityDAO.getTopNPopulatedCapitalCitiesByRegion("Central Africa", 10);
 
@@ -499,6 +686,21 @@ class AppIntegrationTest {
         assertEquals("Kinshasa", capitalCity.getName());
         assertEquals("Congo, The Democratic Republic of the", capitalCity.getCountry());
     }
+
+    @Test
+    void getTopNPopulatedCapitalCitiesByRegion_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        CapitalCityDAO dao = new CapitalCityDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<CapitalCity> result = dao.getTopNPopulatedCapitalCitiesByRegion("Caribbean", 3);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
 
     // Test Population
     @Test
@@ -515,6 +717,21 @@ class AppIntegrationTest {
     }
 
     @Test
+    void getEachContinentPopulationWithUrbanAndNonUrban_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        PopulationDAO dao = new PopulationDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<Population> result = dao.getEachContinentPopulationWithUrbanAndNonUrban();
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());  // Expected due to exception
+    }
+
+
+    @Test
     void getEachRegionPopulationWithUrbanAndNonUrban(){
         List<Population> populations = populationDAO.getEachRegionPopulationWithUrbanAndNonUrban();
 
@@ -528,6 +745,21 @@ class AppIntegrationTest {
     }
 
     @Test
+    void getEachRegionPopulationWithUrbanAndNonUrban_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        PopulationDAO dao = new PopulationDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<Population> result = dao.getEachRegionPopulationWithUrbanAndNonUrban();
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());  // Expected due to exception
+    }
+
+
+    @Test
     void getEachCountryPopulationWithUrbanAndNonUrban(){
         List<Population> populations = populationDAO.getEachCountryPopulationWithUrbanAndNonUrban();
 
@@ -538,8 +770,22 @@ class AppIntegrationTest {
         Population population = populations.getFirst();
         assertEquals("Afghanistan", population.getName());
         assertEquals(22720000, population.getTotalPopulation());
-
     }
+
+    @Test
+    void getEachCountryPopulationWithUrbanAndNonUrban_Exception() throws Exception {
+        Connection mockCon = mock(Connection.class);
+        PopulationDAO dao = new PopulationDAO(mockCon);
+
+        when(mockCon.prepareStatement(anyString()))
+                .thenThrow(new SQLException("Simulated DB error"));
+
+        List<Population> result = dao.getEachCountryPopulationWithUrbanAndNonUrban();
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());  // Expected due to exception
+    }
+
     // integration testing for city dao
     @Test
     void getAllinWorldCitiesByPopulation() {
