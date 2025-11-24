@@ -1,0 +1,77 @@
+name: Bug Report
+description: Create a report to help us improve
+title: "[Bug]: "
+labels:
+  - bug
+
+body:
+  - type: dropdown
+    id: assign
+    attributes:
+      label: Who should handle this issue?
+      description: Select the assignee for this bug.
+      options:
+        - ph0neMyatThu4079
+        - Ingyin0-0
+        - Lin-Myat-Thu
+        - MinWanaHlan
+        - So-Pyay-Tun
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: Bug Summary
+      description: Provide a short title for the bug.
+      placeholder: "Example: Clicking Save crashes the app"
+    validations:
+      required: true
+
+  - type: textarea
+    id: describe-bug
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description of what the bug is.
+      placeholder: "What happened? What did you expect?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: To Reproduce
+      description: Describe the steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain the problem.
+      placeholder: "Attach image(s) here"
+    validations:
+      required: false
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Development environment where bug occurs.
+      placeholder: "Example: Windows 11, Java 17, Chrome 120"
+    validations:
+      required: false
