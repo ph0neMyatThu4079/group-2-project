@@ -16,8 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * AppIntegrationTest performs integration testing on the DAO classes and their
@@ -44,16 +43,6 @@ class AppIntegrationTest {
     static CapitalCityDAO capitalCityDAO;
 
 
-    @Test
-    void testConnection() {
-        assertNotNull(conn, "Connection should not be null");
-
-        try {
-            assertTrue(conn.isValid(5), "Connection should be valid");
-        } catch (Exception e) {
-            fail("Connection is not valid: " + e.getMessage());
-        }
-    }
 
     @BeforeAll
     static void setup()
@@ -72,6 +61,16 @@ class AppIntegrationTest {
     @AfterAll
     static void tearDown() {
         DatabaseConfig.closeConnection();
+    }
+
+    @Test
+    void testConnection() {
+        assertNotNull(conn, "Connection should not be null");
+        try {
+            assertTrue(conn.isValid(5), "Connection should be valid");
+        } catch (Exception e) {
+            fail("Connection is not valid: " + e.getMessage());
+        }
     }
 
     @Test
