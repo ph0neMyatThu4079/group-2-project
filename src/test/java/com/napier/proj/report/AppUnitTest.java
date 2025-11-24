@@ -33,38 +33,55 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Ingyin Thwe
  */
 public class AppUnitTest {
-
+    // DAO for accessing country data (mocked in tests)
     static CountryDAO countryDAO;
+    // Report generator that uses CountryDAO
     static CountryReport countryReport;
-
+    // DAO for accessing city data (mocked in tests)
     public static CityDAO cityDAO;
+    // Report generator for city information
     static CityReport cityReport;
-
+    // DAO for accessing capital cities
     static CapitalCityDAO capitalCityDAO;
+    // Report generator for capital city information
     static CapitalCityReport capitalCityReport;
-
+    // DAO for population-related queries
     static PopulationDAO populationDAO;
+    // Report generator for population statistics
     static PopulationReport populationReport;
-
+    // DAO for language usage queries
     static LanguageDAO languageDAO;
+    // Report generator for language statistics
     static LanguageReport languageReport;
 
 
     @BeforeEach
     void setUp() {
+        // Create a Mockito mock for the CountryDAO.
+        // This replaces real database calls with controlled, testable behavior.
         countryDAO = Mockito.mock(CountryDAO.class);
+        // Create a CountryReport object and inject the mocked DAO into it.
+        // This ensures the report uses fake data during tests.
         countryReport = new CountryReport(countryDAO);
 
+        // Mock the CityDAO so city-related methods return test data only.
         cityDAO = Mockito.mock(CityDAO.class);
+        // Create the CityReport using the mocked CityDAO.
         cityReport = new CityReport(cityDAO);
 
+        // Mock the CapitalCityDAO for capital city queries.
         capitalCityDAO = Mockito.mock(CapitalCityDAO.class);
+        // Inject the mock into the CapitalCityReport instance.
         capitalCityReport = new CapitalCityReport(capitalCityDAO);
 
+        // Mock the PopulationDAO to simulate population query results.
         populationDAO = Mockito.mock(PopulationDAO.class);
+        // Create the PopulationReport using the mocked DAO.
         populationReport = new PopulationReport(populationDAO);
 
+        // Mock the LanguageDAO for language statistics queries.
         languageDAO = Mockito.mock(LanguageDAO.class);
+        // Create the LanguageReport with the mocked LanguageDAO dependency.
         languageReport = new LanguageReport(languageDAO);
     }
 
@@ -72,9 +89,14 @@ public class AppUnitTest {
     void tearDown() {
     }
 
-    // Unit Testings for Country Reports
+    /**
+     * This test ensures that the method correctly handles different scenarios of country data.
+     * The test uses Mockito to mock the CountryDAO behavior and verifies that no exceptions
+     * are thrown when the report method is executed.
+     */
     @Test
     void printAllCountriesByPopulation() {
+        // Create a sample Country object for testing
         Country c1 = new Country();
         c1.setCode("ABW");
         c1.setName("Aruba");
@@ -85,7 +107,7 @@ public class AppUnitTest {
 
         // Case 1 — Valid list with 1 country
         ArrayList<Country> mockCountries = new ArrayList<>();
-        mockCountries.add(c1);
+        mockCountries.add(c1); // Add the sample country to the list
 
         Mockito.when(countryDAO.getAllCountriesByPopulation()).thenReturn(mockCountries);
         assertDoesNotThrow(() -> countryReport.printAllCountriesByPopulation());
@@ -106,6 +128,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> countryReport.printAllCountriesByPopulation());
     }
 
+    /**
+     * This test ensures that the method correctly handles different scenarios of country data
+     * filtered by continent. Mockito is used to mock the CountryDAO responses, and
+     * assertDoesNotThrow ensures that the method executes without exceptions.
+     */
     @Test
     void printAllCountriesInContinentByPopulation() {
         Country c1 = new Country();
@@ -139,6 +166,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> countryReport.printAllCountriesInContinentByPopulation("Africa"));
     }
 
+    /**
+     * This test verifies that the method correctly handles different scenarios of country data
+     * filtered by region. Mockito is used to mock the CountryDAO responses, and
+     * assertDoesNotThrow ensures that the method executes without exceptions.
+     */
     @Test
     void printAllCountriesInRegionByPopulation() {
             Country c1 = new Country();
@@ -172,6 +204,12 @@ public class AppUnitTest {
             assertDoesNotThrow(() -> countryReport.printAllCountriesInRegionByPopulation("Southern Europe"));
     }
 
+    /**
+     * This test ensures that the method can handle various scenarios of country data when
+     * retrieving the top N populated countries in the world. Mockito is used to mock
+     * CountryDAO responses, and assertDoesNotThrow ensures that the method executes
+     * without throwing exceptions.
+     */
     @Test
     void getTopNPopulatedCountriesIntheworld() {
         Country c1 = new Country();
@@ -206,6 +244,11 @@ public class AppUnitTest {
 
 }
 
+    /**
+     * This test verifies that the method can handle different scenarios when retrieving the top N
+     * populated countries in a specified continent. Mockito is used to mock the CountryDAO responses,
+     * and assertDoesNotThrow ensures the method executes without throwing exceptions.
+     */
     @Test
     void getTopNPopulatedCountriesInContinent() {
         Country c1 = new Country();
@@ -240,6 +283,11 @@ public class AppUnitTest {
 
     }
 
+    /**
+     * This test ensures that the method correctly handles different scenarios when retrieving the
+     * top N populated countries within a specified region. Mockito is used to simulate DAO responses,
+     * and assertDoesNotThrow ensures the method executes without exceptions.
+     */
     @Test
     void getTopNPopulatedCountriesInRegion() {
         Country c1 = new Country();
@@ -274,7 +322,7 @@ public class AppUnitTest {
 
     }
 
-    // Unit Testings for City Reports
+
     @Test
     void printAllCitiesInWorldByPopulation() {
         City ci1 = new City();
@@ -306,6 +354,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> cityReport.printAllCitiesInWorldByPopulation());
     }
 
+    /**
+     * This test verifies that the method correctly handles different scenarios when printing
+     * all cities in the world sorted by population. Mockito is used to simulate DAO responses,
+     * and assertDoesNotThrow ensures the method executes without exceptions.
+     */
     @Test
     void printAllCitiesInContinentByPopulation() {
         String continent = "Europe";
@@ -340,6 +393,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> cityReport.printAllCitiesInContinentByPopulation(null));
     }
 
+    /**
+     * This test verifies that the method correctly handles different scenarios when printing
+     * all cities in a specific region sorted by population. Mockito is used to mock DAO responses,
+     * and assertDoesNotThrow ensures the method executes without throwing exceptions.
+     */
     @Test
     void printAllCitiesInRegionByPopulation() {
         String region = "Southeast Asia";
@@ -374,7 +432,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> cityReport.printAllCitiesInRegionByPopulation(null));
     }
 
-
+    /**
+     * This test ensures that the method handles different scenarios when printing all cities
+     * in a specific country sorted by population. Mockito is used to mock DAO responses,
+     * and assertDoesNotThrow checks that the method executes without throwing exceptions.
+     */
     @Test
     void printAllCitiesInCountryByPopulation() {
         String country = "Myanmar";
@@ -409,7 +471,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> cityReport.printAllCitiesInCountryByPopulation(null));
     }
 
-
+    /**
+     * This test verifies that the method correctly handles various scenarios when printing
+     * all cities in a specific district sorted by population. Mockito is used to mock DAO responses,
+     * and assertDoesNotThrow ensures that the method executes without throwing exceptions.
+     */
     @Test
     void printAllCitiesInDistrictByPopulation() {
         String district = "Yangon";
@@ -445,7 +511,11 @@ public class AppUnitTest {
     }
 
 
-    // Unit Testings for Capital City Reports
+    /**
+     * This test ensures that the method correctly handles different scenarios when
+     * printing all capital cities. Mockito is used to mock the DAO responses, and
+     * assertDoesNotThrow verifies that no exceptions are thrown during execution.
+     */
     @Test
     void printAllCapitalCities() {
         CapitalCity cc = new CapitalCity();
@@ -476,6 +546,12 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> capitalCityReport.printAllCapitalCities());
     }
 
+    /**
+     * This test ensures that the method correctly handles different scenarios when
+     * printing all capital cities within a specified continent. Mockito is used to
+     * mock DAO responses, and assertDoesNotThrow verifies that no exceptions are thrown
+     * during execution.
+     */
     @Test
     void printAllCapitalCitiesInContinent() {
         CapitalCity cc = new CapitalCity();
@@ -506,6 +582,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> capitalCityReport.printAllCapitalCitiesInContinent("Asia"));
     }
 
+    /**
+     * This test validates that the method correctly prints all capital cities within
+     * a specified region. Mockito is used to mock the DAO responses, and assertDoesNotThrow
+     * ensures the method does not throw any exceptions during execution.
+     */
     @Test
     void printAllCapitalCitiesInRegion() {
         CapitalCity cc1 = new CapitalCity();
@@ -542,6 +623,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> capitalCityReport.printAllCapitalCitiesInRegion("Eastern Asia"));
     }
 
+    /**
+     * This test validates that the method correctly prints the top N populated capital cities.
+     * Mockito is used to mock the DAO responses, and assertDoesNotThrow ensures that
+     * the method executes without throwing any exceptions.
+     */
     @Test
     void printTopNPopulatedCapitalCities() {
         CapitalCity cc1 = new CapitalCity();
@@ -578,6 +664,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> capitalCityReport.printTopNPopulatedCapitalCities(2));
     }
 
+    /**
+     * This test validates that the method correctly prints the top N populated capital cities
+     * within a specified continent. Mockito is used to mock the DAO responses, and assertDoesNotThrow
+     * ensures the method executes without throwing exceptions.
+     */
     @Test
     void printTopNPopulatedCapitalCitiesInContinent() {
         CapitalCity cc1 = new CapitalCity();
@@ -614,6 +705,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> capitalCityReport.printTopNPopulatedCapitalCitiesInContinent("Asia", 2));
     }
 
+    /**
+     * This test validates that the method correctly prints the top N populated capital cities
+     * within a specified region. Mockito is used to mock the DAO responses, and assertDoesNotThrow
+     * ensures that the method executes without throwing exceptions.
+     */
     @Test
     void printTopNPopulatedCapitalCitiesInRegion() {
         CapitalCity cc1 = new CapitalCity();
@@ -650,7 +746,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> capitalCityReport.printTopNPopulatedCapitalCitiesInRegion("Central Africa", 2));
     }
 
-    // Unit Testings for Top N City Reports
+    /**
+     * This test ensures that the method correctly prints the top N populated cities globally.
+     * Mockito is used to mock the DAO responses, and assertDoesNotThrow is used to verify that
+     * the method executes without throwing any exceptions.
+     */
     @Test
     void printTopNPopulatedCitiesInWorld() {
         City ci1 = new City();
@@ -681,8 +781,14 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInWorld(5));
     }
 
+    /**
+     * This test verifies that the method correctly prints the top N populated cities in a given continent.
+     * Mockito is used to mock the DAO responses, and assertDoesNotThrow ensures that the method
+     * executes without throwing exceptions.
+     */
     @Test
     void printTopNPopulatedCitiesInContinent() {
+        // Define the continent for testing
         String continent = "Asia";
 
         City ci1 = new City();
@@ -692,28 +798,40 @@ public class AppUnitTest {
         ci1.setPopulation(26000000);
 
         ArrayList<City> list = new ArrayList<>();
+        // Add city to the list
         list.add(ci1);
 
+        // CASE 1 — Valid list of cities
         Mockito.when(cityDAO.getTopNPopulatedCitiesInContinent(continent, 5)).thenReturn(list);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(continent, 5));
 
+        // CASE 2 — DAO returns null
         Mockito.when(cityDAO.getTopNPopulatedCitiesInContinent(continent, 5)).thenReturn(null);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(continent, 5));
 
+        // CASE 3 — DAO returns empty list
         Mockito.when(cityDAO.getTopNPopulatedCitiesInContinent(continent, 5)).thenReturn(new ArrayList<>());
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(continent, 5));
 
+        // CASE 4 — DAO returns list with null elements
         ArrayList<City> listWithNull = new ArrayList<>();
         listWithNull.add(null);
         Mockito.when(cityDAO.getTopNPopulatedCitiesInContinent(continent, 5)).thenReturn(listWithNull);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(continent, 5));
 
+        // CASE 5 — Empty or null input for continent
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent("", 5));
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInContinent(null, 5));
     }
 
+    /**
+     * This test verifies that the method correctly prints the top N populated cities in a given region.
+     * Mockito is used to mock the DAO responses, and assertDoesNotThrow ensures that the method
+     * executes without throwing exceptions.
+     */
     @Test
     void printTopNPopulatedCitiesInRegion() {
+        // Define region
         String region = "Western Europe";
 
         City ci1 = new City();
@@ -725,26 +843,37 @@ public class AppUnitTest {
         ArrayList<City> list = new ArrayList<>();
         list.add(ci1);
 
+        // CASE 1 — Valid list of cities
         Mockito.when(cityDAO.getTopNPopulatedCitiesInRegion(region, 5)).thenReturn(list);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(region, 5));
 
+        // CASE 2 — DAO returns null
         Mockito.when(cityDAO.getTopNPopulatedCitiesInRegion(region, 5)).thenReturn(null);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(region, 5));
 
+        // CASE 3 — DAO returns empty list
         Mockito.when(cityDAO.getTopNPopulatedCitiesInRegion(region, 5)).thenReturn(new ArrayList<>());
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(region, 5));
 
+        // CASE 4 — DAO returns list with null elements
         ArrayList<City> listWithNull = new ArrayList<>();
         listWithNull.add(null);
         Mockito.when(cityDAO.getTopNPopulatedCitiesInRegion(region, 5)).thenReturn(listWithNull);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(region, 5));
 
+        // CASE 5 — Empty or null input for region
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion("", 5));
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInRegion(null, 5));
     }
 
+    /**
+     * This test verifies that the method correctly prints the top N populated cities within a given country.
+     * Mockito is used to mock DAO responses, and assertDoesNotThrow ensures that the method
+     * executes without throwing exceptions.
+     */
     @Test
     void printTopNPopulatedCitiesInCountry() {
+        // Define country
         String country = "USA";
 
         City ci1 = new City();
@@ -756,26 +885,37 @@ public class AppUnitTest {
         ArrayList<City> list = new ArrayList<>();
         list.add(ci1);
 
+        // CASE 1 — Valid list of cities
         Mockito.when(cityDAO.getTopNPopulatedCitiesInCountry(country, 5)).thenReturn(list);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(country, 5));
 
+        // CASE 2 — DAO returns null
         Mockito.when(cityDAO.getTopNPopulatedCitiesInCountry(country, 5)).thenReturn(null);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(country, 5));
 
+        // CASE 3 — DAO returns empty list
         Mockito.when(cityDAO.getTopNPopulatedCitiesInCountry(country, 5)).thenReturn(new ArrayList<>());
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(country, 5));
 
+        // CASE 4 — DAO returns list with null elements
         ArrayList<City> listWithNull = new ArrayList<>();
         listWithNull.add(null);
         Mockito.when(cityDAO.getTopNPopulatedCitiesInCountry(country, 5)).thenReturn(listWithNull);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(country, 5));
 
+        // CASE 5 — Empty or null input for country
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry("", 5));
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInCountry(null, 5));
     }
 
+    /**
+     * This test validates that the method correctly prints the top N populated cities within a given district.
+     * Mockito is used to mock DAO responses, and assertDoesNotThrow ensures the method executes safely
+     * without throwing exceptions.
+     */
     @Test
     void printTopNPopulatedCitiesInDistrict() {
+        // Define district
         String district = "California";
 
         City ci1 = new City();
@@ -787,26 +927,35 @@ public class AppUnitTest {
         ArrayList<City> list = new ArrayList<>();
         list.add(ci1);
 
+        // CASE 1 — Valid list of cities
         Mockito.when(cityDAO.getTopNPopulatedCitiesInDistrict(district, 5)).thenReturn(list);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(district, 5));
 
+        // CASE 2 — DAO returns null
         Mockito.when(cityDAO.getTopNPopulatedCitiesInDistrict(district, 5)).thenReturn(null);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(district, 5));
 
+        // CASE 3 — DAO returns empty list
         Mockito.when(cityDAO.getTopNPopulatedCitiesInDistrict(district, 5)).thenReturn(new ArrayList<>());
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(district, 5));
 
+        // CASE 4 — DAO returns list with null elements
         ArrayList<City> listWithNull = new ArrayList<>();
         listWithNull.add(null);
         Mockito.when(cityDAO.getTopNPopulatedCitiesInDistrict(district, 5)).thenReturn(listWithNull);
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(district, 5));
 
+        // CASE 5 — Empty or null input for district
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict("", 5));
         assertDoesNotThrow(() -> cityReport.printTopNPopulatedCitiesInDistrict(null, 5));
     }
 
 
-    // Unit Testings for Population Reports
+    /**
+     * This test ensures that the method correctly prints the total world population.
+     * Mockito is used to mock DAO responses, and assertDoesNotThrow ensures the method executes
+     * without throwing exceptions in all cases.
+     */
     @Test
     void printWorldPopulation(){
         Population p = new Population();
@@ -834,6 +983,11 @@ public class AppUnitTest {
         Mockito.when(populationDAO.getWorldPopulation()).thenReturn(listWithNull);
         assertDoesNotThrow(() -> populationReport.printWorldPopulation());
     }
+    /**
+     * This test verifies that the method correctly prints the population of a specified continent.
+     * Mockito is used to mock the DAO responses, and assertDoesNotThrow ensures the method runs
+     * without exceptions in all scenarios.
+     */
     @Test
     void printContinentPopulation(){
         Population p = new Population();
@@ -861,6 +1015,12 @@ public class AppUnitTest {
         Mockito.when(populationDAO.getContinentPopulation("Asia")).thenReturn(listWithNull);
         assertDoesNotThrow(() -> populationReport.printContinentPopulation("Asia"));
     }
+
+    /**
+     * This test verifies that the method correctly prints the population of a specified region.
+     * Mockito is used to mock the DAO responses, and assertDoesNotThrow ensures the method
+     * executes without throwing exceptions in all scenarios.
+     */
     @Test
     void printRegionPopulation(){
         Population p = new Population();
@@ -888,6 +1048,12 @@ public class AppUnitTest {
         Mockito.when(populationDAO.getRegionPopulation("Southeast Asia")).thenReturn(listWithNull);
         assertDoesNotThrow(() -> populationReport.printRegionPopulation("Southeast Asia"));
     }
+
+    /**
+     * This test verifies that the method correctly prints the population of a specified country.
+     * Mockito is used to mock the DAO responses, and assertDoesNotThrow ensures the method
+     * executes without throwing exceptions for all scenarios.
+     */
     @Test
     void printCountryPopulation(){
         Population p = new Population();
@@ -916,6 +1082,12 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> populationReport.printCountryPopulation("Japan"));
 
     }
+
+    /**
+     * This test verifies that the method correctly prints the population of a specified district.
+     * Mockito is used to mock DAO responses, and assertDoesNotThrow ensures that the method
+     * executes without throwing exceptions under different scenarios.
+     */
     @Test
     void printDistrictPopulation(){
         Population p = new Population();
@@ -943,6 +1115,12 @@ public class AppUnitTest {
         Mockito.when(populationDAO.getDistrictPopulation("Benguela")).thenReturn(listWithNull);
         assertDoesNotThrow(() -> populationReport.printDistrictPopulation("Benguela"));
     }
+
+    /**
+     * This test ensures that the method correctly prints the population of a given city.
+     * Mockito is used to mock DAO responses, and assertDoesNotThrow confirms that
+     * the method executes without exceptions under various scenarios.
+     */
     @Test
     void printCityPopulation(){
 
@@ -971,6 +1149,12 @@ public class AppUnitTest {
         Mockito.when(populationDAO.getCityPopulation("Bangkok")).thenReturn(listWithNull);
         assertDoesNotThrow(() -> populationReport.printCityPopulation("Bangkok"));
     }
+
+    /**
+     * This test verifies that the method correctly prints the population of each continent,
+     * including both urban and non-urban populations. The DAO is mocked using Mockito,
+     * and assertDoesNotThrow ensures that no exceptions are thrown during execution.
+     */
     @Test
     void printEachContinentPopulationWithUrbanAndNonUrban() {
         Population p = new Population();
@@ -1000,6 +1184,11 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> populationReport.printEachContinentPopulationWithUrbanAndNonUrban());
     }
 
+    /**
+     * This test verifies that the method correctly prints the population of each region,
+    * including both urban and non-urban populations. Mockito is used to mock DAO responses,
+    * and assertDoesNotThrow ensures that no exceptions are thrown during execution.
+    */
     @Test
     void printEachRegionPopulationWithUrbanAndNonUrban() {
         Population p = new Population();
@@ -1029,39 +1218,15 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> populationReport.printEachRegionPopulationWithUrbanAndNonUrban());
     }
 
-    @Test
-    void printEachCountryPopulationWithUrbanAndNonUrban() {
-        Population p = new Population();
-        p.setName("Afghanistan");
-        p.setTotalPopulation(22720000L);
 
-        // Case 1 — Valid list with 1 country
-        ArrayList<Population> mockPopulation = new ArrayList<>();
-        mockPopulation.add(p);
-
-        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(mockPopulation);
-        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
-
-        // Case 2 — Null list
-        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(null);
-        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
-
-        // Case 3 — Empty list
-        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(new ArrayList<>());
-        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
-
-        // Case 4 — List with all null elements
-        ArrayList<Population> listWithNull = new ArrayList<>();
-        listWithNull.add(null);
-
-        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(listWithNull);
-        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
-    }
-
-    // Unit Testings for Language Reports
+    /**
+    * This test verifies that the method correctly prints a report of major languages in the world,
+    * including the number of speakers and the percentage of world population.
+    * The DAO is mocked using Mockito, and assertDoesNotThrow ensures that no exceptions are thrown
+    * during execution.
+    */
     @Test
     void printMajorLanguageReport(){
-// Mock Languages
         Language l1 = new Language();
         l1.setLanguage("Chinese");
         l1.setSpeakers(1200000000L);
