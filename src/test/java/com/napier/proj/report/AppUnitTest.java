@@ -1218,6 +1218,35 @@ public class AppUnitTest {
         assertDoesNotThrow(() -> populationReport.printEachRegionPopulationWithUrbanAndNonUrban());
     }
 
+    @Test
+    void printEachCountryPopulationWithUrbanAndNonUrban() {
+        Population p = new Population();
+        p.setName("Afghanistan");
+        p.setTotalPopulation(22720000L);
+
+        // Case 1 — Valid list with 1 country
+        ArrayList<Population> mockPopulation = new ArrayList<>();
+        mockPopulation.add(p);
+
+        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(mockPopulation);
+        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
+
+        // Case 2 — Null list
+        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(null);
+        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
+
+        // Case 3 — Empty list
+        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(new ArrayList<>());
+        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
+
+        // Case 4 — List with all null elements
+        ArrayList<Population> listWithNull = new ArrayList<>();
+        listWithNull.add(null);
+
+        Mockito.when(populationDAO.getEachCountryPopulationWithUrbanAndNonUrban()).thenReturn(listWithNull);
+        assertDoesNotThrow(() -> populationReport.printEachCountryPopulationWithUrbanAndNonUrban());
+    }
+
 
     /**
     * This test verifies that the method correctly prints a report of major languages in the world,
